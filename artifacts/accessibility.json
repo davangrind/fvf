@@ -1,0 +1,62 @@
+[
+  {
+    "path": "/",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/launch",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/tokens",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/battle/season-01",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/activity",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/docs",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/launch",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/tokens",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/battle/season-01",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/activity",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/docs",
+    "width": 390,
+    "violations": []
+  }
+]

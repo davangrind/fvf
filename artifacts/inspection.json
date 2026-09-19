@@ -1,0 +1,102 @@
+[
+  {
+    "name": "home",
+    "width": 1440,
+    "scroll": 1440,
+    "viewport": 1440,
+    "overflows": [],
+    "errors": []
+  },
+  {
+    "name": "battle",
+    "width": 1440,
+    "scroll": 1440,
+    "viewport": 1440,
+    "overflows": [],
+    "errors": []
+  },
+  {
+    "name": "launch",
+    "width": 1440,
+    "scroll": 1440,
+    "viewport": 1440,
+    "overflows": [],
+    "errors": []
+  },
+  {
+    "name": "tokens",
+    "width": 1440,
+    "scroll": 1440,
+    "viewport": 1440,
+    "overflows": [],
+    "errors": []
+  },
+  {
+    "name": "activity",
+    "width": 1440,
+    "scroll": 1440,
+    "viewport": 1440,
+    "overflows": [],
+    "errors": []
+  },
+  {
+    "name": "docs",
+    "width": 1440,
+    "scroll": 1440,
+    "viewport": 1440,
+    "overflows": [],
+    "errors": []
+  },
+  {
+    "name": "home",
+    "width": 390,
+    "scroll": 390,
+    "viewport": 390,
+    "overflows": [
+      "character"
+    ],
+    "errors": []
+  },
+  {
+    "name": "battle",
+    "width": 390,
+    "scroll": 390,
+    "viewport": 390,
+    "overflows": [
+      "character"
+    ],
+    "errors": []
+  },
+  {
+    "name": "launch",
+    "width": 390,
+    "scroll": 390,
+    "viewport": 390,
+    "overflows": [],
+    "errors": []
+  },
+  {
+    "name": "tokens",
+    "width": 390,
+    "scroll": 390,
+    "viewport": 390,
+    "overflows": [],
+    "errors": []
+  },
+  {
+    "name": "activity",
+    "width": 390,
+    "scroll": 390,
+    "viewport": 390,
+    "overflows": [],
+    "errors": []
+  },
+  {
+    "name": "docs",
+    "width": 390,
+    "scroll": 390,
+    "viewport": 390,
+    "overflows": [],
+    "errors": []
+  }
+]

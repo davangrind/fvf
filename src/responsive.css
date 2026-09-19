@@ -1,0 +1,1884 @@
+@media (min-width: 1600px) {
+  .home-intro h1 {
+    font-size: 97px;
+  }
+  .arena-stage {
+    height: 420px;
+  }
+  .character-button {
+    height: 345px;
+  }
+  .fighter-copy h2 {
+    font-size: 59px;
+  }
+  .fighter-copy {
+    top: 78px;
+  }
+  .expanded .arena-stage {
+    height: 475px;
+  }
+  .expanded .character-button {
+    height: 390px;
+  }
+}
+@media (max-width: 1200px) {
+  .site-header {
+    padding: 0 28px;
+    gap: 20px;
+  }
+  .main-nav {
+    gap: 18px;
+  }
+  .brand small {
+    display: none;
+  }
+  .page {
+    padding: 30px 32px 48px;
+  }
+  .site-footer {
+    padding: 30px 32px;
+  }
+  .ticker-label {
+    padding-left: 28px;
+  }
+  .ticker-info {
+    padding-right: 28px;
+  }
+  .home-intro h1 {
+    font-size: 70px;
+  }
+  .intro-action {
+    min-width: 250px;
+    padding-left: 10px;
+  }
+  .home-intro .title-asterisk {
+    font-size: 24px;
+    right: -23px;
+  }
+  .faction-stats {
+    gap: 15px;
+    padding: 17px;
+  }
+  .faction-stats small {
+    font-size: 6px;
+  }
+  .faction-stats strong {
+    font-size: 25px;
+  }
+  .faction-stats .button {
+    font-size: 9px;
+    padding: 10px;
+    gap: 7px;
+  }
+  .fighter-copy h2 {
+    font-size: 47px;
+  }
+  .character-button {
+    right: -17px;
+    width: 77%;
+    height: 290px;
+  }
+  .astra .character-button {
+    left: -17px;
+  }
+  .fighter-copy {
+    left: 20px;
+  }
+  .astra .fighter-copy {
+    right: 20px;
+  }
+  .home-data {
+    gap: 28px;
+  }
+  .war-wire {
+    padding-left: 24px;
+  }
+  .token-table-head,
+  .token-row {
+    grid-template-columns: minmax(160px, 1fr) 80px 75px 16px;
+    gap: 9px;
+  }
+  .section-heading h2 {
+    font-size: 30px;
+  }
+  .loop-strip {
+    font-size: 8px;
+    gap: 12px;
+  }
+  .loop-strip > span {
+    gap: 7px;
+  }
+  .loop-strip svg {
+    width: 16px;
+  }
+  .loop-number {
+    display: none;
+  }
+  .recruit-banner {
+    padding: 25px;
+    gap: 21px;
+  }
+  .recruit-banner h2 {
+    font-size: 31px;
+  }
+  .recruit-banner .button {
+    font-size: 10px;
+  }
+  .launch-layout {
+    gap: 26px;
+    grid-template-columns: minmax(0, 1.45fr) minmax(290px, 1fr);
+  }
+  .launch-form-panel form,
+  .review-step {
+    padding: 22px;
+  }
+  .faction-option {
+    padding: 10px 8px;
+    gap: 5px;
+  }
+  .faction-option > img {
+    width: 43px;
+  }
+  .faction-option strong {
+    font-size: 20px;
+  }
+  .faction-option small {
+    font-size: 5px;
+  }
+  .preview-details {
+    padding: 22px;
+  }
+  .preview-flow {
+    font-size: 6px;
+    gap: 5px;
+  }
+  .summary-strip {
+    gap: 45px;
+  }
+  .page-heading h1 {
+    font-size: 57px;
+  }
+  .expanded .fighter-copy h2 {
+    font-size: 56px;
+  }
+  .expanded .character-button {
+    height: 335px;
+  }
+  .docs-layout {
+    gap: 40px;
+  }
+  .arena-controls small {
+    display: none;
+  }
+}
+@media (max-width: 960px) {
+  .site-header {
+    height: 76px;
+    padding: 0 24px;
+  }
+  .main-nav {
+    gap: 16px;
+    font-size: 10px;
+  }
+  .main-nav a:last-child {
+    display: none;
+  }
+  .header-actions {
+    gap: 5px;
+  }
+  .brand > span {
+    font-size: 42px;
+  }
+  .wallet-button {
+    font-size: 10px;
+    padding: 9px 11px;
+  }
+  .page {
+    padding: 28px 24px 45px;
+  }
+  .home-intro h1 {
+    font-size: 60px;
+  }
+  .home-intro .eyebrow {
+    font-size: 7px;
+  }
+  .intro-action {
+    min-width: 208px;
+  }
+  .intro-action p {
+    font-size: 10px;
+  }
+  .intro-action .button {
+    font-size: 10px;
+    min-height: 35px;
+    padding: 8px 11px;
+  }
+  .title-asterisk {
+    display: none;
+  }
+  .arena-stage {
+    height: 350px;
+  }
+  .fighter-copy {
+    top: 85px;
+    left: 17px;
+  }
+  .fighter-copy h2 {
+    font-size: 40px;
+  }
+  .fighter-kicker {
+    font-size: 6px;
+    margin-bottom: 11px;
+  }
+  .fighter-copy p {
+    width: 100px;
+    font-size: 8px;
+  }
+  .astra .fighter-copy {
+    right: 17px;
+  }
+  .stage-stamp {
+    font-size: 5px;
+    padding: 5px;
+  }
+  .character-button {
+    height: 250px;
+    right: -35px;
+    width: 85%;
+    bottom: 45px;
+  }
+  .astra .character-button {
+    left: -35px;
+  }
+  .arena-countdown {
+    padding: 8px 13px;
+    top: 14px;
+  }
+  .clock b {
+    font-size: 26px;
+  }
+  .faction-stats {
+    display: grid;
+    grid-template-columns: 1.3fr 0.8fr 0.7fr;
+    gap: 14px;
+    padding: 15px 18px;
+  }
+  .faction-stats .button {
+    grid-column: 1/-1;
+    margin: 0;
+    font-size: 10px;
+  }
+  .faction-stats strong {
+    font-size: 27px;
+  }
+  .faction-stats small {
+    font-size: 6px;
+  }
+  .arena-stats {
+    gap: 0;
+  }
+  .fighter-level {
+    left: 17px;
+    right: 17px;
+    font-size: 6px;
+    gap: 5px;
+  }
+  .level-pips {
+    gap: 2px;
+  }
+  .level-pips i {
+    width: 3px;
+    height: 7px;
+  }
+  .arena-scribble {
+    bottom: 43px;
+    font-size: 10px;
+    left: calc(50% - 36px);
+  }
+  .versus {
+    width: 70px;
+    height: 79px;
+    top: 53%;
+  }
+  .versus span {
+    font-size: 34px;
+  }
+  .home-data {
+    grid-template-columns: 1.3fr 1fr;
+    gap: 24px;
+  }
+  .section-heading h2 {
+    font-size: 26px;
+  }
+  .section-heading .eyebrow {
+    font-size: 6px;
+    letter-spacing: 1.2px;
+  }
+  .section-heading > a {
+    font-size: 8px;
+  }
+  .token-table-head,
+  .token-row {
+    grid-template-columns: minmax(145px, 1fr) 64px 64px 12px;
+    gap: 8px;
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+  .rank {
+    font-size: 8px;
+    min-width: 12px;
+  }
+  .token-identity {
+    gap: 7px;
+  }
+  .token-identity strong {
+    font-size: 10px;
+  }
+  .token-icon {
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+  }
+  .token-identity > div > span {
+    font-size: 8px;
+  }
+  .token-market,
+  .token-contribution {
+    font-size: 10px;
+  }
+  .token-contribution > span,
+  .token-market > span {
+    font-size: 7px;
+  }
+  .token-table-head {
+    font-size: 6px;
+  }
+  .event-row {
+    gap: 8px;
+    padding: 11px 0;
+  }
+  .event-row > div {
+    font-size: 9px;
+  }
+  .event-icon {
+    width: 24px;
+    height: 24px;
+  }
+  .war-wire {
+    padding-left: 20px;
+  }
+  .wire-bottom > span:last-child {
+    display: none;
+  }
+  .loop-strip {
+    font-size: 7px;
+    padding: 22px 0;
+    gap: 5px;
+  }
+  .loop-strip > span {
+    gap: 5px;
+  }
+  .loop-strip svg {
+    width: 14px;
+  }
+  .recruit-banner {
+    padding: 24px 20px;
+    gap: 17px;
+  }
+  .recruit-star {
+    font-size: 62px;
+  }
+  .recruit-banner h2 {
+    font-size: 27px;
+  }
+  .recruit-banner p {
+    font-size: 8px;
+    max-width: 280px;
+  }
+  .recruit-banner .button {
+    font-size: 8px;
+    padding: 10px;
+    gap: 6px;
+  }
+  .recruit-banner .eyebrow {
+    font-size: 6px;
+  }
+  .site-footer {
+    padding: 25px 24px;
+    gap: 23px;
+  }
+  .site-footer small {
+    max-width: 380px;
+    font-size: 7px;
+  }
+  .footer-links a {
+    font-size: 8px;
+  }
+  .site-footer p {
+    font-size: 8px;
+  }
+  .page-heading h1 {
+    font-size: 49px;
+  }
+  .page-heading p {
+    font-size: 10px;
+    max-width: 520px;
+  }
+  .page-heading .button {
+    font-size: 10px;
+    padding: 10px 12px;
+    flex-shrink: 0;
+  }
+  .expanded .arena-stage {
+    height: 390px;
+  }
+  .expanded .character-button {
+    height: 300px;
+  }
+  .expanded .fighter-copy h2 {
+    font-size: 44px;
+  }
+  .expanded .fighter-copy p {
+    font-size: 8px;
+  }
+  .expanded .fighter-copy {
+    top: 92px;
+  }
+  .evolution-card {
+    padding: 19px;
+  }
+  .skill-node strong {
+    font-size: 8px;
+  }
+  .evolution-title h3 {
+    font-size: 26px;
+  }
+  .evolution-title .eyebrow {
+    font-size: 7px;
+  }
+  .evolution-number {
+    font-size: 42px;
+  }
+  .battle-lower {
+    gap: 23px;
+    grid-template-columns: 1.2fr 1fr;
+  }
+  .lore-strip {
+    padding: 22px;
+    gap: 20px;
+  }
+  .lore-strip p {
+    font-size: 10px;
+  }
+  .lore-strip > span {
+    font-size: 8px;
+    padding: 7px;
+  }
+  .lore-strip a {
+    font-size: 9px;
+  }
+  .launch-layout {
+    grid-template-columns: 1.3fr 1fr;
+    gap: 20px;
+  }
+  .launch-form-panel form,
+  .review-step {
+    padding: 19px;
+  }
+  .form-steps {
+    padding: 14px;
+    font-size: 9px;
+    gap: 5px;
+  }
+  .form-steps button {
+    font-size: 8px;
+    gap: 4px;
+  }
+  .form-steps b {
+    height: 20px;
+    width: 20px;
+    font-size: 8px;
+  }
+  .faction-picker {
+    gap: 8px;
+  }
+  .faction-option {
+    min-height: 80px;
+    flex-direction: column;
+    padding: 7px;
+    text-align: center;
+    gap: 0;
+  }
+  .faction-option > img {
+    width: 39px;
+    height: 40px;
+  }
+  .faction-option > span {
+    gap: 3px;
+  }
+  .faction-option strong {
+    font-size: 18px;
+  }
+  .faction-option small {
+    font-size: 5px;
+  }
+  .faction-option i {
+    height: 14px;
+    width: 14px;
+  }
+  .faction-option i svg {
+    width: 11px;
+  }
+  .image-input {
+    gap: 12px;
+  }
+  .image-input strong {
+    font-size: 10px;
+  }
+  .image-input p {
+    font-size: 8px;
+  }
+  .upload-preview {
+    height: 68px;
+    width: 68px;
+  }
+  .form-section-title h2 {
+    font-size: 22px;
+  }
+  .form-grid {
+    gap: 12px;
+  }
+  .launch-form-panel input,
+  .launch-form-panel textarea {
+    font-size: 10px !important;
+  }
+  .preview-details {
+    padding: 20px;
+  }
+  .preview-art {
+    height: 215px;
+  }
+  .preview-flow {
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+  .preview-details h2 {
+    font-size: 30px;
+  }
+  .preview-details > p {
+    font-size: 10px;
+  }
+  .hand-note {
+    font-size: 16px;
+    padding-right: 30px;
+  }
+  .launch-form-panel label {
+    font-size: 10px;
+  }
+  .review-list > div {
+    font-size: 9px;
+    gap: 10px;
+  }
+  .summary-strip {
+    padding: 20px;
+    gap: 35px;
+  }
+  .summary-strip strong {
+    font-size: 34px;
+  }
+  .token-filters {
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .filter-inputs {
+    flex: 1;
+    justify-content: flex-end;
+  }
+  .tabs > button {
+    padding: 9px 10px;
+    font-size: 10px;
+  }
+  .search-input {
+    width: 165px;
+  }
+  .sort-input {
+    width: 150px;
+  }
+  .token-profile h1 {
+    font-size: 53px;
+  }
+  .activity-layout {
+    grid-template-columns: 1.25fr 1fr;
+    gap: 20px;
+  }
+  .paper-panel {
+    padding: 20px;
+  }
+  .activity-layout .tabs > button {
+    font-size: 9px;
+    padding: 7px 9px;
+  }
+  .event-filter > span {
+    font-size: 6px;
+  }
+  .activity-layout .event-row > div {
+    font-size: 10px;
+  }
+  .chart-top > div:first-child {
+    gap: 12px;
+  }
+  .legend {
+    font-size: 6px;
+  }
+  .legend b {
+    font-size: 15px;
+  }
+  .segmented button {
+    font-size: 8px;
+    padding: 6px 8px;
+  }
+  .docs-layout {
+    grid-template-columns: 175px minmax(0, 1fr);
+    gap: 30px;
+  }
+  .docs-nav > a {
+    font-size: 10px;
+    padding: 10px;
+  }
+  .manual-stamp {
+    margin-right: 25px;
+    font-size: 23px;
+  }
+  .docs-content h2 {
+    font-size: 32px;
+  }
+  .docs-content p {
+    font-size: 12px;
+  }
+}
+@media (max-width: 700px) {
+  .site-header {
+    height: 69px;
+    padding: 0 17px;
+    gap: 10px;
+  }
+  .brand > span {
+    font-size: 40px;
+  }
+  .brand-bolt {
+    width: 22px;
+    height: 31px;
+  }
+  .header-actions {
+    gap: 3px;
+  }
+  .menu-button {
+    display: flex;
+  }
+  .wallet-button {
+    padding: 8px 10px;
+    font-size: 9px;
+    min-height: 35px;
+  }
+  .wallet-button svg {
+    width: 14px;
+  }
+  .sound-button {
+    width: 31px;
+  }
+  .main-nav {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 69px;
+    z-index: 30;
+    background: var(--paper);
+    border-bottom: 2px solid var(--ink);
+    padding: 20px 23px;
+    box-shadow: 0 10px 15px #20231d22;
+    gap: 10px;
+  }
+  .main-nav.open {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .main-nav a {
+    font-size: 15px;
+    padding: 10px 4px;
+    gap: 8px;
+  }
+  .main-nav a:last-child {
+    display: flex;
+  }
+  .main-nav a.active:after {
+    width: 35px;
+  }
+  .ticker {
+    height: 31px;
+    gap: 12px;
+    font-size: 8px;
+  }
+  .ticker-label {
+    padding: 0 12px 0 17px;
+    font-size: 7px;
+    letter-spacing: 1px;
+    gap: 6px;
+  }
+  .ticker-label i {
+    height: 4px;
+    width: 4px;
+  }
+  .ticker-info {
+    display: none;
+  }
+  .ticker-copy {
+    gap: 24px;
+    padding-right: 24px;
+  }
+  .ticker-copy span {
+    gap: 8px;
+  }
+  .ticker-copy b {
+    font-size: 11px;
+  }
+  .page {
+    padding: 26px 17px 38px;
+  }
+  .home-intro {
+    display: block;
+    margin-bottom: 25px;
+  }
+  .home-intro .eyebrow {
+    font-size: 7px;
+    letter-spacing: 1.2px;
+    margin-bottom: 9px;
+  }
+  .mini-star {
+    font-size: 12px;
+  }
+  .home-intro h1 {
+    font-size: clamp(41px, 8.7vw, 61px);
+    letter-spacing: -0.8px;
+  }
+  .intro-action {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 17px;
+    min-width: 0;
+  }
+  .intro-action p {
+    font-size: 9px;
+    line-height: 1.55;
+    margin: 0;
+  }
+  .intro-action .button {
+    font-size: 9px;
+    gap: 8px;
+    min-height: 37px;
+    padding: 9px 12px;
+  }
+  .intro-action .button svg {
+    width: 15px;
+  }
+  .arena {
+    border-radius: 6px;
+    box-shadow: 3px 4px 0 #20231d16;
+  }
+  .arena-top {
+    height: 32px;
+    padding: 0 11px;
+    font-size: 6px;
+    letter-spacing: 1px;
+    gap: 5px;
+  }
+  .arena-season {
+    display: none;
+  }
+  .arena-top .demo-tag {
+    font-size: 6px;
+    padding: 4px 5px;
+  }
+  .live-dot {
+    width: 4px;
+    height: 4px;
+  }
+  .arena-stage {
+    height: 355px;
+  }
+  .arena-countdown {
+    top: 12px;
+    border-width: 1px;
+    padding: 6px 10px 8px;
+  }
+  .arena-countdown > small {
+    font-size: 6px;
+    letter-spacing: 1px;
+  }
+  .clock {
+    gap: 6px;
+    margin-top: 3px;
+  }
+  .clock b {
+    font-size: 24px;
+  }
+  .clock em {
+    font-size: 6px;
+  }
+  .clock i {
+    font-size: 15px;
+    margin-left: 5px;
+  }
+  .fighter-copy {
+    top: 87px;
+    left: 11px;
+    right: 10px;
+  }
+  .fighter-copy h2 {
+    font-size: 34px;
+    line-height: 0.92;
+  }
+  .fighter-kicker {
+    font-size: 5px;
+    letter-spacing: 0.2px;
+    margin-bottom: 7px;
+  }
+  .fighter-copy p {
+    display: none;
+  }
+  .astra .fighter-copy {
+    right: 11px;
+    left: 10px;
+  }
+  .stage-stamp {
+    font-size: 5px;
+    padding: 4px 5px;
+    margin-top: 9px;
+    letter-spacing: 0;
+    border-radius: 2px;
+  }
+  .character-button {
+    height: 188px;
+    bottom: 29px;
+    right: -15%;
+    width: 130%;
+  }
+  .astra .character-button {
+    left: -15%;
+    height: 191px;
+  }
+  .fighter-level {
+    bottom: 9px;
+    left: 9px;
+    right: 9px;
+    font-size: 5px;
+    letter-spacing: 0;
+    gap: 4px;
+  }
+  .fighter-level > svg {
+    width: 10px;
+    height: 10px;
+    flex-shrink: 0;
+  }
+  .fighter-level b {
+    padding: 0 2px;
+  }
+  .level-pips {
+    gap: 1.5px;
+    display: none;
+  }
+  .fighter-side:after {
+    opacity: 0.15;
+  }
+  .orbit-one {
+    width: 185px;
+    height: 185px;
+    right: -15px;
+    top: 125px;
+  }
+  .orbit-two {
+    width: 230px;
+    height: 100px;
+    right: -40px;
+    top: 210px;
+  }
+  .astra .orbit-one {
+    left: -15px;
+  }
+  .astra .orbit-two {
+    left: -40px;
+  }
+  .versus {
+    width: 46px;
+    height: 53px;
+    top: 55%;
+  }
+  .versus span {
+    font-size: 24px;
+  }
+  .versus-zap {
+    width: 12px;
+    bottom: -15px;
+    right: 5px;
+  }
+  .arena-scribble {
+    display: none;
+  }
+  .debris-one {
+    top: 48%;
+    left: 20%;
+    font-size: 12px;
+  }
+  .debris-two {
+    bottom: 18%;
+    left: 12%;
+    font-size: 13px;
+  }
+  .debris-three {
+    top: 68%;
+    right: 4%;
+    font-size: 16px;
+  }
+  .astra .debris-three {
+    left: 4%;
+  }
+  .control-bar {
+    height: 31px;
+    font-size: 6px;
+    letter-spacing: 0;
+  }
+  .control-bar > div > span {
+    padding: 0 9px;
+    white-space: nowrap;
+  }
+  .control-bar strong {
+    font-size: 10px;
+    padding: 0 4px;
+  }
+  .control-caption {
+    font-size: 5px;
+    padding: 4px 5px;
+  }
+  .faction-stats {
+    grid-template-columns: 1fr 1fr;
+    padding: 13px 11px;
+    gap: 10px 5px;
+  }
+  .faction-stats > div:first-child {
+    grid-column: 1/-1;
+  }
+  .faction-stats small {
+    font-size: 5px;
+    letter-spacing: 0.5px;
+  }
+  .faction-stats > div {
+    gap: 3px;
+  }
+  .faction-stats strong {
+    font-size: 22px;
+  }
+  .faction-stats > div:first-child strong {
+    font-size: 29px;
+  }
+  .faction-stats strong svg {
+    width: 11px;
+  }
+  .faction-stats .button {
+    font-size: 8px;
+    padding: 8px 7px;
+    min-height: 32px;
+    gap: 5px;
+    border-width: 1px;
+  }
+  .faction-stats .button svg {
+    width: 12px;
+    height: 12px;
+  }
+  .arena-bottom {
+    padding: 8px 9px;
+    font-size: 5.5px;
+    gap: 5px;
+  }
+  .arena-bottom > span {
+    gap: 4px;
+    max-width: 63%;
+    line-height: 1.5;
+  }
+  .arena-bottom a {
+    gap: 3px;
+    font-size: 6px;
+    white-space: nowrap;
+  }
+  .arena-bottom a svg {
+    width: 10px;
+  }
+  .speech-bubble {
+    left: 4px;
+    top: 174px;
+    max-width: 150px;
+    padding: 8px;
+    font-size: 15px;
+    border-width: 1.5px;
+  }
+  .loop-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px 8px;
+    padding: 23px 3px;
+    margin-bottom: 28px;
+    font-size: 8px;
+  }
+  .loop-strip > i {
+    display: none;
+  }
+  .loop-strip > span {
+    gap: 8px;
+  }
+  .loop-strip svg {
+    width: 15px;
+  }
+  .home-data {
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
+  }
+  .section-heading {
+    margin-bottom: 17px;
+  }
+  .section-heading h2 {
+    font-size: 31px;
+  }
+  .section-heading .eyebrow {
+    font-size: 7px;
+  }
+  .section-heading > a {
+    font-size: 9px;
+  }
+  .token-table-head,
+  .token-row {
+    grid-template-columns: minmax(145px, 1fr) 64px 65px 13px;
+    gap: 8px;
+    padding: 13px 4px;
+  }
+  .token-table-head {
+    padding-top: 11px;
+    padding-bottom: 11px;
+    font-size: 6px;
+  }
+  .token-identity strong {
+    font-size: 11px;
+  }
+  .token-icon {
+    height: 32px;
+    width: 32px;
+    font-size: 22px;
+  }
+  .token-identity {
+    gap: 8px;
+  }
+  .rank {
+    font-size: 8px;
+    min-width: 13px;
+  }
+  .token-market,
+  .token-contribution {
+    font-size: 11px;
+  }
+  .token-row > svg {
+    width: 13px;
+  }
+  .token-contribution > span,
+  .token-market > span {
+    font-size: 6px;
+  }
+  .war-wire {
+    border-left: 0;
+    padding-left: 0;
+    border-top: 1px solid #cbd0bc;
+    padding-top: 25px;
+  }
+  .event-row {
+    padding: 14px 0;
+    gap: 12px;
+  }
+  .event-row > div {
+    font-size: 11px;
+  }
+  .event-icon {
+    width: 29px;
+    height: 29px;
+  }
+  .event-row small {
+    font-size: 8px;
+  }
+  .wire-bottom > span:last-child {
+    display: block;
+    font-size: 8px;
+  }
+  .recruit-banner {
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 25px 20px;
+    margin-top: 35px;
+  }
+  .recruit-star {
+    position: absolute;
+    right: -13px;
+    top: 0;
+    font-size: 106px;
+    opacity: 0.18;
+    pointer-events: none;
+  }
+  .recruit-banner > div {
+    position: relative;
+    z-index: 1;
+  }
+  .recruit-banner .eyebrow {
+    font-size: 7px;
+  }
+  .recruit-banner h2 {
+    font-size: 35px;
+    max-width: 300px;
+  }
+  .recruit-banner p {
+    font-size: 9px;
+    max-width: 260px;
+  }
+  .recruit-banner .button {
+    font-size: 10px;
+    padding: 12px;
+    margin-left: 0;
+    gap: 18px;
+  }
+  .site-footer {
+    padding: 27px 20px;
+    gap: 19px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  .footer-logo {
+    font-size: 51px;
+  }
+  .site-footer > div:not(.footer-links) {
+    flex: 1;
+    min-width: 200px;
+  }
+  .site-footer > div > strong {
+    font-size: 8px;
+  }
+  .site-footer p {
+    font-size: 8px;
+    max-width: 250px;
+    line-height: 1.6;
+  }
+  .site-footer small {
+    font-size: 7px;
+    line-height: 1.7;
+    max-width: 260px;
+  }
+  .footer-links {
+    margin: 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    border-top: 1px solid #d4d8c6;
+    padding-top: 20px;
+  }
+  .footer-links a {
+    font-size: 8px;
+    gap: 6px;
+    justify-content: flex-start;
+  }
+  .footer-links > span {
+    grid-column: 1/-1;
+    font-size: 7px;
+    margin-top: 0;
+  }
+  .page-heading {
+    display: block;
+    margin: 3px 0 26px;
+  }
+  .page-heading .eyebrow {
+    font-size: 7px;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+  .page-heading h1 {
+    font-size: 48px;
+    letter-spacing: -0.5px;
+  }
+  .page-heading p {
+    font-size: 11px;
+    line-height: 1.7;
+    margin-top: 12px;
+  }
+  .page-heading > .button {
+    margin-top: 20px;
+    font-size: 10px;
+  }
+  .expanded .arena-stage {
+    height: 405px;
+  }
+  .expanded .fighter-copy {
+    top: 89px;
+  }
+  .expanded .fighter-copy h2 {
+    font-size: 34px;
+  }
+  .expanded .fighter-copy p {
+    display: none;
+  }
+  .expanded .character-button {
+    height: 225px;
+    bottom: 32px;
+  }
+  .expanded .arena-countdown {
+    top: 13px;
+  }
+  .expanded .orbit-one {
+    width: 220px;
+    height: 220px;
+  }
+  .expanded .versus {
+    top: 55%;
+  }
+  .arena-controls {
+    padding: 13px 10px;
+    gap: 13px;
+    margin: 0 3px 30px;
+    flex-wrap: wrap;
+  }
+  .arena-controls > span {
+    font-size: 8px;
+    gap: 5px;
+  }
+  .arena-controls > span svg {
+    width: 13px;
+  }
+  .arena-controls > div {
+    gap: 12px;
+    margin-left: auto;
+  }
+  .arena-controls .text-button {
+    font-size: 8px;
+    gap: 4px;
+  }
+  .arena-controls .text-button svg {
+    width: 13px;
+  }
+  .arena-controls .button {
+    font-size: 8px;
+    padding: 7px;
+    min-height: 30px;
+    gap: 5px;
+  }
+  .arena-controls .button svg {
+    width: 12px;
+  }
+  .evolution-section .section-heading {
+    align-items: flex-start;
+    display: block;
+  }
+  .evolution-section .section-heading > span {
+    font-size: 7px;
+    display: block;
+    margin-top: 10px;
+  }
+  .evolution-section .section-heading h2 {
+    font-size: 30px;
+  }
+  .evolution-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .evolution-card {
+    padding: 21px;
+  }
+  .evolution-title h3 {
+    font-size: 29px;
+  }
+  .evolution-title .eyebrow {
+    font-size: 8px;
+  }
+  .evolution-number {
+    font-size: 49px;
+  }
+  .evolution-card > p {
+    font-size: 11px;
+  }
+  .skill-node strong {
+    font-size: 9px;
+  }
+  .skill-node small {
+    font-size: 7px;
+  }
+  .feed-demo {
+    font-size: 10px;
+  }
+  .battle-lower {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    margin-top: 30px;
+  }
+  .chart-top > div:first-child {
+    gap: 21px;
+  }
+  .legend {
+    font-size: 7px;
+  }
+  .legend b {
+    font-size: 19px;
+  }
+  .lore-strip {
+    flex-wrap: wrap;
+    padding: 23px;
+    gap: 16px;
+    margin-top: 29px;
+  }
+  .lore-strip > span {
+    font-size: 7px;
+    rotate: 0deg;
+    transform: none;
+  }
+  .lore-strip p {
+    font-size: 11px;
+    width: 100%;
+    order: 2;
+  }
+  .lore-strip a {
+    font-size: 9px;
+    margin-left: auto;
+  }
+  .battle-overlay {
+    padding: 18px;
+    gap: 12px;
+  }
+  .battle-overlay h2 {
+    font-size: 38px;
+  }
+  .battle-overlay p {
+    font-size: 10px;
+  }
+  .battle-overlay .eyebrow {
+    font-size: 7px;
+  }
+  .result-overlay .button {
+    font-size: 10px;
+    padding: 10px 13px;
+  }
+  .fight-caption {
+    bottom: 65px;
+    padding: 0 10px;
+  }
+  .fight-caption h2 {
+    font-size: 33px;
+    -webkit-text-stroke: 0.8px var(--ink);
+    text-shadow: 2px 2px 0 var(--ink);
+  }
+  .fight-caption > span {
+    font-size: 8px;
+  }
+  .combat-meter {
+    max-width: 230px;
+    height: 7px;
+  }
+  .hand-note {
+    display: none;
+  }
+  .launch-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 33px;
+  }
+  .launch-form-panel {
+    width: 100%;
+  }
+  .launch-preview {
+    position: relative;
+    top: auto;
+    width: 100%;
+    margin-bottom: 18px;
+  }
+  .launch-form-panel form,
+  .review-step {
+    padding: 20px;
+  }
+  .form-steps {
+    padding: 17px;
+    gap: 10px;
+  }
+  .form-steps button {
+    font-size: 9px;
+    gap: 6px;
+  }
+  .form-steps b {
+    height: 22px;
+    width: 22px;
+  }
+  .form-section-title h2 {
+    font-size: 25px;
+  }
+  .faction-picker {
+    gap: 11px;
+  }
+  .faction-option {
+    min-height: 107px;
+    padding: 10px 7px;
+    gap: 5px;
+  }
+  .faction-option > img {
+    width: 47px;
+    height: 51px;
+  }
+  .faction-option strong {
+    font-size: 21px;
+  }
+  .faction-option small {
+    font-size: 5.5px;
+    letter-spacing: 0.5px;
+  }
+  .faction-option i {
+    width: 17px;
+    height: 17px;
+    top: 7px;
+    right: 7px;
+  }
+  .image-input {
+    gap: 15px;
+    padding-bottom: 24px;
+  }
+  .upload-preview {
+    width: 72px;
+    height: 72px;
+  }
+  .image-input strong {
+    font-size: 10px;
+  }
+  .image-input p {
+    font-size: 8px;
+  }
+  .form-grid {
+    grid-template-columns: 1.2fr 1fr;
+    gap: 13px;
+  }
+  .launch-form-panel label {
+    font-size: 10px;
+  }
+  .launch-form-panel input,
+  .launch-form-panel textarea {
+    font-size: 12px !important;
+  }
+  .launch-form-panel input {
+    padding: 11px 10px !important;
+  }
+  .ticker-input input {
+    padding-left: 23px !important;
+  }
+  .preview-art {
+    height: 245px;
+  }
+  .preview-details {
+    padding: 24px;
+  }
+  .preview-details h2 {
+    font-size: 35px;
+  }
+  .preview-details > p {
+    font-size: 11px;
+  }
+  .preview-flow {
+    font-size: 7px;
+    justify-content: space-between;
+    gap: 5px;
+  }
+  .preview-top {
+    padding: 16px 23px;
+  }
+  .preview-sticker {
+    font-size: 8px;
+  }
+  .review-step h2 {
+    font-size: 34px;
+  }
+  .review-step > .eyebrow {
+    font-size: 7px;
+  }
+  .review-list > div {
+    font-size: 10px;
+    padding: 14px 0;
+  }
+  .notice {
+    font-size: 10px;
+    padding: 12px;
+    gap: 10px;
+  }
+  .notice p {
+    font-size: 10px;
+  }
+  .checkbox-label {
+    font-size: 10px !important;
+  }
+  .launch-success {
+    margin: 20px auto;
+  }
+  .launch-success h1 {
+    font-size: 58px;
+  }
+  .launch-success > p {
+    font-size: 12px;
+  }
+  .launch-success > .eyebrow {
+    font-size: 8px;
+  }
+  .success-seal {
+    width: 83px;
+    height: 83px;
+    margin-bottom: 27px;
+  }
+  .launch-success .notice {
+    margin-bottom: 24px;
+    font-size: 10px;
+  }
+  .launch-success .button {
+    font-size: 11px;
+  }
+  .summary-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px 15px;
+    padding: 21px;
+    margin-bottom: 25px;
+  }
+  .summary-strip strong {
+    font-size: 37px;
+  }
+  .summary-strip small {
+    font-size: 7px;
+  }
+  .summary-strip > .demo-tag {
+    font-size: 6px;
+    white-space: normal;
+    line-height: 1.5;
+    margin: 0;
+    max-width: 110px;
+    justify-self: end;
+    text-align: center;
+  }
+  .summary-strip > div {
+    gap: 7px;
+  }
+  .token-filters {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+  .tabs {
+    gap: 4px;
+  }
+  .tabs > button {
+    font-size: 10px;
+    padding: 9px 12px;
+  }
+  .filter-inputs {
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .search-input {
+    width: auto;
+    flex: 1;
+  }
+  .sort-input {
+    width: 147px;
+  }
+  .search-input > input {
+    font-size: 10px !important;
+  }
+  .list-footer {
+    display: block;
+    font-size: 8px;
+    padding: 15px 3px;
+    line-height: 1.7;
+  }
+  .list-footer > span {
+    display: block;
+    margin-bottom: 5px;
+  }
+  .token-profile {
+    gap: 14px;
+    flex-wrap: wrap;
+    margin: 30px 0 24px;
+  }
+  .token-profile > .token-icon {
+    height: 65px;
+    width: 65px;
+    font-size: 36px;
+  }
+  .token-profile > div {
+    flex: 1;
+    min-width: 0;
+  }
+  .token-profile h1 {
+    font-size: 42px;
+  }
+  .token-profile .eyebrow {
+    font-size: 6px;
+    letter-spacing: 0.6px;
+  }
+  .token-profile > .demo-tag {
+    font-size: 7px;
+    margin-left: 0;
+  }
+  .token-ticker {
+    font-size: 11px;
+  }
+  .token-detail .summary-strip {
+    grid-template-columns: 1fr 1fr;
+  }
+  .summary-strip strong.smaller {
+    font-size: 27px;
+  }
+  .detail-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .paper-panel {
+    padding: 21px;
+  }
+  .paper-panel > h2 {
+    font-size: 31px;
+  }
+  .token-description {
+    font-size: 12px;
+  }
+  .detail-grid .notice p {
+    font-size: 10px;
+  }
+  .activity-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .activity-layout > .paper-panel,
+  .activity-layout > aside {
+    width: 100%;
+  }
+  .activity-layout .tabs > button {
+    font-size: 10px;
+    padding: 8px 11px;
+  }
+  .activity-layout .event-row > div {
+    font-size: 11px;
+  }
+  .event-filter select {
+    width: 128px;
+    font-size: 9px;
+  }
+  .event-filter > span {
+    font-size: 6px;
+  }
+  .transmission-note h3 {
+    max-width: 230px;
+    font-size: 32px;
+  }
+  .transmission-note p {
+    font-size: 12px;
+  }
+  .docs-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding-top: 22px;
+  }
+  .docs-nav {
+    position: static;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    gap: 2px;
+    border: 1px solid #bfc8ab;
+    border-radius: 5px;
+    padding: 8px;
+    background: #eceede;
+  }
+  .docs-nav > a {
+    font-size: 9px;
+    padding: 11px 7px;
+  }
+  .manual-stamp {
+    display: none;
+  }
+  .docs-content h2 {
+    font-size: 34px;
+  }
+  .docs-content section > .eyebrow {
+    font-size: 8px;
+  }
+  .docs-content p {
+    font-size: 12px;
+    line-height: 1.85;
+  }
+  .doc-loop {
+    font-size: 20px;
+    padding: 16px;
+  }
+  .docs-content section {
+    margin-bottom: 27px;
+    padding-bottom: 27px;
+  }
+  .modal-content {
+    padding: 30px 23px;
+  }
+  .modal h2 {
+    font-size: 39px;
+  }
+  .modal p {
+    font-size: 11px;
+  }
+  .wallet-option {
+    padding: 16px 12px;
+    gap: 10px;
+  }
+  .wallet-option strong {
+    font-size: 11px;
+  }
+  .wallet-option small {
+    font-size: 7px;
+  }
+  .wallet-option svg {
+    width: 19px;
+  }
+  .toast {
+    font-size: 10px;
+    padding: 13px 17px;
+    bottom: 15px;
+  }
+  .empty-state {
+    padding: 50px 20px;
+    min-height: 320px;
+  }
+  .empty-state h1 {
+    font-size: 48px;
+  }
+  .loading-screen h2 {
+    font-size: 23px;
+  }
+}
+@media (max-width: 370px) {
+  .site-header {
+    padding: 0 12px;
+  }
+  .brand > span {
+    font-size: 35px;
+  }
+  .brand-bolt {
+    width: 18px;
+  }
+  .wallet-button {
+    font-size: 8px;
+    padding: 8px;
+  }
+  .header-actions {
+    gap: 1px;
+  }
+  .sound-button {
+    width: 28px;
+  }
+  .page {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .home-intro h1 {
+    font-size: 41px;
+  }
+  .intro-action .button {
+    padding: 8px;
+    font-size: 8px;
+    gap: 6px;
+  }
+  .intro-action p {
+    font-size: 8px;
+  }
+  .token-table-head,
+  .token-row {
+    grid-template-columns: minmax(125px, 1fr) 55px 57px 11px;
+    gap: 7px;
+  }
+  .token-identity strong {
+    font-size: 10px;
+  }
+  .token-icon {
+    height: 28px;
+    width: 28px;
+    font-size: 19px;
+  }
+  .token-identity {
+    gap: 5px;
+  }
+  .token-contribution,
+  .token-market {
+    font-size: 10px;
+  }
+  .fighter-copy h2,
+  .expanded .fighter-copy h2 {
+    font-size: 30px;
+  }
+  .fighter-kicker {
+    font-size: 4px;
+  }
+  .arena-controls > div {
+    gap: 6px;
+  }
+  .arena-controls .button {
+    font-size: 7px;
+  }
+  .skill-node strong {
+    font-size: 8px;
+  }
+  .form-steps {
+    padding: 14px;
+  }
+  .faction-option strong {
+    font-size: 19px;
+  }
+  .faction-option small {
+    font-size: 4.5px;
+  }
+  .preview-flow {
+    font-size: 6px;
+  }
+  .tabs > button {
+    font-size: 9px;
+    padding: 9px 10px;
+  }
+  .sort-input {
+    width: 137px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .ticker-track {
+    animation: none !important;
+  }
+  .phase-fighting .character-button {
+    animation: none !important;
+  }
+  .character {
+    animation: none !important;
+  }
+  .toast {
+    transition: none !important;
+  }
+}

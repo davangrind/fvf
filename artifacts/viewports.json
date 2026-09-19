@@ -1,0 +1,254 @@
+[
+  {
+    "path": "/",
+    "width": 320,
+    "viewport": 320,
+    "scroll": 320
+  },
+  {
+    "path": "/battle/season-01",
+    "width": 320,
+    "viewport": 320,
+    "scroll": 320
+  },
+  {
+    "path": "/launch",
+    "width": 320,
+    "viewport": 320,
+    "scroll": 320
+  },
+  {
+    "path": "/tokens",
+    "width": 320,
+    "viewport": 320,
+    "scroll": 320
+  },
+  {
+    "path": "/activity",
+    "width": 320,
+    "viewport": 320,
+    "scroll": 320
+  },
+  {
+    "path": "/docs",
+    "width": 320,
+    "viewport": 320,
+    "scroll": 320
+  },
+  {
+    "path": "/",
+    "width": 360,
+    "viewport": 360,
+    "scroll": 360
+  },
+  {
+    "path": "/battle/season-01",
+    "width": 360,
+    "viewport": 360,
+    "scroll": 360
+  },
+  {
+    "path": "/launch",
+    "width": 360,
+    "viewport": 360,
+    "scroll": 360
+  },
+  {
+    "path": "/tokens",
+    "width": 360,
+    "viewport": 360,
+    "scroll": 360
+  },
+  {
+    "path": "/activity",
+    "width": 360,
+    "viewport": 360,
+    "scroll": 360
+  },
+  {
+    "path": "/docs",
+    "width": 360,
+    "viewport": 360,
+    "scroll": 360
+  },
+  {
+    "path": "/",
+    "width": 390,
+    "viewport": 390,
+    "scroll": 390
+  },
+  {
+    "path": "/battle/season-01",
+    "width": 390,
+    "viewport": 390,
+    "scroll": 390
+  },
+  {
+    "path": "/launch",
+    "width": 390,
+    "viewport": 390,
+    "scroll": 390
+  },
+  {
+    "path": "/tokens",
+    "width": 390,
+    "viewport": 390,
+    "scroll": 390
+  },
+  {
+    "path": "/activity",
+    "width": 390,
+    "viewport": 390,
+    "scroll": 390
+  },
+  {
+    "path": "/docs",
+    "width": 390,
+    "viewport": 390,
+    "scroll": 390
+  },
+  {
+    "path": "/",
+    "width": 768,
+    "viewport": 768,
+    "scroll": 768
+  },
+  {
+    "path": "/battle/season-01",
+    "width": 768,
+    "viewport": 768,
+    "scroll": 768
+  },
+  {
+    "path": "/launch",
+    "width": 768,
+    "viewport": 768,
+    "scroll": 768
+  },
+  {
+    "path": "/tokens",
+    "width": 768,
+    "viewport": 768,
+    "scroll": 768
+  },
+  {
+    "path": "/activity",
+    "width": 768,
+    "viewport": 768,
+    "scroll": 768
+  },
+  {
+    "path": "/docs",
+    "width": 768,
+    "viewport": 768,
+    "scroll": 768
+  },
+  {
+    "path": "/",
+    "width": 1024,
+    "viewport": 1024,
+    "scroll": 1024
+  },
+  {
+    "path": "/battle/season-01",
+    "width": 1024,
+    "viewport": 1024,
+    "scroll": 1024
+  },
+  {
+    "path": "/launch",
+    "width": 1024,
+    "viewport": 1024,
+    "scroll": 1024
+  },
+  {
+    "path": "/tokens",
+    "width": 1024,
+    "viewport": 1024,
+    "scroll": 1024
+  },
+  {
+    "path": "/activity",
+    "width": 1024,
+    "viewport": 1024,
+    "scroll": 1024
+  },
+  {
+    "path": "/docs",
+    "width": 1024,
+    "viewport": 1024,
+    "scroll": 1024
+  },
+  {
+    "path": "/",
+    "width": 1440,
+    "viewport": 1440,
+    "scroll": 1440
+  },
+  {
+    "path": "/battle/season-01",
+    "width": 1440,
+    "viewport": 1440,
+    "scroll": 1440
+  },
+  {
+    "path": "/launch",
+    "width": 1440,
+    "viewport": 1440,
+    "scroll": 1440
+  },
+  {
+    "path": "/tokens",
+    "width": 1440,
+    "viewport": 1440,
+    "scroll": 1440
+  },
+  {
+    "path": "/activity",
+    "width": 1440,
+    "viewport": 1440,
+    "scroll": 1440
+  },
+  {
+    "path": "/docs",
+    "width": 1440,
+    "viewport": 1440,
+    "scroll": 1440
+  },
+  {
+    "path": "/",
+    "width": 1920,
+    "viewport": 1920,
+    "scroll": 1920
+  },
+  {
+    "path": "/battle/season-01",
+    "width": 1920,
+    "viewport": 1920,
+    "scroll": 1920
+  },
+  {
+    "path": "/launch",
+    "width": 1920,
+    "viewport": 1920,
+    "scroll": 1920
+  },
+  {
+    "path": "/tokens",
+    "width": 1920,
+    "viewport": 1920,
+    "scroll": 1920
+  },
+  {
+    "path": "/activity",
+    "width": 1920,
+    "viewport": 1920,
+    "scroll": 1920
+  },
+  {
+    "path": "/docs",
+    "width": 1920,
+    "viewport": 1920,
+    "scroll": 1920
+  }
+]
