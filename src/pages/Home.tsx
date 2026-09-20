@@ -1,116 +1,144 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Zap, Skull, Swords, Plus } from "lucide-react";
-import { Arena } from "../components/Arena";
-import { EventFeed, TokenRows } from "../components/DataViews";
-import { useBattle } from "../state";
+import { ArrowUpRight, Plus, BookOpen, ChevronRight } from "lucide-react";
+import { useBattle, useUI, bleep } from "../state";
+import { arenaEvents } from "../data/events";
+import { Metrics, TokenTable, ArenaCard } from "../components/Platform";
+import { Blob } from "../components/Creatures";
 export default function Home() {
   const state = useBattle();
+  const ui = useUI();
+  const top = [...state.tokens]
+    .sort((a, b) => b.contribution - a.contribution)
+    .slice(0, 5);
   return (
     <div className="page home-page">
-      <section className="home-intro">
-        <div>
-          <span className="eyebrow">
-            <span className="mini-star">✳</span> A TOKEN LAUNCHPAD. A VERY BAD
-            IDEA.
-          </span>
-          <h1>
-            FEES FEED <span>THE FIGHT.</span>
-            <span className="title-asterisk" aria-hidden="true">
-              ✳
-            </span>
-          </h1>
+      <section className="home-hero">
+        <button
+          className="hero-goblin goblin-one"
+          aria-label="Poke the homepage goblin"
+          onClick={() => {
+            bleep(ui.sound, 230);
+            ui.toast("he has no idea what a blockchain is");
+          }}
+        >
+          <Blob variant={0} />
+          <span>financially illiterate</span>
+        </button>
+        <div className="hero-badge">
+          <span className="pons-mark">p</span> A launchpad for pons{" "}
+          <span className="tiny-divider" /> A home for bad ideas
         </div>
-        <div className="intro-action">
-          <p>
-            Launch a token. Pick a monster.
-            <br />
-            Your creator fees make it stronger.
-          </p>
-          <Link to="/launch" className="button primary">
-            Launch your token <ArrowUpRight size={19} />
+        <h1>
+          Internet nonsense
+          <br />
+          <span>with consequences</span>
+        </h1>
+        <p>
+          Launch a token. Pick a side. Turn creator fees into fuel
+          <br className="desktop-break" /> for the internet’s next deeply
+          unnecessary event.
+        </p>
+        <div className="button-row">
+          <Link className="button primary large" to="/launch">
+            <Plus size={18} /> Launch a token
+          </Link>
+          <Link className="button large" to="/arena">
+            Find your arena <ArrowUpRight size={17} />
           </Link>
         </div>
-      </section>
-      <Arena />
-      <div className="loop-strip">
-        <span>
-          <span className="loop-number">01</span>
-          <Plus size={18} />
-          <b>MAKE A TOKEN.</b>
-        </span>
-        <i>↝</i>
-        <span>
-          <span className="loop-number">02</span>
-          <Skull size={18} />
-          <b>PICK YOUR PROBLEM.</b>
-        </span>
-        <i>↝</i>
-        <span>
-          <span className="loop-number">03</span>
-          <Zap size={18} />
-          <b>FEES BECOME FIREPOWER.</b>
-        </span>
-        <i>↝</i>
-        <span>
-          <Swords size={18} />
-          <b>ENJOY THE DAMAGE.</b>
-        </span>
-      </div>
-      <div className="home-data">
-        <section>
-          <div className="section-heading">
-            <div>
-              <span className="eyebrow">SMALL TOKENS. BIG PROBLEMS.</span>
-              <h2>
-                THE BIGGEST FEEDERS<span className="orange">*</span>
-              </h2>
-            </div>
-            <Link to="/tokens">
-              All tokens <ArrowUpRight size={17} />
-            </Link>
-          </div>
-          <TokenRows
-            tokens={[...state.tokens]
-              .sort((a, b) => b.contribution - a.contribution)
-              .slice(0, 5)}
-            compact
-          />
-          <p className="micro muted">
-            * Ranked by simulated creator fees contributed to their fighter.
-          </p>
-        </section>
-        <section className="war-wire">
-          <div className="section-heading">
-            <div>
-              <span className="eyebrow">
-                <i className="live-dot" /> TRANSMISSION: UNHINGED
-              </span>
-              <h2>THE WAR WIRE</h2>
-            </div>
-            <Link to="/activity" aria-label="View all activity">
-              <ArrowUpRight size={23} />
-            </Link>
-          </div>
-          <EventFeed events={state.events.slice(0, 5)} />
-          <div className="wire-bottom">
-            <span className="demo-tag">DEMO FEED</span>
-            <span>Somewhere, a server is crying.</span>
-          </div>
-        </section>
-      </div>
-      <section className="recruit-banner">
-        <span className="recruit-star">✳</span>
-        <div>
-          <span className="eyebrow">THE INTERNET WAS A MISTAKE.</span>
-          <h2>MAKE IT EVERYONE'S PROBLEM.</h2>
-          <p>
-            Your next token could be the difference. Probably a terrible one.
-          </p>
+        <div className="hero-footnote">
+          <span className="status-pip" /> Currently cooking: 1 arena{" "}
+          <span>/</span> Local demo
         </div>
-        <Link to="/launch" className="button dark">
-          Pick a side. Launch a token. <ArrowUpRight size={20} />
+        <button
+          className="hero-goblin goblin-two"
+          aria-label="Poke the other homepage goblin"
+          onClick={() => {
+            bleep(ui.sound, 720);
+            ui.toast("source: the little guy told me");
+          }}
+        >
+          <Blob variant={1} />
+          <span>source: trust me bro</span>
+        </button>
+        <div className="hero-orbit" aria-hidden="true" />
+      </section>
+      <Metrics />
+      <div className="home-main-grid">
+        <section className="panel token-panel">
+          <div className="section-heading">
+            <div>
+              <span className="eyebrow">The usual suspects</span>
+              <h2>Biggest enablers</h2>
+            </div>
+            <Link className="text-link" to="/tokens">
+              All tokens <ChevronRight size={16} />
+            </Link>
+          </div>
+          <TokenTable tokens={top} compact />
+          <div className="panel-footnote">
+            Ranked by simulated creator fees contributed{" "}
+            <span className="mono">NOT FINANCIAL WISDOM</span>
+          </div>
+        </section>
+        <section className="home-arena-section">
+          <div className="section-heading">
+            <div>
+              <span className="eyebrow">Meanwhile, in the lab</span>
+              <h2>Currently escalating</h2>
+            </div>
+            <Link className="icon-button" to="/arena" aria-label="All arenas">
+              <ArrowUpRight size={18} />
+            </Link>
+          </div>
+          <ArenaCard event={arenaEvents[0]} featured />
+        </section>
+      </div>
+      <section className="home-bottom-grid">
+        <Link to="/docs#fee-flow" className="flow-teaser panel">
+          <div>
+            <span className="eyebrow">Good question, actually</span>
+            <h2>Where do the fees go?</h2>
+            <p>A token. A side. A growing pool of questionable potential.</p>
+            <span className="text-link">
+              Follow the money <ArrowUpRight size={16} />
+            </span>
+          </div>
+          <div className="mini-flow" aria-hidden="true">
+            <span>$</span>
+            <i />
+            <span className="mini-tank">
+              <b />
+            </span>
+            <i />
+            <Blob variant={0} />
+          </div>
+        </Link>
+        <Link to="/arena" className="next-teaser panel">
+          <div>
+            <span className="eyebrow">This is bigger than one fight</span>
+            <h2>
+              More bad ideas
+              <br />
+              in the microwave
+            </h2>
+            <p>Duels, three-way beef and four-way chaos</p>
+            <span className="text-link">
+              See what’s cooking <ArrowUpRight size={16} />
+            </span>
+          </div>
+          <div className="teaser-blobs">
+            <Blob variant={2} />
+            <Blob variant={3} />
+            <Blob variant={4} />
+          </div>
         </Link>
       </section>
+      <div className="home-manual">
+        <BookOpen size={18} />
+        <span>New here? We wrote down the rules before eating the paper.</span>
+        <Link to="/docs">Read the field manual</Link>
+      </div>
     </div>
   );
 }

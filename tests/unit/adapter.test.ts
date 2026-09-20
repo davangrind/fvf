@@ -72,7 +72,7 @@ describe("demo boundary", () => {
     );
   });
   it("survives corrupt or unavailable browser storage", () => {
-    storage.set("fvf:demo:v1", "{broken");
+    storage.set("fvf:demo:v2", "{broken");
     expect(new DemoAdapter().getSnapshot().tokens.length).toBe(12);
     vi.stubGlobal("localStorage", {
       getItem: () => {

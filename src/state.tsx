@@ -93,7 +93,7 @@ export function StateProvider({ children }: { children: ReactNode }) {
     >
       {children}
       <div className={`toast ${message ? "show" : ""}`} role="status">
-        ✦ {message}
+        {message}
       </div>
     </Context.Provider>
   );

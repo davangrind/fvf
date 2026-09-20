@@ -3,13 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#f4f1e8" />
+    <meta name="theme-color" content="#111513" />
     <meta
       name="description"
-      content="Your token. Their problem. Launch a token, choose your fighter, and feed the war. FVF is a playable demo of a faction-powered Pons launchpad."
+      content="FVF / FeesVFees. Launch a token, pick a side, and fuel the internet's next ridiculous event. An interactive launchpad concept for pons."
     />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>FVF — Fees feed the fight.</title>
+    <title>FVF / Internet nonsense with consequences</title>
+    <script>
+      try {
+        document.documentElement.dataset.theme =
+          localStorage.getItem("fvf:theme") === "light" ? "light" : "dark";
+      } catch {
+        document.documentElement.dataset.theme = "dark";
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

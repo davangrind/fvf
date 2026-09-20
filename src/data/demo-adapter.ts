@@ -1,9 +1,4 @@
-import {
-  advancePhase,
-  factionStats,
-  validateLaunch,
-  FACTIONS,
-} from "../domain/battle";
+import { factionStats, validateLaunch, FACTIONS } from "../domain/battle";
 import type {
   BattleDataAdapter,
   BattleEvent,
@@ -15,7 +10,7 @@ import type {
   SettlementAdapter,
 } from "../domain/types";
 import { createSeed } from "./seed";
-const STORAGE_KEY = "fvf:demo:v1";
+const STORAGE_KEY = "fvf:demo:v2";
 export class DemoAdapter implements BattleDataAdapter, LaunchAdapter {
   readonly source = "demo" as const;
   private state: BattleSnapshot;
@@ -69,8 +64,6 @@ export class DemoAdapter implements BattleDataAdapter, LaunchAdapter {
     let ticks = 0;
     this.timer = setInterval(() => {
       if (document.hidden) return;
-      const next = advancePhase(this.state, Date.now());
-      if (next !== this.state) this.commit(next);
       if (++ticks % 7 === 0 && this.state.phase === "preparing")
         this.simulate();
     }, 1000);

@@ -1,125 +1,186 @@
-import { useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
-import { ArrowUpRight, Search, SlidersHorizontal } from "lucide-react";
+import { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
+import { Search, List, LayoutGrid, Plus } from "lucide-react";
 import { useBattle } from "../state";
-import { TokenRows } from "../components/DataViews";
+import { TokenTable, TokenAvatar, Sparkline } from "../components/Platform";
 import { money } from "../domain/battle";
+import { Blob } from "../components/Creatures";
 export default function Tokens() {
-  const state = useBattle();
-  const [params, setParams] = useSearchParams();
+  const s = useBattle();
   const [query, setQuery] = useState("");
-  const [sort, setSort] = useState("contribution");
-  const faction = params.get("faction") ?? "all";
-  const tokens = state.tokens
-    .filter(
-      (t) =>
-        (faction === "all" || t.faction === faction) &&
-        `${t.name} ${t.ticker}`.toLowerCase().includes(query.toLowerCase()),
-    )
-    .sort((a, b) =>
-      sort === "newest"
-        ? b.createdAt - a.createdAt
-        : sort === "marketCap"
-          ? b.marketCap - a.marketCap
-          : b.contribution - a.contribution,
-    );
+  const [faction, setFaction] = useState("all");
+  const [sort, setSort] = useState("fees");
+  const [grid, setGrid] = useState(false);
+  const tokens = useMemo(
+    () =>
+      s.tokens
+        .filter(
+          (t) =>
+            (faction === "all" || t.faction === faction) &&
+            `${t.name} ${t.ticker}`.toLowerCase().includes(query.toLowerCase()),
+        )
+        .sort((a, b) =>
+          sort === "fees"
+            ? b.contribution - a.contribution
+            : sort === "cap"
+              ? b.marketCap - a.marketCap
+              : b.createdAt - a.createdAt,
+        ),
+    [s.tokens, query, faction, sort],
+  );
   return (
     <div className="page">
-      <div className="page-heading">
+      <div className="page-heading heading-row">
         <div>
-          <span className="eyebrow">
-            SMALL CAPS. LARGE PERSONALITY DISORDERS.
-          </span>
-          <h1>
-            THE <span className="orange">ARSENAL.</span>
-          </h1>
-          <p>Every token is somebody's bad idea. These ones have a side.</p>
+          <span className="eyebrow">The token petri dish</span>
+          <h1>Small caps, big personalities</h1>
+          <p>Every token has a side. Some even have a brain cell.</p>
         </div>
         <Link className="button primary" to="/launch">
-          Add your weapon <ArrowUpRight size={18} />
+          <Plus size={16} /> Launch a token
         </Link>
       </div>
-      <div className="summary-strip">
-        <div>
-          <small>ACTIVE RECRUITS</small>
-          <strong>{state.tokens.length}</strong>
-        </div>
-        <div>
-          <small>TOTAL FEES FED</small>
-          <strong>
-            {money(state.tokens.reduce((s, t) => s + t.contribution, 0))}
-          </strong>
-        </div>
-        <div>
-          <small>SIDES TO REGRET</small>
-          <strong>02</strong>
-        </div>
-        <span className="demo-tag">ALL VALUES SIMULATED</span>
+      <div className="token-summary">
+        <span>
+          <b>{s.tokens.length}</b> local recruits
+        </span>
+        <span>
+          <b>
+            {money(
+              s.tokens.reduce((n, t) => n + t.contribution, 0),
+              true,
+            )}
+          </b>{" "}
+          fees contributed
+        </span>
+        <span className="badge">Simulated data</span>
       </div>
-      <div className="token-filters">
-        <div className="tabs" aria-label="Filter tokens by faction">
-          {[
-            ["all", "All weapons"],
-            ["fly", "The swarm"],
-            ["astra", "Astra elite"],
-          ].map(([value, label]) => (
-            <button
-              key={value}
-              className={faction === value ? "active" : ""}
-              onClick={() =>
-                setParams(value === "all" ? {} : { faction: value })
-              }
-            >
-              {label}
-            </button>
-          ))}
-        </div>
-        <div className="filter-inputs">
-          <label className="search-input">
+      <section className="panel">
+        <div className="token-filters">
+          <div className="search-input">
             <Search size={17} />
             <input
-              placeholder="Find a problem…"
               aria-label="Search tokens"
+              placeholder="Search name or ticker"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
             />
-          </label>
-          <label className="sort-input">
-            <SlidersHorizontal size={16} />
-            <select
-              value={sort}
-              onChange={(e) => setSort(e.target.value)}
-              aria-label="Sort tokens"
-            >
-              <option value="contribution">Biggest feeders</option>
-              <option value="newest">New recruits</option>
-              <option value="marketCap">Market cap</option>
-            </select>
-          </label>
-        </div>
-      </div>
-      {tokens.length ? (
-        <TokenRows tokens={tokens} />
-      ) : (
-        <div className="empty-state">
-          <Search size={40} />
-          <h2>NO PROBLEMS FOUND.</h2>
-          <p>Try another name or choose a different faction.</p>
-          <button
-            className="button"
-            onClick={() => {
-              setQuery("");
-              setParams({});
-            }}
+            {query && (
+              <button className="text-button" onClick={() => setQuery("")}>
+                Clear
+              </button>
+            )}
+          </div>
+          <div className="segmented">
+            {[
+              ["all", "All sides"],
+              ["fly", "Neuro Fly"],
+              ["astra", "Astra"],
+            ].map(([id, label]) => (
+              <button
+                key={id}
+                aria-pressed={faction === id}
+                className={faction === id ? "active" : ""}
+                onClick={() => setFaction(id)}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+          <select
+            aria-label="Sort tokens"
+            value={sort}
+            onChange={(e) => setSort(e.target.value)}
           >
-            Clear filters
-          </button>
+            <option value="fees">Most fees</option>
+            <option value="cap">Market cap</option>
+            <option value="new">Newest</option>
+          </select>
+          <div className="view-toggle">
+            <button
+              className={`icon-button ${!grid ? "active" : ""}`}
+              aria-label="Table view"
+              aria-pressed={!grid}
+              onClick={() => setGrid(false)}
+            >
+              <List size={18} />
+            </button>
+            <button
+              className={`icon-button ${grid ? "active" : ""}`}
+              aria-label="Grid view"
+              aria-pressed={grid}
+              onClick={() => setGrid(true)}
+            >
+              <LayoutGrid size={17} />
+            </button>
+          </div>
         </div>
-      )}
-      <div className="list-footer">
-        <span>{tokens.length} weapons found</span>
-        <span>Demo tokens have no contract address and cannot be traded.</span>
-      </div>
+        {grid ? (
+          <div className="token-grid">
+            {tokens.map((t, i) => (
+              <Link
+                className="token-grid-card"
+                to={`/tokens/${t.id}`}
+                key={t.id}
+              >
+                <div className="token-identity">
+                  <TokenAvatar token={t} />
+                  <span>
+                    <strong>{t.name}</strong>
+                    <small>${t.ticker}</small>
+                  </span>
+                  <span className={`faction-pill ${t.faction}`}>
+                    {t.faction === "fly" ? "Fly" : "Astra"}
+                  </span>
+                </div>
+                <p>{t.description}</p>
+                <div className="token-grid-stats">
+                  <span>
+                    <small>Market cap</small>
+                    <b>{money(t.marketCap, true)}</b>
+                  </span>
+                  {t.marketCap > 0 ? (
+                    <Sparkline variant={i} negative={t.change < 0} />
+                  ) : (
+                    <small className="muted">No history</small>
+                  )}
+                  <span>
+                    <small>Contributed</small>
+                    <b>{money(t.contribution, true)}</b>
+                  </span>
+                </div>
+              </Link>
+            ))}
+            {!tokens.length && (
+              <div className="empty-state">
+                <Blob />
+                <h3>No matching tokens</h3>
+                <button
+                  className="button"
+                  onClick={() => {
+                    setQuery("");
+                    setFaction("all");
+                  }}
+                >
+                  Clear filters
+                </button>
+              </div>
+            )}
+          </div>
+        ) : (
+          <TokenTable tokens={tokens} />
+        )}
+        <div className="panel-footnote">
+          <span>
+            {tokens.length} of {s.tokens.length} tokens
+          </span>
+          <span>All tokens currently support experiment 001</span>
+        </div>
+      </section>
+      <p className="page-note">
+        Market caps, changes and sparklines are illustrative. Creator-fee
+        contributions reflect this browser’s simulation.
+      </p>
     </div>
   );
 }

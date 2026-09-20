@@ -2,31 +2,33 @@ import { useEffect, useRef, useState } from "react";
 import type { FormEvent } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import {
-  ArrowLeft,
-  ArrowRight,
-  ArrowUpRight,
   Upload,
   Check,
-  Zap,
-  ShieldCheck,
   LoaderCircle,
+  FlaskConical,
+  LockKeyhole,
+  ChevronLeft,
+  Plus,
 } from "lucide-react";
 import { useUI } from "../state";
 import { demoAdapter } from "../data/demo-adapter";
-import { FACTIONS, validateLaunch } from "../domain/battle";
+import { validateLaunch } from "../domain/battle";
+import { imageMimeFromBytes } from "../domain/artwork";
 import type { Faction, LaunchInput, Token } from "../domain/types";
+import { Creature } from "../components/Creatures";
+import { TokenAvatar } from "../components/Platform";
 const empty: LaunchInput = {
   name: "",
   ticker: "",
   description: "",
-  image: "/art/fly.webp",
+  image: "/art/fly-avatar.svg",
   faction: "fly",
   website: "",
   x: "",
 };
 function readDraft(): LaunchInput {
   try {
-    const v = JSON.parse(sessionStorage.getItem("fvf:draft") ?? "null");
+    const v = JSON.parse(sessionStorage.getItem("fvf:draft:v2") ?? "null");
     if (
       v &&
       typeof v.name === "string" &&
@@ -37,20 +39,25 @@ function readDraft(): LaunchInput {
     )
       return v;
   } catch {
-    /* Empty draft. */
+    /* empty draft */
   }
   return empty;
 }
 export default function Launch() {
   const [params] = useSearchParams();
-  const [input, setInput] = useState<LaunchInput>(() => ({
-    ...readDraft(),
-    ...(params.get("faction") === "astra"
-      ? { faction: "astra", image: "/art/astra.webp" }
-      : params.get("faction") === "fly"
-        ? { faction: "fly", image: "/art/fly.webp" }
-        : {}),
-  }));
+  const [input, setInput] = useState<LaunchInput>(() => {
+    const draft = readDraft();
+    const f = params.get("faction");
+    return f === "fly" || f === "astra"
+      ? {
+          ...draft,
+          faction: f,
+          image: draft.image.startsWith("data:")
+            ? draft.image
+            : `/art/${f}-avatar.svg`,
+        }
+      : draft;
+  });
   const [step, setStep] = useState(1);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
@@ -59,40 +66,41 @@ export default function Launch() {
   const fileRef = useRef<HTMLInputElement>(null);
   const ui = useUI();
   useEffect(() => {
-    if (created) return;
-    try {
-      sessionStorage.setItem("fvf:draft", JSON.stringify(input));
-    } catch {
-      /* Draft persistence is best effort. */
-    }
+    if (!created)
+      try {
+        sessionStorage.setItem("fvf:draft:v2", JSON.stringify(input));
+      } catch {
+        /* best effort */
+      }
   }, [input, created]);
   const change = (key: keyof LaunchInput, value: string) => {
     setInput((v) => ({ ...v, [key]: value }));
     setError("");
   };
-  function faction(f: Faction) {
+  const pick = (f: Faction) =>
     setInput((v) => ({
       ...v,
       faction: f,
-      image: v.image.startsWith("/art/") ? `/art/${f}.webp` : v.image,
+      image: v.image.startsWith("/art/") ? `/art/${f}-avatar.svg` : v.image,
     }));
-  }
   async function upload(file?: File) {
     if (!file) return;
-    if (!["image/png", "image/jpeg", "image/webp"].includes(file.type)) {
-      setError("Use a PNG, JPG, or WebP image.");
-      return;
-    }
     if (file.size > 2 * 1024 * 1024) {
       setError("Keep your image under 2 MB.");
       return;
     }
     try {
+      const bytes = await file.arrayBuffer();
+      const mime = imageMimeFromBytes(new Uint8Array(bytes));
+      if (!mime) {
+        setError("Use a PNG, JPG, or WebP image.");
+        return;
+      }
       const data = await new Promise<string>((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(String(reader.result));
-        reader.onerror = () => reject(new Error("Image could not be read."));
-        reader.readAsDataURL(file);
+        const r = new FileReader();
+        r.onload = () => resolve(String(r.result));
+        r.onerror = () => reject(new Error());
+        r.readAsDataURL(new Blob([bytes], { type: mime }));
       });
       const image = new Image();
       image.src = data;
@@ -102,8 +110,8 @@ export default function Launch() {
       setError("That image could not be opened. Try another file.");
     }
   }
-  function next(event: FormEvent) {
-    event.preventDefault();
+  function next(e: FormEvent) {
+    e.preventDefault();
     const err = validateLaunch(input);
     if (err) {
       setError(err);
@@ -111,7 +119,6 @@ export default function Launch() {
     }
     setError("");
     setStep(2);
-    window.scrollTo({ top: 180, behavior: "smooth" });
   }
   async function launch() {
     if (!ui.wallet) {
@@ -125,11 +132,15 @@ export default function Launch() {
     setBusy(true);
     setError("");
     try {
-      const result = await demoAdapter.launch(input);
-      if (result.source === "demo") {
-        setCreated(result.token);
-        sessionStorage.removeItem("fvf:draft");
-        ui.toast("Your token is now a problem.");
+      const r = await demoAdapter.launch(input);
+      if (r.source === "demo") {
+        setCreated(r.token);
+        try {
+          sessionStorage.removeItem("fvf:draft:v2");
+        } catch {
+          /* optional storage */
+        }
+        ui.toast("A new problem has entered the chat");
       }
     } catch (e) {
       setError(e instanceof Error ? e.message : "Launch failed. Please retry.");
@@ -139,112 +150,124 @@ export default function Launch() {
   }
   if (created)
     return (
-      <div className={`page launch-page theme-${created.faction}`}>
-        <section className="launch-success">
-          <div className="success-seal">
-            <Check size={52} />
+      <div className="page">
+        <section className="launch-success panel">
+          <div className="success-creature">
+            <Creature faction={created.faction} stage={2} />
+            <span>
+              <Check size={25} />
+            </span>
           </div>
-          <span className="eyebrow">LOCAL DEMO LAUNCH COMPLETE</span>
+          <span className="eyebrow">Local demo launch complete</span>
           <h1>
-            YOUR TOKEN IS
+            A new problem
             <br />
-            NOW A <span className="orange">WEAPON.</span>
+            has entered the chat
           </h1>
           <p>
-            <strong>${created.ticker}</strong> joined{" "}
-            {FACTIONS[created.faction].name}.<br />
+            <b>${created.ticker}</b> joined{" "}
+            {created.faction === "fly" ? "Neuro Fly" : "GPT-6 Astra"} in
+            experiment 001.
+          </p>
+          <p className="muted">
             {demoAdapter.persistenceAvailable
-              ? "It is saved in this browser and listed in the demo arsenal."
-              : "It is listed for this session. Browser storage is unavailable; a reload will lose this recruit."}
+              ? "Saved in this browser and listed in Tokens."
+              : "Available for this session. Storage is unavailable; a reload will lose this record."}
           </p>
           <div className="notice">
-            <ShieldCheck size={20} />
+            <FlaskConical size={19} />
             <span>
-              No token was deployed onchain. No transaction or signature was
+              No token was deployed onchain. No signature or transaction was
               requested.
             </span>
           </div>
           <div className="button-row">
             <Link className="button primary" to={`/tokens/${created.id}`}>
-              Meet your recruit <ArrowUpRight size={18} />
+              Meet your token
             </Link>
-            <Link className="button" to="/battle/season-01">
-              Back to the fight
+            <Link className="button" to="/arena/season-01">
+              Visit the lab
             </Link>
           </div>
         </section>
       </div>
     );
   return (
-    <div className={`page launch-page theme-${input.faction}`}>
+    <div className="page launch-page">
       <div className="page-heading">
-        <div>
-          <span className="eyebrow">RECRUITMENT IS OPEN / DEMO LAUNCH</span>
-          <h1>
-            CREATE A <span className="orange">SMALL PROBLEM.</span>
-          </h1>
-          <p>Give it a name. Give it a side. Let the fees do the talking.</p>
-        </div>
-        <span className="hand-note">
-          terrible ideas
-          <br />
-          welcome here ↙
-        </span>
+        <span className="eyebrow">The idea was probably fine in your head</span>
+        <h1>Let it loose</h1>
+        <p>Give your token a name, a face and a questionable allegiance.</p>
       </div>
       <div className="launch-layout">
-        <section className="launch-form-panel">
+        <section className="panel launch-form-panel">
           <div className="form-steps">
             <button
               className={step === 1 ? "active" : ""}
-              onClick={() => setStep(1)}
               disabled={busy}
+              onClick={() => setStep(1)}
             >
-              <b>01</b> Build your weapon
+              <span>01</span> Make a little guy
             </button>
-            <span>→</span>
             <button
               className={step === 2 ? "active" : ""}
+              disabled={busy}
               onClick={() => {
                 const err = validateLaunch(input);
                 if (err) setError(err);
-                else setStep(2);
+                else {
+                  setError("");
+                  setStep(2);
+                }
               }}
-              disabled={busy}
             >
-              <b>02</b> Review & recruit
+              <span>02</span> Read the fine print
             </button>
           </div>
           {step === 1 ? (
             <form onSubmit={next} noValidate>
               <div className="form-section-title">
-                <span>01 /</span>
-                <h2>WHOSE SIDE ARE YOU ON?</h2>
+                <span>01</span>
+                <h2>Choose your experiment</h2>
               </div>
+              <label>
+                Arena
+                <select aria-label="Arena">
+                  <option>Neuro Fly vs GPT-6 Astra / Recruiting</option>
+                  <option disabled>The Touch Grass Incident / Planned</option>
+                  <option disabled>The Last Brain Cell / Planned</option>
+                  <option disabled>Council of Bad Advice / Planned</option>
+                </select>
+              </label>
               <div className="faction-picker">
                 {(["fly", "astra"] as Faction[]).map((f) => (
                   <button
                     type="button"
                     key={f}
                     className={`faction-option ${f} ${input.faction === f ? "selected" : ""}`}
-                    onClick={() => faction(f)}
                     aria-pressed={input.faction === f}
+                    onClick={() => pick(f)}
                   >
-                    <img src={`/art/${f}.webp`} alt="" />
-                    <span>
-                      <strong>{FACTIONS[f].cta}</strong>
+                    <Creature faction={f} stage={1} />
+                    <div>
+                      <strong>
+                        {f === "fly" ? "Neuro Fly" : "GPT-6 Astra"}
+                      </strong>
                       <small>
                         {f === "fly"
-                          ? "BIOLOGICALLY UNHINGED"
-                          : "ARTIFICIALLY SUPERIOR"}
+                          ? "Wetware enjoyer"
+                          : "Hardware enthusiast"}
                       </small>
+                    </div>
+                    <span className="selection-dot">
+                      {input.faction === f && <Check size={12} />}
                     </span>
-                    <i>{input.faction === f ? <Check size={15} /> : null}</i>
                   </button>
                 ))}
               </div>
               <div className="form-section-title">
-                <span>02 /</span>
-                <h2>GIVE IT AN IDENTITY.</h2>
+                <span>02</span>
+                <h2>Give it an identity</h2>
               </div>
               <div className="image-input">
                 <button
@@ -253,24 +276,24 @@ export default function Launch() {
                   onClick={() => fileRef.current?.click()}
                   aria-label="Upload token image"
                 >
-                  <img src={input.image} alt="Token artwork preview" />
+                  {input.image.startsWith("data:") ? (
+                    <img src={input.image} alt="Token artwork preview" />
+                  ) : (
+                    <Creature faction={input.faction} stage={1} />
+                  )}
                   <span>
-                    <Upload size={15} />
+                    <Upload size={14} />
                   </span>
                 </button>
                 <div>
-                  <strong>A face only the internet could love.</strong>
-                  <p>
-                    Upload PNG, JPG, or WebP. Max 2 MB.
-                    <br />
-                    Or keep your fighter as the token image.
-                  </p>
+                  <strong>A face only the internet could love</strong>
+                  <p>PNG, JPG or WebP / Max 2 MB</p>
                   <button
                     className="text-button"
                     type="button"
                     onClick={() => fileRef.current?.click()}
                   >
-                    Choose image <ArrowUpRight size={14} />
+                    Choose image
                   </button>
                 </div>
                 <input
@@ -284,20 +307,20 @@ export default function Launch() {
               </div>
               <div className="form-grid">
                 <label>
-                  Token name{" "}
+                  Token name
                   <input
                     value={input.name}
                     onChange={(e) => change("name", e.target.value)}
                     maxLength={32}
-                    placeholder="e.g. Definitely a Bug"
+                    placeholder="e.g. Emotionally Liquid"
                     required
                     autoComplete="off"
                   />
                 </label>
                 <label>
-                  Ticker{" "}
+                  Ticker
                   <div className="ticker-input">
-                    <span aria-hidden="true">$</span>
+                    <span>$</span>
                     <input
                       aria-label="Ticker"
                       value={input.ticker}
@@ -310,7 +333,7 @@ export default function Launch() {
                         )
                       }
                       maxLength={10}
-                      placeholder="BUG"
+                      placeholder="COPE"
                       required
                       autoComplete="off"
                     />
@@ -325,13 +348,13 @@ export default function Launch() {
                   onChange={(e) => change("description", e.target.value)}
                   maxLength={256}
                   rows={3}
-                  placeholder="Tell us why this needed to exist."
+                  placeholder="Explain yourself. Or make it worse."
                   required
                 />
               </label>
               <details className="social-details">
                 <summary>
-                  Social links <span>OPTIONAL +</span>
+                  Optional social links <Plus size={15} />
                 </summary>
                 <div className="form-grid">
                   <label>
@@ -340,7 +363,7 @@ export default function Launch() {
                       type="url"
                       value={input.website}
                       onChange={(e) => change("website", e.target.value)}
-                      placeholder="https://your-chaos.com"
+                      placeholder="https://"
                     />
                   </label>
                   <label>
@@ -348,7 +371,7 @@ export default function Launch() {
                     <input
                       value={input.x}
                       onChange={(e) => change("x", e.target.value)}
-                      placeholder="@questionableideas"
+                      placeholder="@yourhandle"
                       maxLength={16}
                     />
                   </label>
@@ -359,71 +382,60 @@ export default function Launch() {
                   {error}
                 </p>
               )}
-              <button type="submit" className="button primary full">
-                Review your weapon <ArrowRight size={19} />
+              <button className="button primary full" type="submit">
+                Review the little guy
               </button>
-              <p className="micro muted form-footnote">
-                Demo mode. Images stay in your browser. No upload to IPFS.
-              </p>
             </form>
           ) : (
-            <div className="review-step">
-              <span className="eyebrow">
-                LAST CHANCE TO DEVELOP COMMON SENSE
-              </span>
-              <h2>READY TO MAKE IT WORSE?</h2>
+            <div className="launch-review">
+              <span className="eyebrow">One last vibe check</span>
+              <h2>Know where the fees go</h2>
               <dl className="review-list">
                 <div>
                   <dt>Token</dt>
                   <dd>
-                    {input.name} <b>${input.ticker}</b>
+                    {input.name} / ${input.ticker}
                   </dd>
                 </div>
                 <div>
-                  <dt>Fighter</dt>
-                  <dd>{FACTIONS[input.faction].name}</dd>
+                  <dt>Event</dt>
+                  <dd>Neuro Fly vs GPT-6 Astra</dd>
                 </div>
                 <div>
-                  <dt>Creator-fee destination</dt>
-                  <dd>{FACTIONS[input.faction].short} battle pool</dd>
+                  <dt>Supporting</dt>
+                  <dd>
+                    {input.faction === "fly"
+                      ? "Neuro Fly / Wetware"
+                      : "GPT-6 Astra / Hardware"}
+                  </dd>
                 </div>
                 <div>
-                  <dt>Creator fees routed</dt>
-                  <dd>100% of this token's creator share</dd>
+                  <dt>Mode</dt>
+                  <dd>Local demo</dd>
                 </div>
                 <div>
-                  <dt>Network</dt>
-                  <dd>Local demo · no chain transaction</dd>
-                </div>
-                <div>
-                  <dt>Launch cost</dt>
-                  <dd>$0 demo · no gas</dd>
-                </div>
-                <div>
-                  <dt>Signatures now</dt>
+                  <dt>Gas or payment</dt>
                   <dd>None</dd>
                 </div>
               </dl>
               <div className="notice">
-                <ShieldCheck size={23} />
-                <p>
-                  In production, launch and any required approvals need your
-                  wallet confirmation. The fee recipient and exact network fees
-                  must be shown before signing. This demo only saves a local
-                  recruit.
-                </p>
+                <FlaskConical size={20} />
+                <span>
+                  Creator fees are simulated and attributed to this side’s pool.
+                  The production pons launch and fee collector are not
+                  connected.
+                </span>
               </div>
               <label className="checkbox-label">
                 <input
                   type="checkbox"
                   checked={ack}
                   onChange={(e) => setAck(e.target.checked)}
-                  disabled={busy}
                 />
                 <span>
-                  I understand this is a simulated launch and this token's
-                  creator fees are assigned to {FACTIONS[input.faction].short}{" "}
-                  in the demo.
+                  I understand this creates a local demo record, not an onchain
+                  token, and the selected side receives its simulated
+                  contributions.
                 </span>
               </label>
               {error && (
@@ -433,72 +445,75 @@ export default function Launch() {
               )}
               <button
                 className="button primary full"
-                onClick={launch}
-                disabled={busy || (!ack && !!ui.wallet)}
+                onClick={() => void launch()}
+                disabled={busy}
               >
                 {busy ? (
                   <>
-                    <LoaderCircle className="spin" size={18} /> Recruiting your
-                    problem…
+                    <LoaderCircle size={17} className="spin" /> Creating your
+                    problem
                   </>
                 ) : ui.wallet ? (
-                  <>
-                    Launch demo token <Zap size={18} />
-                  </>
+                  "Create demo token"
                 ) : (
-                  <>
-                    Connect to launch <ArrowRight size={18} />
-                  </>
+                  "Choose a pilot to continue"
                 )}
               </button>
               <button
-                className="text-button back-button"
-                onClick={() => setStep(1)}
+                className="text-button"
                 disabled={busy}
+                onClick={() => setStep(1)}
               >
-                <ArrowLeft size={15} /> Back to editing
+                <ChevronLeft size={14} /> Back to editing
               </button>
             </div>
           )}
         </section>
         <aside className="launch-preview">
-          <div className="preview-top">
-            <span className="eyebrow">YOUR FUTURE PROBLEM</span>
-            <span className="demo-tag">PREVIEW</span>
-          </div>
-          <div className={`preview-art ${input.faction}`}>
-            <span className="preview-orbit" />
-            <img src={input.image} alt="Your token preview" />
-            <span className="preview-star">✧</span>
-          </div>
-          <div className="preview-details">
-            <span className="faction-pill">
-              {FACTIONS[input.faction].short} RECRUIT
-            </span>
-            <h2>{input.name || "An unnamed menace"}</h2>
-            <span className="preview-ticker">
-              ${input.ticker || "YOURTICKER"}
-            </span>
+          <div className={`panel launch-preview-card ${input.faction}`}>
+            <span className="eyebrow">Your future problem</span>
+            <div className="launch-art">
+              {input.image.startsWith("data:") ? (
+                <img src={input.image} alt="Token artwork preview" />
+              ) : (
+                <Creature faction={input.faction} stage={2} />
+              )}
+            </div>
+            <div className="preview-token-identity">
+              <TokenAvatar
+                token={{
+                  ...input,
+                  id: "preview",
+                  emoji: "",
+                  createdAt: 0,
+                  marketCap: 0,
+                  contribution: 0,
+                  change: 0,
+                  source: "demo",
+                }}
+              />
+              <div>
+                <h2>{input.name || "Unnamed little guy"}</h2>
+                <span className="mono">${input.ticker || "???"}</span>
+              </div>
+            </div>
             <p>
               {input.description ||
-                "No lore yet. Just enormous potential for poor decisions."}
+                "No lore yet. The mystery is part of the charm."}
             </p>
-            <div className="preview-flow">
-              <span>YOUR TOKEN</span>
-              <Zap size={17} />
-              <span>CREATOR FEES</span>
-              <ArrowRight size={17} />
-              <strong>{FACTIONS[input.faction].short}</strong>
+            <div className="preview-routing">
+              <span className={`faction-pill ${input.faction}`}>
+                {input.faction === "fly" ? "Team Fly" : "Team Astra"}
+              </span>
+              <span className="micro muted">Experiment 001</span>
             </div>
-            <p className="micro muted">
-              Trading creates fees. Fees feed your fighter. Your token joins one
-              shared battle.
-            </p>
           </div>
-          <div className="preview-sticker">
-            100% OF CREATOR FEES.
-            <br />
-            0% COMMON SENSE.
+          <div className="launch-fineprint">
+            <LockKeyhole size={16} />
+            <p>
+              No payment. No signing. Your draft stays in this browser.{" "}
+              <Link to="/docs#launch">How launches work</Link>
+            </p>
           </div>
         </aside>
       </div>

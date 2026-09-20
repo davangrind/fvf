@@ -17,6 +17,14 @@ export default defineConfig({
       name: "mobile",
       use: { ...devices["iPhone 13"], defaultBrowserType: "chromium" },
     },
+    {
+      name: "webkit-desktop",
+      use: { browserName: "webkit", viewport: { width: 1440, height: 1000 } },
+    },
+    {
+      name: "webkit-mobile",
+      use: { ...devices["iPhone 13"], browserName: "webkit" },
+    },
   ],
   webServer: process.env.FVF_TEST_URL
     ? undefined

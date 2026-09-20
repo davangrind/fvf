@@ -62,7 +62,7 @@ export function WalletModal() {
     <Modal
       open={ui.walletOpen}
       onClose={ui.closeWallet}
-      title={ui.wallet ? "Pilot connected." : "Identify yourself, human."}
+      title={ui.wallet ? "Pilot connected" : "Identify yourself, human"}
     >
       {ui.wallet ? (
         <>

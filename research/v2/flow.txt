@@ -1,0 +1,236 @@
+Skip to main content
+Home
+Explore
+Payments
+Analytics
+Launch
+Capital Flow
+Docs
+UsePaid
+@UsePaid
+Launch
+Connect wallet
+Capital flow
+
+Creator fees from pump.fun are claimed on a schedule, converted to dollars through Kraken, and sent to the creator's
+X
+ Money account. The 20% protocol share covers execution costs and $PAID buybacks and burns.
+
+Pons fee flow
+Native ETH fees accrue and are claimed into PAID’s Robinhood Chain treasury.
+ETH is bridged and converted to SOL on Solana. Robinhood ETH is not sent directly to Kraken.
+The recipient’s allocation goes through Kraken to USD, then confirmed X Money funding and payout.
+80% of verified fees belongs to the X recipient. Execution costs reduce the protocol’s 20%; the remainder funds $PAID buybacks and burns.
+
+Accrued fees, claimed funds, conversion and completed payouts are separate stages. Token-denominated fees remain held for review.
+
+80%
+20%
+pump.fun
+Fees claimed
+Offramp through
+Kraken API
+Sent to X Money
+balance
+Sent to X user
+$PAID bought back
+and burnt
+
+Showing recent verified transfers while the feed refreshes.
+
+Off-ramp
+All
+Deposits
+Swaps
+ACH
+1 / 251
+
+4.29 SOL
+
+sent to
+Kraken
+Sent
+8m
+Amount
+4.285628275 SOL
+To
+7bnp7SDB63bDvFKaMuALBpNiJRzjzwyHSk7gA1NAUfJW
+Transaction
+3HzFkCYJ9yVADaRtY9deBZsJqt6htTNGGE1jSMfPxUjvFNq9SuaPwuSJKW7U54qwjMjUR1xzyPYwuNupQkN9jAV4
+Sent
+Sep 20, 2026, 12:41 PM
+Credited at Kraken
+Waiting for Kraken
+View on Solscan
+
+$359.52
+
+USD sent to
+X Money
+Initiated
+8m
+Amount
+$359.52
+Method
+ACH (Plaid Transfer)
+From
+Kraken USD balance
+To
+X Money checking
+Kraken reference
+FTcqBS2-IprT5VRKUagucXf90vLxk7
+Initiated
+Sep 20, 2026, 12:41 PM
+
+$359.52
+
+swapped
+3.33 SOL
+Swapped
+8m
+Swapped
+3.32595035 SOL
+Market
+SOL/USD, market order
+Average price
+$108.29 per SOL
+Gross
+$360.17
+Kraken fee
+$0.65 (0.18%)
+Received
+$359.52
+Order ID
+OCRVPE-PQKWE-SDISYQ
+Filled
+Sep 20, 2026, 12:41 PM
+
+3.33 SOL
+
+sent to
+Kraken
+Credited
+8m
+Amount
+3.32595035 SOL
+To
+7bnp7SDB63bDvFKaMuALBpNiJRzjzwyHSk7gA1NAUfJW
+Transaction
+2ZkYVZ3BfYmRgNHrMJvrBxxLYVeRP75M3Z5CEkiKZaEjbKPauk2wZETLUpjkjuna7zAgN3zuCGJt7rZv1V3foMsJ
+Kraken reference
+FTih3Hg-hSTJJwhcpSjWdbvR8K8A2b
+Sent
+Sep 20, 2026, 12:11 PM
+Credited at Kraken
+Sep 20, 2026, 12:41 PM
+View on Solscan
+
+$3,000.84
+
+USD sent to
+X Money
+Sent
+8m
+Amount
+$3,000.84
+Batches
+2 swaps combined
+Method
+ACH (Plaid Transfer)
+From
+Kraken USD balance
+To
+X Money checking
+Kraken reference
+FTTcWvL-XHT1b7D1WP3iGazshcKSoH
+Initiated
+Sep 20, 2026, 12:11 PM
+
+$2,294.61
+
+swapped
+21.15 SOL
+Swapped
+38m
+Swapped
+21.147619071 SOL
+Market
+SOL/USD, market order
+Average price
+$108.70 per SOL
+Gross
+$2,298.75
+Kraken fee
+$4.14 (0.18%)
+Received
+$2,294.61
+Order ID
+OXT4JH-YTQ4C-2WD4DT
+Filled
+Sep 20, 2026, 12:11 PM
+A token on pump.fun points its fees at us
+
+At launch, the token directs its creator fees to our treasury and locks in that destination. pump.fun pays in SOL. We read the X handle from the token's description and claim the fees on a schedule. Every claim splits: 80% to the creator and 20% to cover protocol execution costs and buy and burn $PAID.
+
+80%
+20%
+Kraken converts it to dollars
+
+Every claim's recipient share reaches this step as SOL and converts to US Dollars at the same Kraken account. Conversions run in batches rather than one per payout.
+
+$PAID is bought back and burnt
+
+The 20% protocol allocation covers execution costs, then buys $PAID on the open market, in SOL, and burns it through the SPL Token program's own burn instruction, which removes it from supply rather than parking it at an address. Supply is fixed, and the buys and burns are on chain if you want to check them.
+
+USD arrives in our
+X
+ Money balance
+
+The dollars Kraken settles land in the
+X
+ Money balance on the @UsePaid account, the treasury every payout is made from. It holds what is owed to X users between a claim and its payout, and we keep it ahead of what is owed.
+
+The X user receives the distribution through
+X
+ Money
+
+The payout leaves our balance and arrives in the X user's
+X
+ Money account, the one matched to their handle. X asks for verification and the enrolled security key answers it, so nobody taps a prompt. @UsePaid then replies with X's own receipt attached.
+
+X
+ Money operations
+
+X
+ Money allows an account to confirm payments with a security key. @UsePaid has one enrolled and held by our payout worker. When X requests verification, the worker uses the key to sign the verification challenge, allowing the payment to proceed through the
+X
+ Money interface. This is what makes the sends automatic.
+
+Verification
+An X security key, held by our payout worker
+Send limit
+No hard cap on peer-to-peer sends
+Fee
+$0 per send
+PAID payout minimum
+$50 combined per recipient
+
+X's settings as of September 2026. After catch-up, PAID checks combined balances from $50 daily, anchored to the recipient’s first coin creation. New $5,000 threshold hits receive priority; smaller balances carry forward.
+
+UsePaid
+© 2026 UsePaid
+Not affiliated with X Corp.
+Product
+Explore
+Payments
+Analytics
+Launch
+Protocol
+Capital Flow
+$PAID
+Docs
+Legal
+Terms
+Privacy
+Disclosures
+Opt out

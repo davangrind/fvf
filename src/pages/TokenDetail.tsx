@@ -1,121 +1,157 @@
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, ArrowUpRight, Zap } from "lucide-react";
-import { useBattle } from "../state";
-import { TokenIcon, EventFeed } from "../components/DataViews";
-import { FACTIONS, factionStats, money, age } from "../domain/battle";
+import { ChevronLeft, Copy, ExternalLink } from "lucide-react";
+import { useBattle, useUI } from "../state";
+import { money, age, factionStats } from "../domain/battle";
+import { TokenAvatar } from "../components/Platform";
+import { Creature, Blob } from "../components/Creatures";
 export default function TokenDetail() {
   const { id } = useParams();
-  const state = useBattle();
-  const token = state.tokens.find((t) => t.id === id);
-  if (!token)
+  const s = useBattle();
+  const ui = useUI();
+  const t = s.tokens.find((t) => t.id === id);
+  if (!t)
     return (
       <div className="page empty-state">
-        <h1>RECRUIT MISSING IN ACTION.</h1>
-        <p>This demo token may belong to another browser.</p>
+        <Blob />
+        <h1>This token escaped containment</h1>
+        <p>It may belong to another browser’s local demo.</p>
         <Link className="button primary" to="/tokens">
-          Back to the arsenal
+          Back to tokens
         </Link>
       </div>
     );
-  const stats = factionStats(state, token.faction);
-  const rank =
-    [...state.tokens]
-      .sort((a, b) => b.contribution - a.contribution)
-      .findIndex((t) => t.id === id) + 1;
+  const stats = factionStats(s, t.faction);
+  const events = s.events.filter((e) => e.tokenId === t.id);
   return (
-    <div className={`page token-detail theme-${token.faction}`}>
-      <Link className="text-button" to="/tokens">
-        <ArrowLeft size={16} /> Back to the arsenal
+    <div className="page token-detail-page">
+      <Link className="text-link" to="/tokens">
+        <ChevronLeft size={15} /> All tokens
       </Link>
-      <div className="token-profile">
-        <TokenIcon token={token} />
+      <div className="token-detail-heading">
+        <TokenAvatar token={t} />
         <div>
-          <span className="eyebrow">
-            {FACTIONS[token.faction].short} / DEMO RECRUIT #{rank}
-          </span>
-          <h1>{token.name}</h1>
-          <span className="token-ticker">${token.ticker}</span>
+          <span className="eyebrow">Local demo token</span>
+          <h1>{t.name}</h1>
+          <span className="mono">${t.ticker}</span>
         </div>
-        <span className="demo-tag">LOCAL DEMO TOKEN</span>
+        <span className={`faction-pill ${t.faction}`}>
+          {t.faction === "fly" ? "Team Fly" : "Team Astra"}
+        </span>
       </div>
-      <div className="summary-strip">
-        <div>
-          <small>CREATOR FEES FED</small>
-          <strong>{money(token.contribution)}</strong>
-        </div>
-        <div>
-          <small>FACTION CONTRIBUTION</small>
-          <strong>
-            {stats.pool
-              ? ((token.contribution / stats.pool) * 100).toFixed(1)
-              : 0}
-            %
-          </strong>
-        </div>
-        <div>
-          <small>DEMO MARKET CAP</small>
-          <strong>{money(token.marketCap, true)}</strong>
-        </div>
-        <div>
-          <small>RECRUITED</small>
-          <strong className="smaller">{age(token.createdAt)}</strong>
-        </div>
-      </div>
-      <div className="detail-grid">
-        <section className="paper-panel">
-          <span className="eyebrow">THE OFFICIAL EXCUSE</span>
-          <h2>THE LORE</h2>
-          <p className="token-description">{token.description}</p>
-          <div className="notice">
-            <Zap size={21} />
-            <p>
-              100% of this token's simulated creator-fee share feeds{" "}
-              {FACTIONS[token.faction].name}. It has generated{" "}
-              {Math.floor(token.contribution * 0.72).toLocaleString("en-US")}{" "}
-              demo power.
-            </p>
+      <div className="token-detail-grid">
+        <section className="panel token-dossier">
+          <h2>The lore</h2>
+          <p>{t.description}</p>
+          <div className="token-detail-stats">
+            <div>
+              <small>Simulated market cap</small>
+              <strong>{money(t.marketCap)}</strong>
+            </div>
+            <div>
+              <small>Creator fees contributed</small>
+              <strong>{money(t.contribution)}</strong>
+            </div>
+            <div>
+              <small>Illustrative 24h change</small>
+              <strong className={t.change < 0 ? "negative" : "positive"}>
+                {t.change > 0 ? "+" : ""}
+                {t.change}%
+              </strong>
+            </div>
+            <div>
+              <small>Joined the lab</small>
+              <strong>{age(t.createdAt)}</strong>
+            </div>
           </div>
-          <p className="micro muted">
-            This local demo record has no onchain contract, trading pool, or
-            transaction hash.
+          <div className="record-id">
+            <span>
+              <small>Local record ID / not a contract address</small>
+              <code>{t.id}</code>
+            </span>
+            <button
+              className="icon-button"
+              aria-label="Copy local token ID"
+              onClick={() => {
+                void navigator.clipboard
+                  .writeText(t.id)
+                  .then(() => ui.toast("Local record ID copied"))
+                  .catch(() =>
+                    ui.toast(
+                      "Clipboard unavailable. Select the ID to copy it.",
+                    ),
+                  );
+              }}
+            >
+              <Copy size={17} />
+            </button>
+          </div>
+          {(t.website || t.x) && (
+            <div className="button-row">
+              {t.website && (
+                <a
+                  className="button small"
+                  href={t.website}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Website <ExternalLink size={13} />
+                </a>
+              )}
+              {t.x && (
+                <a
+                  className="button small"
+                  href={`https://x.com/${t.x.replace("@", "")}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  X profile <ExternalLink size={13} />
+                </a>
+              )}
+            </div>
+          )}
+          <h3>Attributed incidents</h3>
+          <div className="activity-list">
+            {events.map((e) => (
+              <div className="activity-row" key={e.id}>
+                <div>
+                  <p>{e.text}</p>
+                  <small>demo / {e.kind}</small>
+                </div>
+                <time>{age(e.at)}</time>
+              </div>
+            ))}
+            {!events.length && (
+              <p className="muted">
+                No recent events for this token in the retained log.
+              </p>
+            )}
+          </div>
+        </section>
+        <aside className={`panel token-allegiance ${t.faction}`}>
+          <span className="eyebrow">Proudly enabling</span>
+          <Creature faction={t.faction} stage={stats.stage} />
+          <h2>{t.faction === "fly" ? "Neuro Fly" : "GPT-6 Astra"}</h2>
+          <p>
+            This token contributes{" "}
+            {stats.pool
+              ? ((t.contribution / stats.pool) * 100).toFixed(1)
+              : "0"}
+            % of its side’s simulated creator-fee pool.
           </p>
-          {token.website && (
-            <a
-              className="text-button"
-              href={token.website}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Website <ArrowUpRight size={16} />
-            </a>
-          )}
-          {token.x && (
-            <a
-              className="text-button"
-              href={`https://x.com/${token.x.replace("@", "")}`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              X profile <ArrowUpRight size={16} />
-            </a>
-          )}
-          <Link className="button primary" to="/battle/season-01">
-            Watch your fighter <ArrowUpRight size={17} />
-          </Link>
-        </section>
-        <section className="paper-panel">
-          <span className="eyebrow">A PAPER TRAIL OF BAD DECISIONS</span>
-          <h2>RECRUIT ACTIVITY</h2>
-          {state.events.some((e) => e.tokenId === id) ? (
-            <EventFeed
-              events={state.events.filter((e) => e.tokenId === id).slice(0, 8)}
+          <div className="stage-progress">
+            <span
+              style={{
+                width: `${stats.pool ? (t.contribution / stats.pool) * 100 : 0}%`,
+              }}
             />
-          ) : (
-            <p className="muted">
-              No recent events for this recruit. The lab is watching.
-            </p>
-          )}
-        </section>
+          </div>
+          <Link className="button primary full" to="/arena/season-01">
+            Visit the preparation lab
+          </Link>
+          <Link className="text-link" to="/docs#attribution">
+            Understand attribution
+          </Link>
+        </aside>
       </div>
     </div>
   );

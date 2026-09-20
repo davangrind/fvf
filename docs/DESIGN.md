@@ -1,49 +1,51 @@
-# FVF: pirate broadcast from a cartoon war room
+# Version 2 design
 
-The product is built around one question: who is getting fed? The arena is the homepage hero, not a link hidden below a marketing introduction.
+## Direction
 
-## Visual decisions
+FVF is the platform, not the name of a single rivalry. The new structure keeps the homepage compact and moves the elaborate interactive scene into its own event page.
 
-- Warm newsprint, ink borders, condensed poster typography, vermilion calls to action. No glass surfaces or dark-dashboard shell.
-- Radioactive green organic chaos versus periwinkle/cyan synthetic vanity. Two original hand-inked character assets share a comic language while remaining recognizable as silhouettes.
-- Halftone panels, converging rays, orbiting machinery, a cutout VS burst, tilted status stickers and dry field notes establish a broadcast world.
-- One shared territory split displays control. Fee pools, power, actual demo recruit counts and the countdown remain the primary data. Small explanatory labels explicitly mark simulation.
-- Mobile retains both fighters side by side. Identity moves above the characters and each faction gets a compact stat grid and its own launch action. The full progression and war wire follow in one column.
+The visual language is a late-night laboratory with soft graphite surfaces, restrained mint and violet, strange hand-built vector organisms and dry internet humour. The light palette is a warm day-shift variant. DM Sans supplies readable product typography; Space Mono marks identifiers and small technical labels. There is no poster typography, orange framing or reused raster character art from version 1.
 
-## Product structure
+All interface icons use Lucide SVG or project-authored vector shapes. Decorative Unicode arrows, stars and emoji are absent. Headings have no trailing full stops. The top navigation becomes a narrower translucent rounded bar on scroll. Search, launch and wallet access remain global.
 
-| Route                       | Purpose                                                                                      |
-| --------------------------- | -------------------------------------------------------------------------------------------- |
-| `/`                         | What it is, current fight, leader, countdown, recruit actions, top contributors and activity |
-| `/battle/season-01`         | Larger arena, skills, evolution controls, cinematic finale, fee history, lore                |
-| `/launch`                   | Faction choice, artwork, metadata, preview, review and local demo launch                     |
-| `/tokens` (also `/explore`) | Searchable and sortable arsenal with faction filters                                         |
-| `/tokens/:id`               | Contribution, faction share, profile and attributable local activity                         |
-| `/activity`                 | Event filters, paused view, JSON export, cumulative pool history                             |
-| `/docs`                     | Short English field manual and transparent product boundaries                                |
+## References reviewed
 
-There is no extra analytics route: the useful history lives beside the battle and the event feed. This avoids an empty dashboard section.
+[UsePaid home](https://usepaid.app/) informed the compact explanation, clear launchpad positioning, search and useful token/metric summaries. [Capital flow](https://usepaid.app/capital-flow) informed the idea of making the path of fees inspectable. Desktop and mobile captures from this pass live in `research/v2/`.
 
-## Motion and interaction
+Those references informed information hierarchy. FVF uses its own artwork, palette, composition and copy. The flow does not inherit UsePaid’s payment destination, protocol split or exchange/off-ramp mechanics.
 
-Idle movement is compositor-friendly translate/rotate on a small number of elements. CSS handles rays, orbit sway, shadows, progression and combat beams; SVG handles the small history chart. No WebGL or animation runtime is loaded. Events update every seven seconds only while the document is visible. Timers use elapsed time, not frame counts.
+## Platform hierarchy
 
-Sound defaults off and is synthesized with Web Audio after opt-in. Character pokes, upgrades, lead changes and combat can bleep. Repeated poking reveals an alternate taunt. The arena link can be copied without posting to an external account.
+Home presents the platform before the first event. Tokens is the local asset catalogue. Arena separates a recruiting event from locked future concepts. Numbers owns metrics and activity. The manual groups 24 chapters into orientation, fee accounting, launch, lab interactions, analytics and implementation boundaries. The launch form exposes only the open experiment.
 
-The final fight progresses through warning, attacks, power swings and a winner overlay. Visual attacks never secretly change accounting. A separate resolver picks the deterministic demo outcome.
+The event registry in `src/data/events.ts` is independent from the first event’s UI. It includes two-, three- and four-contender concepts. Only experiment 001 is operational. Upcoming cards are explicitly locked and their save action is a browser bookmark, not an external notification.
 
-System reduced-motion disables idle, marquee, screen shake and combat motion; static state labels and the result remain. Native dialogs preserve focus and Escape behavior. Labels, alternative text, keyboard controls, empty/error states and contrast are included.
+## Creatures and scene
 
-## Research findings
+Neuro Fly is a soft, slightly deranged biological creature with oversized asymmetric eyes. Its brain, pupils, wings, legs, cable, backpack, orbit and crown are independently drawn and animated. Astra is a deliberately different isometric CRT creature with a pixel face, antenna, articulated hands, USB-like tail, orbiting modules and halo.
 
-[UsePaid](https://usepaid.app/) provides a strong product structure: one obvious action supported by listings, evidence of activity, analytics and docs. Its desktop sidebar becomes compact mobile navigation; the launch form pairs metadata entry with an outcome preview. FVF uses that clarity with its own layout and art.
+`Creatures.tsx` supplies five visual stages for each participant. These are code-authored vector illustrations, not a 3D engine or externally generated character images. The lab uses CSS perspective, a receding floor grid, layered equipment and vector platforms to create a diorama.
 
-[Pepons](https://pepons.family/) earns identity through a persistent character, custom objects, lore, cursor reactions, and an intro that can be skipped. The world extends into its copy and footer. FVF takes the continuity principle, not its chrome materials or frog art.
+Pool growth changes the actual stage and base equipment. A separate preview slider reveals future silhouettes without changing the account state. The skill tree includes eight descriptions and four effect families: swarm, neural pulse, overclock, shield, plus final ascension. Previews never imply an actual fight.
 
-[Hotdog](https://www.hotdogonrh.com/) carries one joke through its illustrated environment, ticker, membership card and receipt-style facts. Its mobile hero remains an intentional illustrated composition. FVF similarly gives data a place inside its fictional world.
+Assistants support pointer dragging, touch dragging and arrow-key movement. Poking creatures cycles their lines and plays optional faction-specific sounds. A sequence-memory toy adds a replayable nonfinancial interaction. Sound uses Web Audio; no external audio files or autoplay are required.
 
-Reference desktop/mobile screenshots and text captures are retained under `research/`. They are research artifacts and are not shipped in `public/`.
+On phones the two labs stack vertically rather than compressing into an unreadable arena. The skill tree, previews and controls retain their own space. The actual longer battle has deliberately not been implemented in this version.
 
-## Next stage
+## Motion and accessibility
 
-The two source illustrations are finished MVP assets. A future art pass could add separately rigged wings/drones and distinct hand-drawn silhouettes for all five stages. Current evolution is intentionally represented by size, aura, machinery, skills and stage identity. Additional seasons, full combat simulation, community chat, trading and payouts are outside this MVP.
+Buttons respond to hover and activation. Characters float and react; fluid surfaces and bubbles animate; flow diagrams show moving particles. The cursor glow and small connected points are decorative, do not replace the system cursor and never capture input.
+
+A footer motion switch saves the user’s preference. Reduced-motion CSS removes animations, transition effects and pointer decoration. The memory toy still has discrete, user-initiated sequence cues. Sound defaults off.
+
+Native dialogs provide modal focus handling and Escape dismissal. Controls have names independent of icon appearance. Search supports arrow keys and Enter; charts expose keyboard snapshot inspection; the manual supports text search and hash links.
+
+## Honest data model
+
+The main fee chart uses timestamps rather than evenly spacing irregular arrivals. Pool share is labelled separately from evolution fill. The tank is cumulative creator-fee contribution, not token liquidity. Seed token microcharts are clearly illustrative. New local tokens start at zero; the UI does not invent holders, volume or payouts.
+
+The fee-flow calculator uses a plainly disclosed assumed 1% rate, not a production pons quote. Future protocol changes must distinguish accrued, claimable, claimed and received fees.
+
+## Archive
+
+Version 1 remains intact at branch `archive/v1-initial` and tag `v0.1.0-initial`. Its research captures and source PNGs remain available, but its styles and old rendered scene components are no longer imported in version 2.

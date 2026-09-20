@@ -1,0 +1,98 @@
+[
+  {
+    "path": "/",
+    "width": 1440,
+    "theme": "dark",
+    "violations": []
+  },
+  {
+    "path": "/arena",
+    "width": 1440,
+    "theme": "dark",
+    "violations": []
+  },
+  {
+    "path": "/arena/season-01",
+    "width": 1440,
+    "theme": "dark",
+    "violations": []
+  },
+  {
+    "path": "/tokens",
+    "width": 1440,
+    "theme": "dark",
+    "violations": []
+  },
+  {
+    "path": "/numbers",
+    "width": 1440,
+    "theme": "dark",
+    "violations": []
+  },
+  {
+    "path": "/launch",
+    "width": 1440,
+    "theme": "dark",
+    "violations": []
+  },
+  {
+    "path": "/docs",
+    "width": 1440,
+    "theme": "dark",
+    "violations": []
+  },
+  {
+    "path": "/tokens/demo-brain",
+    "width": 1440,
+    "theme": "dark",
+    "violations": []
+  },
+  {
+    "path": "/",
+    "width": 390,
+    "theme": "light",
+    "violations": []
+  },
+  {
+    "path": "/arena",
+    "width": 390,
+    "theme": "light",
+    "violations": []
+  },
+  {
+    "path": "/arena/season-01",
+    "width": 390,
+    "theme": "light",
+    "violations": []
+  },
+  {
+    "path": "/tokens",
+    "width": 390,
+    "theme": "light",
+    "violations": []
+  },
+  {
+    "path": "/numbers",
+    "width": 390,
+    "theme": "light",
+    "violations": []
+  },
+  {
+    "path": "/launch",
+    "width": 390,
+    "theme": "light",
+    "violations": []
+  },
+  {
+    "path": "/docs",
+    "width": 390,
+    "theme": "light",
+    "violations": []
+  },
+  {
+    "path": "/tokens/demo-brain",
+    "width": 390,
+    "theme": "light",
+    "violations": []
+  }
+]

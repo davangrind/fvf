@@ -1,5 +1,7 @@
 # Original character art
 
+**Version 1 archive:** these raster characters belong to the initial prototype and are not used by the version 2 interface. The new articulated creatures and avatars are authored directly in SVG/CSS in `src/components/Creatures.tsx` and `public/art/*-avatar.svg`; no image-generation model was used for version 2.
+
 Generated using the built-in `image_gen` tool through the `imagegen` skill; no API-key or CLI fallback was used. The images are original to this project, with no reference artwork copied from the research sites. Generated alpha was retained. Sharp was used only for lossily encoding resized delivery copies as WebP.
 
 | Character        | Shipped asset           | PNG master                |
