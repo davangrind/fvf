@@ -5,10 +5,10 @@ test("navigation, theme and motion preferences work on every screen", async ({
   isMobile,
 }) => {
   await page.goto("/");
-  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
-  await page.getByRole("button", { name: "Switch to light theme" }).click();
-  await page.reload();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+  await page.getByRole("button", { name: "Switch to dark theme" }).click();
+  await page.reload();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
   await page.getByRole("button", { name: "Pause ambient motion" }).click();
   await expect(page.locator("html")).toHaveAttribute("data-motion", "paused");
   await page.getByRole("button", { name: "Open global search" }).click();
@@ -31,7 +31,7 @@ test("navigation, theme and motion preferences work on every screen", async ({
     page.getByRole("heading", { name: "The numbers have lore" }),
   ).toBeVisible();
   await page.getByRole("button", { name: "Resume ambient motion" }).click();
-  await page.getByRole("button", { name: "Switch to dark theme" }).click();
+  await page.getByRole("button", { name: "Switch to light theme" }).click();
   await page.evaluate(() => window.scrollTo(0, 600));
   await expect(page.locator(".site-header")).toHaveClass(/is-scrolled/);
 });
@@ -55,7 +55,7 @@ test("global search finds tokens and manual chapters by keyboard", async ({
   await expect(page.locator("#accounting")).toBeInViewport();
   await page.getByRole("button", { name: "Open global search" }).click();
   await search.fill("no-such-braincell");
-  await expect(page.getByText("No brain cells found")).toBeVisible();
+  await expect(page.getByText("No results on this frequency")).toBeVisible();
   await search.press("Escape");
   await expect(page.getByRole("dialog")).not.toBeVisible();
 });
@@ -65,9 +65,9 @@ test("arena separates recruiting events from locked concepts and saves ideas", a
 }) => {
   await page.goto("/arena");
   await expect(page.locator(".arena-card")).toHaveCount(6);
-  await page.getByRole("button", { name: /In the microwave 5/ }).click();
+  await page.getByRole("button", { name: /Coming later 5/ }).click();
   await expect(page.locator(".arena-card")).toHaveCount(5);
-  await expect(page.getByRole("link", { name: "Enter the lab" })).toHaveCount(
+  await expect(page.getByRole("link", { name: "Enter the arena" })).toHaveCount(
     0,
   );
   await page
@@ -93,7 +93,7 @@ test("local launch validates, reviews, persists and is searchable", async ({
   page,
 }) => {
   await page.goto("/launch?faction=astra");
-  await page.getByRole("button", { name: "Review the little guy" }).click();
+  await page.getByRole("button", { name: "Review your token" }).click();
   await expect(page.getByRole("alert")).toContainText("Name needs");
   await page
     .getByLabel("Token name", { exact: true })
@@ -102,7 +102,7 @@ test("local launch validates, reviews, persists and is searchable", async ({
   await page
     .getByRole("textbox", { name: /The lore/ })
     .fill("An excellent mistake with absolutely no yield promises");
-  await page.getByRole("button", { name: "Review the little guy" }).click();
+  await page.getByRole("button", { name: "Review your token" }).click();
   await expect(page.locator(".review-list")).toContainText(
     "GPT-6 Astra / Hardware",
   );
@@ -162,98 +162,75 @@ test("artwork checks reject invalid uploads and accept a real image", async ({
   await expect(page.getByRole("alert")).toHaveCount(0);
 });
 
-test("mutation previews are separate from actual pool unlocks", async ({
+test("homepage presents the platform and keeps the first event compact", async ({
   page,
 }) => {
-  await page.goto("/arena/season-01");
-  await page.getByLabel("Scrub through the mutations").fill("4");
-  await expect(page.locator(".mutation-info h3")).toHaveText(
-    "Extinction event",
+  await page.goto("/");
+  await expect(page.locator(".platform-intro")).toContainText(
+    "LAUNCHPAD FOR PONS",
   );
-  await expect(page.locator(".fighter-zone.fly .faction-pill")).toContainText(
-    "Preview / stage 5",
+  await expect(page.locator(".platform-intro h1")).toHaveText(
+    "FEES FUELINTERNET CHAOS",
   );
-  await expect(page.locator(".skill-tree-heading")).toContainText(
-    "2 / 4 unlocked",
-  );
-  await page.getByRole("button", { name: "Lord of the pings $250K" }).click();
-  await expect(page.locator(".skill-detail")).toContainText(
-    "Locked in actual progression",
-  );
-  await page.getByRole("button", { name: "Preview ability" }).click();
-  await expect(page.locator(".lab-stage")).toHaveClass(/effect-ascend/);
-  await page.getByRole("button", { name: "Return to actual stage" }).click();
-  await expect(page.locator(".mutation-info h3")).toHaveText("Neuro menace");
-  await page.getByRole("button", { name: "Feed Fly", exact: true }).click();
-  await page
-    .getByRole("button", { name: "Simulate $25,000 in fees", exact: true })
-    .click();
-  await expect(page.locator(".mutation-info h3")).toHaveText("Hive mind");
-  await expect(page.locator(".skill-tree-heading")).toContainText(
-    "3 / 4 unlocked",
-  );
-  await expect(page.locator(".fighter-zone.fly .base-equipment")).toHaveClass(
-    /level-3/,
-  );
-  await page.reload();
-  await expect(page.locator(".mutation-info h3")).toHaveText("Hive mind");
+  await expect(page.locator(".home-page .arena-card")).toHaveCount(1);
+  await expect(page.locator(".home-page .arena")).toHaveCount(0);
+  await expect(page.locator(".event-ticket")).toHaveCount(3);
+  await page.getByRole("link", { name: "Explore arenas", exact: true }).click();
+  await expect(page).toHaveURL(/\/arena$/);
+  await expect(page.locator(".arena-card")).toHaveCount(6);
 });
 
-test("creatures respond and assistants move with accessible keyboard controls", async ({
+test("original arena progression updates pools, skills and persisted stage", async ({
   page,
 }) => {
   await page.goto("/arena/season-01");
-  await page
-    .getByRole("button", { name: "Poke Neuro Fly", exact: true })
+  const fly = page.locator(".evolution-card.fly");
+  await expect(fly.locator("h3")).toHaveText("Neuro menace");
+  await expect(fly.locator(".skill-node.unlocked")).toHaveCount(2);
+  await fly
+    .getByRole("button", { name: "Hive mind, locked", exact: true })
     .click();
-  await expect(page.locator(".fighter-zone.fly .speech-bubble")).toHaveText(
-    "i ate the terms & conditions",
+  await expect(fly.locator(".skill-description")).toContainText("$150,000");
+  await fly.getByRole("button", { name: "Simulate $25K in fees" }).click();
+  await expect(fly.locator("h3")).toHaveText("Hive mind");
+  await expect(fly.locator(".skill-node.unlocked")).toHaveCount(3);
+  await expect(page.locator(".fighter-side.fly")).toHaveClass(/evolution-3/);
+  await expect(page.locator(".arena")).toContainText("$153,420");
+  await page.reload();
+  await expect(fly.locator("h3")).toHaveText("Hive mind");
+  await expect(page.locator(".arena")).toHaveClass(/phase-preparing/);
+  await expect(page.getByRole("button", { name: /Fast-forward/ })).toHaveCount(
+    0,
   );
-  await page.getByRole("button", { name: "Poke Astra", exact: true }).click();
-  await expect(page.locator(".fighter-zone.astra .speech-bubble")).toHaveText(
-    "i have 8 GB of audacity",
+});
+
+test("restored illustrated fighters respond and have optional sound", async ({
+  page,
+}) => {
+  await page.goto("/arena/season-01");
+  await expect(page.locator(".fighter-side.fly img.character")).toHaveAttribute(
+    "src",
+    "/art/fly.webp",
   );
-  const assistant = page.getByRole("button", { name: /Move lab assistant 1/ });
-  const before = await assistant.evaluate((e) => (e as HTMLElement).style.left);
-  await assistant.focus();
-  await assistant.press("ArrowRight");
-  await expect
-    .poll(() => assistant.evaluate((e) => (e as HTMLElement).style.left))
-    .not.toBe(before);
-  await page.getByRole("button", { name: "Reset interns" }).click();
-  await expect
-    .poll(() => assistant.evaluate((e) => (e as HTMLElement).style.left))
-    .toBe(before);
+  await expect(
+    page.locator(".fighter-side.astra img.character"),
+  ).toHaveAttribute("src", "/art/astra.webp");
+  await page
+    .getByRole("button", { name: "Poke Zombie Neuro Fly", exact: true })
+    .click();
+  await expect(page.locator(".fighter-side.fly .speech-bubble")).toHaveText(
+    "YOUR CURSOR LOOKS EDIBLE.",
+  );
+  await page
+    .getByRole("button", { name: "Poke GPT-6 Astra", exact: true })
+    .click();
+  await expect(page.locator(".fighter-side.astra .speech-bubble")).toHaveText(
+    "HUMAN DETECTED. UNFORTUNATE.",
+  );
   await page.getByRole("button", { name: "Sound off", exact: true }).click();
   await expect(
     page.getByRole("button", { name: "Sound on", exact: true }),
   ).toBeVisible();
-});
-
-test("memory toy repeats a sequence, records best score and recovers from mistakes", async ({
-  page,
-}) => {
-  await page.addInitScript(() => {
-    Math.random = () => 0.05;
-  });
-  await page.clock.install();
-  await page.goto("/arena/season-01");
-  await page.getByRole("button", { name: "Start check", exact: true }).click();
-  await page.clock.fastForward(1200);
-  await expect(page.locator(".memory-status")).toHaveText("Your turn / 0 of 1");
-  await page.getByRole("button", { name: "Memory pad A", exact: true }).click();
-  await page.clock.fastForward(2600);
-  await expect(page.locator(".memory-status")).toHaveText("Your turn / 0 of 2");
-  await page.getByRole("button", { name: "Memory pad A", exact: true }).click();
-  await page.getByRole("button", { name: "Memory pad A", exact: true }).click();
-  await expect(page.getByText("Personal best: 2 rounds")).toBeVisible();
-  await page.clock.fastForward(3100);
-  await page.getByRole("button", { name: "Memory pad B", exact: true }).click();
-  await expect(page.locator(".memory-status")).toContainText(
-    "The neuron has left",
-  );
-  await page.reload();
-  await expect(page.getByText("Personal best: 2 rounds")).toBeVisible();
 });
 
 test("token filters, sorting, layout and empty states work", async ({
@@ -368,7 +345,7 @@ test("reduced motion, legacy routes and missing records stay usable", async ({
   await expect(page).toHaveURL(/arena\/season-01/);
   expect(
     await page
-      .locator(".creature-float")
+      .locator(".character")
       .first()
       .evaluate((e) => getComputedStyle(e).animationName),
   ).toBe("none");
@@ -391,9 +368,7 @@ test("corrupt storage recovers without crashing the interface", async ({
     localStorage.setItem("fvf:demo:v2", "{broken"),
   );
   await page.goto("/");
-  await expect(
-    page.getByRole("heading", { name: /Internet nonsense/ }),
-  ).toBeVisible();
+  await expect(page.getByRole("heading", { name: /FEES FUEL/ })).toBeVisible();
   await page.goto("/tokens");
   await expect(page.locator("tbody tr")).toHaveCount(12);
 });

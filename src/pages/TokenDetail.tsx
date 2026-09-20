@@ -3,7 +3,7 @@ import { ChevronLeft, Copy, ExternalLink } from "lucide-react";
 import { useBattle, useUI } from "../state";
 import { money, age, factionStats } from "../domain/battle";
 import { TokenAvatar } from "../components/Platform";
-import { Creature, Blob } from "../components/Creatures";
+import { FighterArtwork, TopicIcon } from "../components/Artwork";
 export default function TokenDetail() {
   const { id } = useParams();
   const s = useBattle();
@@ -12,7 +12,7 @@ export default function TokenDetail() {
   if (!t)
     return (
       <div className="page empty-state">
-        <Blob />
+        <TopicIcon />
         <h1>This token escaped containment</h1>
         <p>It may belong to another browser’s local demo.</p>
         <Link className="button primary" to="/tokens">
@@ -59,7 +59,7 @@ export default function TokenDetail() {
               </strong>
             </div>
             <div>
-              <small>Joined the lab</small>
+              <small>Joined the event</small>
               <strong>{age(t.createdAt)}</strong>
             </div>
           </div>
@@ -129,7 +129,7 @@ export default function TokenDetail() {
         </section>
         <aside className={`panel token-allegiance ${t.faction}`}>
           <span className="eyebrow">Proudly enabling</span>
-          <Creature faction={t.faction} stage={stats.stage} />
+          <FighterArtwork faction={t.faction} stage={stats.stage} />
           <h2>{t.faction === "fly" ? "Neuro Fly" : "GPT-6 Astra"}</h2>
           <p>
             This token contributes{" "}

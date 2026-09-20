@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Search, BookOpen, ChevronRight } from "lucide-react";
 import { manualChapters } from "../data/manual";
 import { FeeFlow } from "../components/Platform";
-import { Blob } from "../components/Creatures";
+import { TopicIcon } from "../components/Artwork";
 export default function Docs() {
   const [query, setQuery] = useState("");
   const location = useLocation();
@@ -33,7 +33,7 @@ export default function Docs() {
           <BookOpen size={14} /> Instructions were, in fact, included
         </span>
         <h1>The field manual</h1>
-        <p>Everything you need to know before adopting a financial goblin.</p>
+        <p>The platform, the events and exactly where the fees go.</p>
       </div>
       <div className="manual-layout">
         <aside className="manual-sidebar">
@@ -76,22 +76,22 @@ export default function Docs() {
         <div className="manual-content">
           <section className="manual-intro panel">
             <div>
-              <span className="badge">Edition 02 / Local demo</span>
+              <span className="badge">Edition 03 / Local demo</span>
               <h2>
                 Read the room
                 <br />
                 Then read the rules
               </h2>
               <p>
-                FVF turns creator fees into fuel for community events. The weird
-                little guys are optional. Understanding where your fees go
-                isn’t.
+                FVF turns creator fees into fuel for community events. Each
+                event has its own sides, rules and progression. Start here, then
+                choose your arena.
               </p>
               <a className="text-link" href="#fee-flow">
                 Start with the fee flow <ChevronRight size={16} />
               </a>
             </div>
-            <Blob variant={3} />
+            <TopicIcon variant={3} />
           </section>
           {chapters.map((c) => (
             <article className="manual-chapter" id={c.id} key={c.id}>
@@ -160,7 +160,7 @@ export default function Docs() {
           ))}
           {!chapters.length && (
             <div className="empty-state">
-              <Blob />
+              <TopicIcon />
               <h2>No matching chapters</h2>
               <button className="button" onClick={() => setQuery("")}>
                 Show the whole manual
@@ -168,10 +168,12 @@ export default function Docs() {
             </div>
           )}
           <section className="manual-outro panel">
-            <h2>Enough reading, go poke something</h2>
-            <p>The lab is open. The assistants are unsupervised.</p>
-            <Link className="button primary" to="/arena/season-01">
-              Enter the lab
+            <h2>Enough reading, find your event</h2>
+            <p>
+              Browse the first arena and the events still on the drawing board.
+            </p>
+            <Link className="button primary" to="/arena">
+              Explore arenas
             </Link>
           </section>
         </div>

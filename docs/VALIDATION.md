@@ -1,61 +1,61 @@
-# Version 2 validation
+# Version 3 validation
 
-Completed 2026-09-20 in the Windows workspace. Browser checks used headless Chromium and WebKit, each with desktop and iPhone 13 emulation. These are engine and viewport checks, not a claim of testing on physical Apple hardware or the Safari application.
+Completed 2026-09-20 in the Windows workspace. Browser checks used headless Chromium and WebKit, each with desktop and iPhone 13 emulation. This does not claim testing on physical Apple hardware or the Safari application.
 
 | Check | Result |
 | --- | --- |
 | TypeScript and production build | Passed with `npm run build` |
 | Unit tests | 22 passed across 3 files |
-| Production-browser E2E | 60 passed: 15 scenarios on each of 4 browser/device configurations |
-| Route inspection | 16 page/viewport combinations; no runtime errors, trailing periods in headings or emoji-dependent symbols |
-| Responsive overflow | 64 checks passed: 8 routes at 320, 360, 390, 600, 768, 1024, 1440 and 1920 px |
-| Automated accessibility | 16 scans with no reported axe WCAG 2 A/AA or WCAG 2.1 AA violations: 8 routes in desktop dark and mobile light themes |
-| Dependency audit | No known vulnerabilities reported in the full or production-only dependency audit |
+| Production-browser E2E | 60 passed: 15 scenarios on 4 browser/device configurations |
+| Route inspection | 16 page/viewport combinations without runtime errors, heading periods or emoji-dependent decoration |
+| Responsive widths | 64 checks passed: 8 routes at 320, 360, 390, 600, 768, 1024, 1440 and 1920 px |
+| Automated accessibility | 16 scans without reported axe WCAG 2 A/AA or WCAG 2.1 AA violations: 8 routes in desktop dark and mobile light themes |
+| Dependency audit | No known vulnerabilities reported by npm after restoring the original fonts |
 
-The final E2E run targeted the compiled production preview at port 4173. The automated accessibility scan is not a complete manual accessibility certification.
+The E2E run targeted the compiled production preview on port 4173. Accessibility and visual inspection were refreshed after the final contrast and icon corrections. Automated accessibility scans are not a complete manual accessibility certification.
 
-## Scenarios exercised
+## User flows
 
-- Main and mobile navigation, persistent dark/light theme, persistent motion preference, global search dialogs, and the scrolling header transformation
-- Keyboard search for token profiles and deep-linked manual chapters; empty results and Escape dismissal
-- Active versus locked arena concepts, filtering and local bookmarks
-- Launch validation, explicit review, demo identity, local token creation, reload persistence and searchability
-- Invalid artwork rejection and successful real WebP upload, including WebKit files without a MIME type
-- Actual contribution-based evolution versus clearly labelled stage previews, skill inspection and effect previews
-- Creature responses and keyboard movement of draggable assistants
-- Memory sequence success, failure, retry and best-score persistence
-- Token search, side filters, sorting, grid/table switching and no-results recovery
-- Chart periods, activity filtering, pause/resume and labelled demo JSON export
-- Full-content manual search, chapter anchors and the interactive fee-flow calculator
-- Read-only wallet account/chain access, connection rejection and recovery to a demo identity
-- OS reduced motion, legacy redirects, missing tokens, 404 routes and corrupt local storage
+- Persistent light/dark theme, motion preference, mobile navigation, global dialogs and the sticky scrolling header
+- Keyboard search for tokens and manual chapters, empty results and Escape dismissal
+- Platform-focused homepage, compact first-event preview, upcoming concepts and the complete event directory
+- Active/locked event filtering, lore dialogs and persisted local bookmarks
+- Launch validation, side selection, explicit review, demo identity, local creation, profile, reload persistence and search
+- Invalid artwork rejection and valid local WebP upload in Chromium and WebKit
+- Original fighter artwork, click responses and optional sound
+- Fee contributions updating the actual stage, skill unlocks, scene and persisted local pools
+- Token filters, sorting, grid/table views and no-results recovery
+- Activity filters, pause/resume, demo JSON export and chart period controls
+- All 24 manual chapters, full-content search, deep links and interactive fee flow
+- Read-only wallet account/chain requests and recovery from rejection
+- Reduced motion, legacy redirects, missing records, 404 and corrupt storage recovery
 
-Unit coverage includes fee attribution, threshold boundaries, legacy deterministic resolution, production adapter rejection and image-format signature detection. The retained resolution model is not exposed as an active fight in version 2; the interface stays in preparation mode.
+Unit coverage retains fee attribution, threshold boundaries, deterministic resolution rules, adapter boundaries and image signatures. The current interface stays in preparation mode and does not expose the deferred fight.
 
-## Visual inspection and fixes
+## Visual restoration
 
-Reviewed desktop and mobile dark layouts, light homepages, the preparation scene at 320, 768 and 1440 px, maximum evolution previews and WebKit captures. The review corrected tablet character overlap, stacked the narrow-screen lab, improved light-theme contrast and ensured pausing motion leaves dialogs and newly mounted content visible.
+Compared the restored interface with the first release's saved desktop and mobile screenshots. The review confirmed the original typography, paper background, orange actions, ink borders, broadcast framing and character assets, alongside the platform hierarchy introduced in version 2.
 
-Characters and icons use native vector elements with separately animated parts. Pointer decoration has no hit targets and is hidden for coarse pointers or reduced motion. Assistants also support keyboard movement. Sound starts off and requires a user action.
+Inspected desktop and mobile versions of Home, Arena, the first event, Tokens, Numbers, Launch, the manual and token profiles. Corrected a narrow-screen intro layout inherited from v1 and restored readable dark-theme contrast for form fields, secondary labels and the event feed.
 
-A real WebKit upload issue was corrected by identifying supported artwork from file signatures and validating decoded image content, instead of relying solely on the browser-provided MIME type.
+SVG icons replace the original Unicode decoration and token emoji. The archived v2 creature assets are no longer referenced by the UI; old saved default avatar paths map to the original WebP illustrations. Sound remains opt-in and both ambient-motion pause and OS reduced motion work.
 
 ## Reports and reproduction
 
-- Screenshots and scene captures: `artifacts/v2/`
-- Route checks: `artifacts/v2/inspection.json`
-- Width matrix: `artifacts/v2/viewports.json`
-- Accessibility results: `artifacts/v2/accessibility.json`
-- Detailed browser report: `playwright-report/index.html` (generated and ignored by Git)
+- Current screenshots: `artifacts/v3/`
+- Route checks: `artifacts/v3/inspection.json`
+- Width matrix: `artifacts/v3/viewports.json`
+- Accessibility: `artifacts/v3/accessibility.json`
+- Detailed E2E report: `playwright-report/index.html` (generated and ignored by Git)
 
-Run `npm test`, install browsers with `npx playwright install chromium webkit`, then run `npm run test:e2e`. Set `FVF_TEST_URL` to test a running production preview. The inspection and audit scripts are `scripts/inspect-v2.mjs` and `scripts/audit-v2.mjs`.
+Run `npm test`, install browsers with `npx playwright install chromium webkit`, then run `npm run test:e2e`. Set `FVF_TEST_URL` to a running production preview. Use `scripts/inspect-v3.mjs` and `scripts/audit-v3.mjs` for visual and accessibility checks.
 
-Initial application JavaScript is approximately 111 KB gzip, with secondary pages split into lazy chunks. Styles total approximately 18.3 KB gzip. Fonts are self-hosted.
+Initial application JavaScript is approximately 110 KB gzip; styles are approximately 27 KB gzip. Secondary pages are lazy-loaded and fonts are self-hosted. The original optimized WebP character assets are reused.
 
-Development URL: http://localhost:5173. Production preview: http://localhost:4173. Start them with `npm run dev`, or `npm run build` followed by `npm run preview`.
+Development: http://localhost:5173. Production preview: http://localhost:4173. Start with `npm run dev`, or `npm run build` followed by `npm run preview`.
 
-## Scope
+## Boundaries and archives
 
-Tokens, prices, fee pools, chart history and activity are local simulations. Wallet checks used an injected EIP-1193 mock; no signing, real funds, blockchain launch, Pons transaction, external indexer or settlement was involved. The longer fight is intentionally deferred.
+No real funds, onchain launch, Pons transaction, indexer, payout or settlement was used. Wallet checks used an injected EIP-1193 mock. All financial-looking metrics remain local simulations.
 
-The original release and its validation record remain on branch `archive/v1-initial` and tag `v0.1.0-initial`.
+The first version is preserved at `archive/v1-initial` / `v0.1.0-initial`. The complete laboratory redesign, including its code, screenshots and validation, is preserved at `archive/v2-lab` / `v0.2.0-lab` before this restoration.

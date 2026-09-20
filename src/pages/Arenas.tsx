@@ -21,9 +21,9 @@ export default function Arenas() {
       <div className="filter-bar">
         <div className="segmented">
           {[
-            ["all", "All experiments", 6],
+            ["all", "All events", 6],
             ["preparing", "Recruiting", 1],
-            ["planned", "In the microwave", 5],
+            ["planned", "Coming later", 5],
           ].map(([id, label, count]) => (
             <button
               key={id}
@@ -43,7 +43,7 @@ export default function Arenas() {
         ))}
       </div>
       <p className="page-note">
-        One playable preparation lab. Five future concepts. All fees and token
+        One recruiting arena. Five future concepts. All fees and token
         activity are simulated.
       </p>
     </div>

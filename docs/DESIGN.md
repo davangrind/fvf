@@ -1,51 +1,59 @@
-# Version 2 design
+# Version 3: original visual identity, platform hierarchy
 
 ## Direction
 
-FVF is the platform, not the name of a single rivalry. The new structure keeps the homepage compact and moves the elaborate interactive scene into its own event page.
+The original visual concept is restored: warm newsprint, ink borders, orange calls to action, condensed poster headings, Space Grotesk text, broadcast ticker, tilted status stamps, halftones and the original illustrated fighters. This is a restoration of the first edition's design, not a third visual concept.
 
-The visual language is a late-night laboratory with soft graphite surfaces, restrained mint and violet, strange hand-built vector organisms and dry internet humour. The light palette is a warm day-shift variant. DM Sans supplies readable product typography; Space Mono marks identifiers and small technical labels. There is no poster typography, orange framing or reused raster character art from version 1.
+The platform structure from version 2 remains. The homepage describes FVF and shows its metrics, tokens and event directory. Neuro Fly versus GPT-6 Astra is a compact event card there; the full illustrated scene belongs on its own event page.
 
-All interface icons use Lucide SVG or project-authored vector shapes. Decorative Unicode arrows, stars and emoji are absent. Headings have no trailing full stops. The top navigation becomes a narrower translucent rounded bar on scroll. Search, launch and wallet access remain global.
+The light paper edition is the default so the initial impression matches version 1. A dark edition retains the same typography, framing and orange accents. It does not reintroduce the mint/violet laboratory shell from version 2.
 
-## References reviewed
+## Preserved elements
 
-[UsePaid home](https://usepaid.app/) informed the compact explanation, clear launchpad positioning, search and useful token/metric summaries. [Capital flow](https://usepaid.app/capital-flow) informed the idea of making the path of fees inspectable. Desktop and mobile captures from this pass live in `research/v2/`.
+- Original font families, palette, brand mark, outlined buttons and offset hover shadows
+- Original broadcast strip and paper-based section hierarchy
+- Original fly and Astra illustrations, green/periwinkle stage, radial rays and halftone texture
+- Original stage names, pool thresholds, power formula, skill tree and response lines
+- SVG replacements for decorative Unicode symbols and token emoji
+- Headings without trailing periods
 
-Those references informed information hierarchy. FVF uses its own artwork, palette, composition and copy. The flow does not inherit UsePaid’s payment destination, protocol split or exchange/off-ramp mechanics.
+`styles.css`, `classic-responsive.css` and `polish.css` preserve the original style foundation. `platform-layout.css` and `features.css` supply the additional page layouts; `platform.css` applies the restored identity to them. The final `responsive.css` handles the broader navigation and platform sections at smaller sizes.
 
 ## Platform hierarchy
 
-Home presents the platform before the first event. Tokens is the local asset catalogue. Arena separates a recruiting event from locked future concepts. Numbers owns metrics and activity. The manual groups 24 chapters into orientation, fee accounting, launch, lab interactions, analytics and implementation boundaries. The launch form exposes only the open experiment.
+| Route | Role |
+| --- | --- |
+| `/` | Platform explanation, launch action, metrics, top tokens, compact first event and planned concepts |
+| `/tokens` | Searchable local token catalogue, table/grid layouts and sorting |
+| `/arena` | Recruiting and planned events, with two-, three- and four-contender formats |
+| `/arena/season-01` | The full first-event scene, fee pools, progression, skills and history |
+| `/numbers` | Platform aggregates, fee chart, distribution, rankings and activity |
+| `/docs` | 24 searchable documentation chapters with interactive fee flow |
+| `/launch` | Open-event selection, faction choice, metadata, review and local creation |
+| `/tokens/:id` | Local token record, contribution and attributable activity |
 
-The event registry in `src/data/events.ts` is independent from the first event’s UI. It includes two-, three- and four-contender concepts. Only experiment 001 is operational. Upcoming cards are explicitly locked and their save action is a browser bookmark, not an external notification.
+The event directory is a platform concept. Only the first arena is operational, and future cards remain explicitly locked. Their save action is a local bookmark, not a notification subscription.
 
-## Creatures and scene
+## Interactions
 
-Neuro Fly is a soft, slightly deranged biological creature with oversized asymmetric eyes. Its brain, pupils, wings, legs, cable, backpack, orbit and crown are independently drawn and animated. Astra is a deliberately different isometric CRT creature with a pixel face, antenna, articulated hands, USB-like tail, orbiting modules and halo.
+Global search supports token names and tickers, pages, the open arena and manual chapter titles. It opens with the navigation control or Command/Control K, supports arrow keys and Enter, and closes with Escape.
 
-`Creatures.tsx` supplies five visual stages for each participant. These are code-authored vector illustrations, not a 3D engine or externally generated character images. The lab uses CSS perspective, a receding floor grid, layered equipment and vector platforms to create a diorama.
+The navigation remains sticky and becomes slightly shorter on scroll. Buttons use the original border and shadow feedback. The system cursor is unchanged. Sound is opt-in; ambient motion can be paused and reduced-motion settings are respected.
 
-Pool growth changes the actual stage and base equipment. A separate preview slider reveals future silhouettes without changing the account state. The skill tree includes eight descriptions and four effect families: swarm, neural pulse, overclock, shield, plus final ascension. Previews never imply an actual fight.
+Clicking an illustrated fighter reveals a response. The fee simulation controls remain explicit and attributed to existing tokens. Stage changes alter scale, aura and equipment around the original illustration; the assets are not separately rigged models. Skills show descriptions and unlock thresholds. The actual longer battle remains deferred, without a fake imminent countdown.
 
-Assistants support pointer dragging, touch dragging and arrow-key movement. Poking creatures cycles their lines and plays optional faction-specific sounds. A sequence-memory toy adds a replayable nonfinancial interaction. Sound uses Web Audio; no external audio files or autoplay are required.
+The v2 articulated creatures, CRT character, draggable assistants, liquid tanks, mutation preview and memory game have been removed from the current interface.
 
-On phones the two labs stack vertically rather than compressing into an unreadable arena. The skill tree, previews and controls retain their own space. The actual longer battle has deliberately not been implemented in this version.
+## Data and integration
 
-## Motion and accessibility
+The tested local fee accounting, launch validation, file-signature checks and read-only wallet boundary remain. Existing `fvf:demo:v2` data is retained; theme and draft keys are versioned separately. Archived default-avatar references resolve to the restored illustrations.
 
-Buttons respond to hover and activation. Characters float and react; fluid surfaces and bubbles animate; flow diagrams show moving particles. The cursor glow and small connected points are decorative, do not replace the system cursor and never capture input.
+Charts distinguish cumulative contributions from market-cap and illustrative token changes. There are no live prices, liquidity removal, production launches or payouts. The manual describes the current interface and the remaining production integration work.
 
-A footer motion switch saves the user’s preference. Reduced-motion CSS removes animations, transition effects and pointer decoration. The memory toy still has discrete, user-initiated sequence cues. Sound defaults off.
+## Archive and evidence
 
-Native dialogs provide modal focus handling and Escape dismissal. Controls have names independent of icon appearance. Search supports arrow keys and Enter; charts expose keyboard snapshot inspection; the manual supports text search and hash links.
+Version 1: branch `archive/v1-initial`, tag `v0.1.0-initial`, commit `ea431a3`.
 
-## Honest data model
+Version 2: branch `archive/v2-lab`, tag `v0.2.0-lab`, commit `d5ab75e`. Its code, screenshots and validation remain accessible there.
 
-The main fee chart uses timestamps rather than evenly spacing irregular arrivals. Pool share is labelled separately from evolution fill. The tank is cumulative creator-fee contribution, not token liquidity. Seed token microcharts are clearly illustrative. New local tokens start at zero; the UI does not invent holders, volume or payouts.
-
-The fee-flow calculator uses a plainly disclosed assumed 1% rate, not a production pons quote. Future protocol changes must distinguish accrued, claimable, claimed and received fees.
-
-## Archive
-
-Version 1 remains intact at branch `archive/v1-initial` and tag `v0.1.0-initial`. Its research captures and source PNGs remain available, but its styles and old rendered scene components are no longer imported in version 2.
+The restoration was compared against the original desktop and mobile captures in `artifacts/screenshots/`. Current screenshots and checks are in `artifacts/v3/`.

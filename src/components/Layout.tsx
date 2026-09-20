@@ -5,7 +5,7 @@ import {
   useLocation,
   useNavigate,
 } from "react-router-dom";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import {
   Search,
   Menu,
@@ -17,6 +17,11 @@ import {
   CircleHelp,
   Pause,
   Play,
+  Zap,
+  Radio,
+  Sun,
+  Moon,
+  ArrowUpRight,
 } from "lucide-react";
 import { useBattle, useUI } from "../state";
 import { WalletModal } from "./WalletModal";
@@ -24,53 +29,8 @@ import { Modal } from "./Modal";
 import { arenaEvents } from "../data/events";
 import { manualChapters } from "../data/manual";
 import { demoAdapter } from "../data/demo-adapter";
-import { Blob } from "./Creatures";
+import { TopicIcon } from "./Artwork";
 
-function CursorField() {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const media = matchMedia(
-      "(pointer: fine) and (prefers-reduced-motion: no-preference)",
-    );
-    let frame = 0;
-    const move = (e: PointerEvent) => {
-      if (!media.matches || !ref.current) return;
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => {
-        if (!ref.current) return;
-        ref.current.style.transform = `translate3d(${e.clientX}px,${e.clientY}px,0)`;
-        ref.current.dataset.active = String(
-          Boolean(
-            (e.target as Element).closest("a,button,input,select,summary"),
-          ),
-        );
-        ref.current.style.opacity = "1";
-      });
-    };
-    const hide = () => {
-      if (ref.current) ref.current.style.opacity = "0";
-    };
-    window.addEventListener("pointermove", move);
-    document.addEventListener("pointerleave", hide);
-    return () => {
-      window.removeEventListener("pointermove", move);
-      document.removeEventListener("pointerleave", hide);
-      cancelAnimationFrame(frame);
-    };
-  }, []);
-  return (
-    <div ref={ref} className="cursor-field" aria-hidden="true">
-      <div className="cursor-light" />
-      <svg viewBox="-60 -60 120 120">
-        <path d="M-23 -15L21 -22L31 21L-17 29Z M-23 -15L31 21" />
-        <circle cx="-23" cy="-15" r="2" />
-        <circle cx="21" cy="-22" r="2" />
-        <circle cx="31" cy="21" r="2" />
-        <circle cx="-17" cy="29" r="2" />
-      </svg>
-    </div>
-  );
-}
 function GlobalSearch({ open, close }: { open: boolean; close: () => void }) {
   const [query, setQuery] = useState("");
   const [index, setIndex] = useState(0);
@@ -175,8 +135,8 @@ function GlobalSearch({ open, close }: { open: boolean; close: () => void }) {
       </div>
       {!results.length && (
         <div className="empty-state">
-          <Blob variant={2} />
-          <h3>No brain cells found</h3>
+          <TopicIcon variant={4} />
+          <h3>No results on this frequency</h3>
           <p>Try a token ticker, “fees” or “arena”.</p>
         </div>
       )}
@@ -192,9 +152,9 @@ export function Layout() {
   const [scrolled, setScrolled] = useState(false);
   const [theme, setTheme] = useState(() => {
     try {
-      return localStorage.getItem("fvf:theme") === "light" ? "light" : "dark";
+      return localStorage.getItem("fvf:theme:v3") === "dark" ? "dark" : "light";
     } catch {
-      return "dark";
+      return "light";
     }
   });
   const [motion, setMotion] = useState(() => {
@@ -205,11 +165,12 @@ export function Layout() {
     }
   });
   const ui = useUI();
+  const state = useBattle();
   const location = useLocation();
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     try {
-      localStorage.setItem("fvf:theme", theme);
+      localStorage.setItem("fvf:theme:v3", theme);
     } catch {
       /* optional preference */
     }
@@ -244,29 +205,25 @@ export function Layout() {
     if (!location.hash)
       window.scrollTo({ top: 0, left: 0, behavior: "instant" });
     const name = location.pathname.split("/")[1];
-    document.title = `FVF / ${name ? name[0].toUpperCase() + name.slice(1) : "Internet nonsense, with consequences"}`;
+    document.title = `FVF / ${name ? name[0].toUpperCase() + name.slice(1) : "Fees fuel internet chaos"}`;
   }, [location.pathname, location.hash]);
   return (
     <>
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <CursorField />
       <header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
         <div className="nav-shell">
           <Link className="brand" to="/" aria-label="FVF home">
-            <svg viewBox="0 0 34 32" aria-hidden="true">
-              <path
-                d="M3 6H14V12H9V15H14V21H9V28H3ZM17 6H23L26 19L29 6H34L29 28H23Z"
-                fill="currentColor"
-              />
-              <circle cx="5" cy="3" r="2" />
-              <circle cx="29" cy="3" r="2" />
-            </svg>
+            <Zap className="brand-bolt" fill="currentColor" />
             <span>
-              fvf
-              <span className="brand-period" />
+              FVF<span className="brand-dot">®</span>
             </span>
+            <small>
+              FEES
+              <br />
+              VERSUS FEES
+            </small>
           </Link>
           <nav
             className={menu ? "main-nav open" : "main-nav"}
@@ -277,7 +234,7 @@ export function Layout() {
             </NavLink>
             <NavLink to="/tokens">Tokens</NavLink>
             <NavLink to="/arena">
-              Arena <i className="live-dot" />
+              Arena <span className="nav-dot" />
             </NavLink>
             <NavLink to="/numbers">Numbers</NavLink>
             <NavLink to="/docs">Field manual</NavLink>
@@ -295,23 +252,18 @@ export function Layout() {
               </kbd>
             </button>
             <button
-              className={`theme-switch ${theme}`}
+              className={`icon-button theme-switch ${theme}`}
               onClick={() => setTheme((t) => (t === "dark" ? "light" : "dark"))}
               aria-label={
                 theme === "dark"
                   ? "Switch to light theme"
                   : "Switch to dark theme"
               }
-              title={theme === "dark" ? "Day shift" : "Night shift"}
             >
-              <span className="theme-orbit" />
-              <span className="theme-creature">
-                <i />
-                <i />
-              </span>
+              {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
             </button>
             <Link to="/launch" className="button primary nav-launch">
-              Launch
+              Launch <ArrowUpRight size={15} />
             </Link>
             <button
               className="button wallet-button"
@@ -329,7 +281,7 @@ export function Layout() {
                 {ui.wallet
                   ? ui.wallet.kind === "demo"
                     ? "Demo pilot"
-                    : `${ui.wallet.label.slice(0, 6)}...`
+                    : ui.wallet.label.slice(0, 6) + "..."
                   : "Connect wallet"}
               </span>
             </button>
@@ -344,41 +296,73 @@ export function Layout() {
           </div>
         </div>
       </header>
+      <div className="ticker" aria-label="Simulated platform updates">
+        <span className="ticker-label">
+          <i /> FVF BROADCAST
+        </span>
+        <div className="ticker-window">
+          <div className="ticker-track">
+            {[0, 1].map((copy) => (
+              <div className="ticker-copy" aria-hidden={copy === 1} key={copy}>
+                <span>
+                  <Radio size={13} /> ONE PLATFORM / MANY BAD IDEAS
+                </span>
+                <span>
+                  <Zap size={13} /> LAUNCH ON PONS / FUEL YOUR EVENT
+                </span>
+                {state.events.slice(0, 3).map((e) => (
+                  <span key={e.id}>
+                    <Radio size={12} className={e.faction} />
+                    {e.text}
+                  </span>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+        <Link to="/docs#demo" className="ticker-info">
+          SIMULATED DATA <ArrowUpRight size={12} />
+        </Link>
+      </div>
       <main id="main" tabIndex={-1}>
         {!demoAdapter.persistenceAvailable && (
           <div className="storage-notice" role="status">
-            Browser storage is unavailable. Your demo changes last for this
-            session.
+            SESSION-ONLY DEMO / Browser storage is unavailable. Your changes
+            last for this session.
           </div>
         )}
         <Outlet />
       </main>
       <footer className="site-footer">
-        <div>
-          <Link className="footer-brand" to="/">
-            fvf
-          </Link>
-          <p>Good tech for deeply unserious things</p>
+        <Link to="/" className="footer-logo">
+          FVF<span>®</span>
+        </Link>
+        <div className="footer-copy">
+          <strong>FEES FUEL INTERNET CHAOS</strong>
+          <p>
+            An independent launchpad concept for{" "}
+            <a
+              href="https://www.ponsfamily.com/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              pons
+            </a>{" "}
+            on Robinhood Chain.
+          </p>
           <small>
-            An independent launchpad concept for pons on Robinhood Chain
+            Local demo. No real tokens, trades or payouts. Not affiliated with
+            pons, Robinhood or OpenAI.
           </small>
         </div>
         <div className="footer-links">
-          <Link to="/docs#fee-flow">Where do the fees go?</Link>
-          <Link to="/docs#demo">About this demo</Link>
-          <a
-            href="https://www.ponsfamily.com/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Meet pons
-          </a>
-        </div>
-        <div className="footer-controls">
-          <span className="badge">
-            <i className="live-dot" /> Local demo
-          </span>
-          <div>
+          <Link to="/docs#fee-flow">
+            Follow the fees <ArrowUpRight size={14} />
+          </Link>
+          <Link to="/arena">
+            Find your next event <ArrowUpRight size={14} />
+          </Link>
+          <div className="footer-controls">
             <button
               className="icon-button"
               onClick={ui.toggleSound}
@@ -399,12 +383,8 @@ export function Layout() {
               <CircleHelp size={18} />
             </Link>
           </div>
-          <small>© 2026 FeesVFees</small>
+          <span>FEES VERSUS FEES / © 2026 FVF</span>
         </div>
-        <p className="footer-disclaimer">
-          Simulated tokens, fees and metrics. No real trades or payouts. FVF is
-          not affiliated with pons, Robinhood or OpenAI.
-        </p>
       </footer>
       <GlobalSearch open={search} close={() => setSearch(false)} />
       <WalletModal />

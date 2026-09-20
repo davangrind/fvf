@@ -1,6 +1,6 @@
 # Original character art
 
-**Version 1 archive:** these raster characters belong to the initial prototype and are not used by the version 2 interface. The new articulated creatures and avatars are authored directly in SVG/CSS in `src/components/Creatures.tsx` and `public/art/*-avatar.svg`; no image-generation model was used for version 2.
+**Restored in version 3:** the original illustrations are used again in the first arena, event cards and launch previews. No new character images were generated for this restoration. The version 2 SVG characters remain on branch `archive/v2-lab` and tag `v0.2.0-lab`.
 
 Generated using the built-in `image_gen` tool through the `imagegen` skill; no API-key or CLI fallback was used. The images are original to this project, with no reference artwork copied from the research sites. Generated alpha was retained. Sharp was used only for lossily encoding resized delivery copies as WebP.
 

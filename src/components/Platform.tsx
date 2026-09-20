@@ -14,9 +14,14 @@ import {
 import { useBattle } from "../state";
 import { factionStats, money } from "../domain/battle";
 import type { Token } from "../domain/types";
-import { arenaEvents } from "../data/events";
 import type { ArenaEvent } from "../data/events";
-import { Blob, Creature } from "./Creatures";
+import {
+  TopicIcon,
+  FighterArtwork,
+  TokenSymbol,
+  tokenArtwork,
+  contenderIcon,
+} from "./Artwork";
 import { Modal } from "./Modal";
 
 export function TokenAvatar({ token }: { token: Token }) {
@@ -25,10 +30,10 @@ export function TokenAvatar({ token }: { token: Token }) {
     <span className={`token-avatar avatar-${hash % 6}`}>
       {token.image &&
       (token.image.startsWith("data:image/") ||
-        token.image.endsWith("-avatar.svg")) ? (
-        <img src={token.image} alt="" />
+        token.image.startsWith("/art/")) ? (
+        <img src={tokenArtwork(token.image, token.faction)} alt="" />
       ) : (
-        <Blob variant={hash % 6} />
+        <TokenSymbol ticker={token.ticker} />
       )}
     </span>
   );
@@ -46,13 +51,13 @@ export function Metrics() {
     {
       label: "Tokens with a side",
       value: String(s.tokens.length),
-      note: "Very real commitment issues",
+      note: "Local demo records",
       icon: Coins,
     },
     {
       label: "Open arenas",
       value: "01",
-      note: "5 more in the microwave",
+      note: "5 planned events",
       icon: Layers3,
     },
     {
@@ -114,7 +119,7 @@ export function TokenTable({
             <th>Token</th>
             <th>Market cap</th>
             <th>24h change</th>
-            {!compact && <th>Micro vibes</th>}
+            {!compact && <th>Illustrative trend</th>}
             <th>Fees contributed</th>
             <th>Side</th>
           </tr>
@@ -161,8 +166,8 @@ export function TokenTable({
       </table>
       {!tokens.length && (
         <div className="empty-state">
-          <Blob variant={2} />
-          <h3>Nothing in this petri dish</h3>
+          <TopicIcon variant={2} />
+          <h3>No tokens found</h3>
           <p>Try a different search or filter.</p>
         </div>
       )}
@@ -196,22 +201,22 @@ export function ArenaCard({
         <div className="arena-card-top">
           <span className={`badge ${active ? "mint" : ""}`}>
             {active ? <i className="live-dot" /> : <LockKeyhole size={12} />}{" "}
-            {active ? "Recruiting" : "In the microwave"}
+            {active ? "Recruiting" : "Coming later"}
           </span>
           <span className="mono">{event.type}</span>
         </div>
         <div className="arena-card-art">
           {active ? (
             <>
-              <Creature faction="fly" stage={fly.stage} />
+              <FighterArtwork faction="fly" stage={fly.stage} />
               <span className="vs-mark">vs</span>
-              <Creature faction="astra" stage={astra.stage} />
+              <FighterArtwork faction="astra" stage={astra.stage} />
             </>
           ) : (
-            <div className="blob-lineup">
+            <div className="contender-lineup">
               {event.contenders.map((c, i) => (
                 <div key={c}>
-                  <Blob variant={i + arenaEvents.indexOf(event)} />
+                  <TopicIcon variant={contenderIcon(event.id, i)} />
                   <span>{c}</span>
                 </div>
               ))}
@@ -220,7 +225,7 @@ export function ArenaCard({
         </div>
         <div className="arena-card-copy">
           <span className="eyebrow">
-            {active ? "Experiment 001" : "Future experiment"}
+            {active ? "Event 001" : "Upcoming event"}
           </span>
           <h3>{event.title}</h3>
           <p>{event.subtitle}</p>
@@ -243,7 +248,7 @@ export function ArenaCard({
                 </span>
               </div>
               <Link className="button primary full" to="/arena/season-01">
-                Enter the lab <ArrowUpRight size={16} />
+                Enter the arena <ArrowUpRight size={16} />
               </Link>
             </>
           ) : (
@@ -264,9 +269,9 @@ export function ArenaCard({
         </div>
       </article>
       <Modal open={open} onClose={() => setOpen(false)} title={event.title}>
-        <div className="modal-blobs">
+        <div className="modal-contenders">
           {event.contenders.map((c, i) => (
-            <Blob key={c} variant={i + 1} />
+            <TopicIcon key={c} variant={contenderIcon(event.id, i)} />
           ))}
         </div>
         <p>{event.lore}</p>
@@ -479,7 +484,7 @@ const flowSteps = [
   },
   {
     title: "Your side evolves",
-    text: "Attributed contributions fill the pool. Thresholds unlock new creature parts, base equipment and abilities.",
+    text: "Attributed contributions fill the pool. Each event defines its own progression. In the first arena, fee thresholds unlock fighter evolution and skills.",
     icon: FlaskConical,
   },
 ];

@@ -71,7 +71,7 @@ export default function Numbers() {
         <section className="panel distribution-panel">
           <div className="section-heading">
             <div>
-              <span className="eyebrow">Experiment 001</span>
+              <span className="eyebrow">Event 001</span>
               <h2>Who’s eating?</h2>
             </div>
           </div>

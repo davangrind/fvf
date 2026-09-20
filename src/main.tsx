@@ -1,17 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import "@fontsource/dm-sans/latin-400.css";
-import "@fontsource/dm-sans/latin-500.css";
-import "@fontsource/dm-sans/latin-600.css";
-import "@fontsource/dm-sans/latin-700.css";
-import "@fontsource/dm-sans/latin-800.css";
-import "@fontsource/space-mono/latin-400.css";
+import "@fontsource/barlow-condensed/latin-600.css";
+import "@fontsource/barlow-condensed/latin-700.css";
+import "@fontsource/barlow-condensed/latin-800.css";
+import "@fontsource/space-grotesk/latin-400.css";
+import "@fontsource/space-grotesk/latin-500.css";
+import "@fontsource/space-grotesk/latin-600.css";
+import "@fontsource/space-grotesk/latin-700.css";
 import { App } from "./App";
 import { StateProvider } from "./state";
 import "./styles.css";
-import "./lab.css";
+import "./classic-responsive.css";
+import "./polish.css";
+import "./platform-layout.css";
 import "./features.css";
+import "./platform.css";
 import "./responsive.css";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

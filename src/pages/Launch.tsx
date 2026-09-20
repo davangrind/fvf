@@ -15,20 +15,20 @@ import { demoAdapter } from "../data/demo-adapter";
 import { validateLaunch } from "../domain/battle";
 import { imageMimeFromBytes } from "../domain/artwork";
 import type { Faction, LaunchInput, Token } from "../domain/types";
-import { Creature } from "../components/Creatures";
+import { FighterArtwork } from "../components/Artwork";
 import { TokenAvatar } from "../components/Platform";
 const empty: LaunchInput = {
   name: "",
   ticker: "",
   description: "",
-  image: "/art/fly-avatar.svg",
+  image: "/art/fly.webp",
   faction: "fly",
   website: "",
   x: "",
 };
 function readDraft(): LaunchInput {
   try {
-    const v = JSON.parse(sessionStorage.getItem("fvf:draft:v2") ?? "null");
+    const v = JSON.parse(sessionStorage.getItem("fvf:draft:v3") ?? "null");
     if (
       v &&
       typeof v.name === "string" &&
@@ -54,7 +54,7 @@ export default function Launch() {
           faction: f,
           image: draft.image.startsWith("data:")
             ? draft.image
-            : `/art/${f}-avatar.svg`,
+            : `/art/${f}.webp`,
         }
       : draft;
   });
@@ -68,7 +68,7 @@ export default function Launch() {
   useEffect(() => {
     if (!created)
       try {
-        sessionStorage.setItem("fvf:draft:v2", JSON.stringify(input));
+        sessionStorage.setItem("fvf:draft:v3", JSON.stringify(input));
       } catch {
         /* best effort */
       }
@@ -81,7 +81,7 @@ export default function Launch() {
     setInput((v) => ({
       ...v,
       faction: f,
-      image: v.image.startsWith("/art/") ? `/art/${f}-avatar.svg` : v.image,
+      image: v.image.startsWith("/art/") ? `/art/${f}.webp` : v.image,
     }));
   async function upload(file?: File) {
     if (!file) return;
@@ -136,7 +136,7 @@ export default function Launch() {
       if (r.source === "demo") {
         setCreated(r.token);
         try {
-          sessionStorage.removeItem("fvf:draft:v2");
+          sessionStorage.removeItem("fvf:draft:v3");
         } catch {
           /* optional storage */
         }
@@ -153,7 +153,7 @@ export default function Launch() {
       <div className="page">
         <section className="launch-success panel">
           <div className="success-creature">
-            <Creature faction={created.faction} stage={2} />
+            <FighterArtwork faction={created.faction} stage={2} />
             <span>
               <Check size={25} />
             </span>
@@ -166,8 +166,8 @@ export default function Launch() {
           </h1>
           <p>
             <b>${created.ticker}</b> joined{" "}
-            {created.faction === "fly" ? "Neuro Fly" : "GPT-6 Astra"} in
-            experiment 001.
+            {created.faction === "fly" ? "Neuro Fly" : "GPT-6 Astra"} in event
+            001.
           </p>
           <p className="muted">
             {demoAdapter.persistenceAvailable
@@ -186,7 +186,7 @@ export default function Launch() {
               Meet your token
             </Link>
             <Link className="button" to="/arena/season-01">
-              Visit the lab
+              Visit the arena
             </Link>
           </div>
         </section>
@@ -196,7 +196,7 @@ export default function Launch() {
     <div className="page launch-page">
       <div className="page-heading">
         <span className="eyebrow">The idea was probably fine in your head</span>
-        <h1>Let it loose</h1>
+        <h1>Launch your token</h1>
         <p>Give your token a name, a face and a questionable allegiance.</p>
       </div>
       <div className="launch-layout">
@@ -207,7 +207,7 @@ export default function Launch() {
               disabled={busy}
               onClick={() => setStep(1)}
             >
-              <span>01</span> Make a little guy
+              <span>01</span> Token details
             </button>
             <button
               className={step === 2 ? "active" : ""}
@@ -228,7 +228,7 @@ export default function Launch() {
             <form onSubmit={next} noValidate>
               <div className="form-section-title">
                 <span>01</span>
-                <h2>Choose your experiment</h2>
+                <h2>Choose your event</h2>
               </div>
               <label>
                 Arena
@@ -248,7 +248,7 @@ export default function Launch() {
                     aria-pressed={input.faction === f}
                     onClick={() => pick(f)}
                   >
-                    <Creature faction={f} stage={1} />
+                    <FighterArtwork faction={f} stage={1} />
                     <div>
                       <strong>
                         {f === "fly" ? "Neuro Fly" : "GPT-6 Astra"}
@@ -279,7 +279,7 @@ export default function Launch() {
                   {input.image.startsWith("data:") ? (
                     <img src={input.image} alt="Token artwork preview" />
                   ) : (
-                    <Creature faction={input.faction} stage={1} />
+                    <FighterArtwork faction={input.faction} stage={1} />
                   )}
                   <span>
                     <Upload size={14} />
@@ -383,7 +383,7 @@ export default function Launch() {
                 </p>
               )}
               <button className="button primary full" type="submit">
-                Review the little guy
+                Review your token
               </button>
             </form>
           ) : (
@@ -471,12 +471,12 @@ export default function Launch() {
         </section>
         <aside className="launch-preview">
           <div className={`panel launch-preview-card ${input.faction}`}>
-            <span className="eyebrow">Your future problem</span>
+            <span className="eyebrow">Your token preview</span>
             <div className="launch-art">
               {input.image.startsWith("data:") ? (
                 <img src={input.image} alt="Token artwork preview" />
               ) : (
-                <Creature faction={input.faction} stage={2} />
+                <FighterArtwork faction={input.faction} stage={2} />
               )}
             </div>
             <div className="preview-token-identity">
@@ -493,7 +493,7 @@ export default function Launch() {
                 }}
               />
               <div>
-                <h2>{input.name || "Unnamed little guy"}</h2>
+                <h2>{input.name || "Your token name"}</h2>
                 <span className="mono">${input.ticker || "???"}</span>
               </div>
             </div>
@@ -505,7 +505,7 @@ export default function Launch() {
               <span className={`faction-pill ${input.faction}`}>
                 {input.faction === "fly" ? "Team Fly" : "Team Astra"}
               </span>
-              <span className="micro muted">Experiment 001</span>
+              <span className="micro muted">Event 001</span>
             </div>
           </div>
           <div className="launch-fineprint">

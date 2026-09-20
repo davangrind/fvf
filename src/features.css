@@ -72,7 +72,7 @@
   color: var(--muted);
   margin-bottom: 17px;
 }
-.manual-intro > .blob {
+.manual-intro > .topic-icon {
   width: 140px;
   transform: rotate(12deg);
 }
@@ -162,7 +162,7 @@
   color: var(--mint-text);
 }
 .flow-nodes > button small {
-  font-family: "Space Mono", monospace;
+  font-family: "Space Grotesk", sans-serif;
   font-size: 9px;
   color: var(--dim);
 }
@@ -219,7 +219,7 @@
 }
 .flow-calculator label b {
   display: block;
-  font-family: "Space Mono", monospace;
+  font-family: "Space Grotesk", sans-serif;
   font-size: 20px;
   font-weight: 400;
   color: var(--text);
@@ -271,7 +271,7 @@
   color: var(--muted);
 }
 .threshold-table b {
-  font-family: "Space Mono", monospace;
+  font-family: "Space Grotesk", sans-serif;
   font-size: 15px;
   color: var(--mint-text);
   font-weight: 400;
@@ -314,7 +314,7 @@
   place-items: center;
   border: 1px solid var(--line);
   border-radius: 7px;
-  font-family: "Space Mono", monospace;
+  font-family: "Space Grotesk", sans-serif;
   font-size: 9px;
 }
 .form-steps > button.active {
@@ -335,7 +335,7 @@
   margin-top: 0;
 }
 .form-section-title > span {
-  font-family: "Space Mono", monospace;
+  font-family: "Space Grotesk", sans-serif;
   color: var(--dim);
   font-size: 10px;
 }
@@ -364,7 +364,7 @@
     border-color 0.2s,
     background 0.2s;
 }
-.faction-option > .creature {
+.faction-option > .fighter-artwork {
   width: 67px;
 }
 .faction-option strong {
@@ -507,7 +507,7 @@
   justify-content: center;
   overflow: hidden;
 }
-.launch-art > .creature {
+.launch-art > .fighter-artwork {
   height: 100%;
   width: 100%;
 }
@@ -673,7 +673,7 @@
   height: 78px;
   border-radius: 20px;
 }
-.token-detail-heading > .token-avatar > .blob {
+.token-detail-heading > .token-avatar > .topic-icon {
   width: 75px;
   height: 75px;
 }
@@ -756,7 +756,7 @@
 .token-allegiance > .eyebrow {
   justify-content: center;
 }
-.token-allegiance > .creature {
+.token-allegiance > .fighter-artwork {
   max-width: 280px;
   margin: 0 auto;
 }
@@ -841,7 +841,7 @@
   background: var(--panel-up);
 }
 .search-results > button > small {
-  font-family: "Space Mono", monospace;
+  font-family: "Space Grotesk", sans-serif;
   font-size: 9px;
   color: var(--muted);
   flex-shrink: 0;
@@ -888,7 +888,7 @@
 }
 .wallet-address {
   overflow-wrap: anywhere;
-  font-family: "Space Mono", monospace;
+  font-family: "Space Grotesk", sans-serif;
   font-size: 12px !important;
 }
 .toast {
@@ -931,7 +931,7 @@
   flex-direction: column;
   gap: 16px;
 }
-.empty-state > .blob {
+.empty-state > .topic-icon {
   width: 95px;
 }
 .empty-state p {

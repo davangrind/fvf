@@ -2,7 +2,7 @@ import { Component, lazy, Suspense } from "react";
 import type { ReactNode } from "react";
 import { Routes, Route, Link, Navigate } from "react-router-dom";
 import { Layout } from "./components/Layout";
-import { Blob } from "./components/Creatures";
+import { TopicIcon } from "./components/Artwork";
 import Home from "./pages/Home";
 const Battle = lazy(() => import("./pages/Battle"));
 const Arenas = lazy(() => import("./pages/Arenas"));
@@ -22,11 +22,11 @@ class ErrorBoundary extends Component<
   render() {
     return this.state.failed ? (
       <div className="page empty-state">
-        <Blob />
-        <h1>The lab had a moment</h1>
+        <TopicIcon />
+        <h1>Transmission interrupted</h1>
         <p>Your saved demo data is still in this browser.</p>
         <button className="button primary" onClick={() => location.reload()}>
-          Reload the lab
+          Reload FVF
         </button>
       </div>
     ) : (
@@ -46,8 +46,8 @@ export function App() {
               <Suspense
                 fallback={
                   <div className="page empty-state">
-                    <Blob />
-                    <h2>Locating the brain cell</h2>
+                    <TopicIcon />
+                    <h2>Tuning into FVF</h2>
                   </div>
                 }
               >
@@ -75,7 +75,7 @@ export function App() {
                     path="*"
                     element={
                       <div className="page empty-state">
-                        <Blob variant={2} />
+                        <TopicIcon variant={2} />
                         <span className="eyebrow">
                           404 / brain cell not found
                         </span>

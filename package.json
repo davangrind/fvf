@@ -1,6 +1,6 @@
 {
   "name": "feesvfees",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -11,8 +11,8 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
-    "@fontsource/dm-sans": "^5.3.0",
-    "@fontsource/space-mono": "^5.3.0",
+    "@fontsource/barlow-condensed": "^5.3.0",
+    "@fontsource/space-grotesk": "^5.3.0",
     "lucide-react": "^0.468.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",

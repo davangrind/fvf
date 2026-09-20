@@ -4,7 +4,7 @@ import { Search, List, LayoutGrid, Plus } from "lucide-react";
 import { useBattle } from "../state";
 import { TokenTable, TokenAvatar, Sparkline } from "../components/Platform";
 import { money } from "../domain/battle";
-import { Blob } from "../components/Creatures";
+import { TopicIcon } from "../components/Artwork";
 export default function Tokens() {
   const s = useBattle();
   const [query, setQuery] = useState("");
@@ -32,9 +32,9 @@ export default function Tokens() {
     <div className="page">
       <div className="page-heading heading-row">
         <div>
-          <span className="eyebrow">The token petri dish</span>
-          <h1>Small caps, big personalities</h1>
-          <p>Every token has a side. Some even have a brain cell.</p>
+          <span className="eyebrow">SMALL CAPS / LARGE PERSONALITIES</span>
+          <h1>The arsenal</h1>
+          <p>Explore the tokens fueling events across FVF.</p>
         </div>
         <Link className="button primary" to="/launch">
           <Plus size={16} /> Launch a token
@@ -153,7 +153,7 @@ export default function Tokens() {
             ))}
             {!tokens.length && (
               <div className="empty-state">
-                <Blob />
+                <TopicIcon />
                 <h3>No matching tokens</h3>
                 <button
                   className="button"
