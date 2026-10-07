@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#f4f1e8" />
+    <meta name="theme-color" content="#1f241e" />
     <meta
       name="description"
       content="FVF / FeesVFees. Launch a token, pick a side, and fuel the internet's next ridiculous event. Arenas and creator-fee rivalries for Solana tokens on pump.fun."
@@ -13,9 +13,13 @@
     <script>
       try {
         document.documentElement.dataset.theme =
-          localStorage.getItem("fvf:theme:v3") === "dark" ? "dark" : "light";
+          localStorage.getItem("fvf:theme:v4") === "light" ? "light" : "dark";
+        document.querySelector('meta[name="theme-color"]').content =
+          document.documentElement.dataset.theme === "dark"
+            ? "#1f241e"
+            : "#f4f1e8";
       } catch {
-        document.documentElement.dataset.theme = "light";
+        document.documentElement.dataset.theme = "dark";
       }
     </script>
   </head>

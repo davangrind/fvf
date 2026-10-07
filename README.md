@@ -22,11 +22,19 @@ npm test
 npm run test:e2e
 ```
 
-## Configure the FVF purchase link
+## Publish the FVF purchase link
 
-Copy `.env.example` to `.env.local` and set `VITE_FVF_CA` to the verified FVF Solana mint. Restart Vite, or rebuild / redeploy on Vercel after changing it. The mint is public configuration, not a secret.
+Once you have the official Solana mint, run this single PowerShell command (replace YOUR_CA):
 
-Without a valid 32-byte base58 address, the card says the CA is coming soon and Swap / Copy are disabled. With a valid address, Swap opens `https://pump.fun/coin/<mint>` in a new tab. Format validation does not verify that the token exists or belongs to FVF; verify the mint before configuring it.
+```powershell
+npm --prefix "E:\MyProjects\fvf" run publish:ca -- "YOUR_CA"
+```
+
+The command validates the address, requires a clean main branch, fast-forwards from GitHub, updates `src/config/token.json`, runs the production build, commits only the CA configuration and pushes to main. Vercel automatically builds and publishes it at https://fvf-six.vercel.app. The public site changes after that deployment completes, not at the instant the command is entered.
+
+No Vercel CLI or token is needed. Existing Git credentials and Node.js 22.12+ are required. Failed builds restore the previous config. If a push fails, rerun the same command to retry the saved CA commit. Unrelated pending commits are not automatically published.
+
+An empty or malformed address keeps Swap and Copy disabled. A configured address enables its exact `https://pump.fun/coin/<mint>` link. The published config takes precedence over `VITE_FVF_CA`; that environment variable remains an optional fallback while the tracked config is empty. Address validation checks its format, not ownership or onchain existence.
 
 ## Platform
 
@@ -52,15 +60,15 @@ The dataset contains 240 unique tokens, 486 starting activity records and 169 ho
 
 - `fvf:solana:v1`: current catalog and fee history; custom records from `fvf:demo:v2` are carried forward on first load and older storage is left intact
 - `fvf:draft:v3`: session launch draft
-- `fvf:theme:v3`: paper / night edition
+- `fvf:theme:v4`: dark by default; explicit light / dark selections persist
 - `fvf:motion`: ambient motion preference
 - `fvf:idea:*`: bookmarked future arenas
 
-Command/Control K opens search. Reduced motion is respected, sound starts off and icons are SVG. The original five evolution thresholds remain $0 / $25K / $75K / $150K / $250K. The full battle is still deferred.
+The dark edition is the default, including the initial HTML paint and unavailable-storage fallback. Old v3 theme defaults reset once; subsequent choices are remembered. Command/Control K opens search. Reduced motion is respected, sound starts off and icons are SVG. The original five evolution thresholds remain $0 / $25K / $75K / $150K / $250K. The full battle is still deferred.
 
 ## Vercel
 
-Import this repository using the root directory. `vercel.json` builds with `npm run build`, publishes `dist/` and rewrites app routes to `index.html`. Set `VITE_FVF_CA` in the appropriate Vercel environment once the official mint is available, then redeploy.
+Import this repository using the root directory. `vercel.json` builds with `npm run build`, publishes `dist/` and rewrites app routes to `index.html`. Use `npm run publish:ca -- YOUR_CA` to publish the mint through the same Git deployment flow. No environment-variable change is needed.
 
 ## Preserved releases
 

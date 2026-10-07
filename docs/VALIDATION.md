@@ -1,3 +1,12 @@
+# Dark default and CA publishing validation
+
+Checked on 2026-10-07 after the Solana edition.
+
+- Production build passed
+- 32 unit checks passed, including publishing the mint to an isolated local Git remote, unchanged retries, invalid-address rejection, build-failure rollback, protection for uncommitted files and config precedence over older environment values
+- 12 targeted browser checks passed across desktop/mobile Chromium and WebKit: dark initial theme, persistence of explicit light preference, migration from the old default and unavailable-storage fallback
+- The live CA is still empty; no test mint was published to the real repository
+
 # Solana edition / v0.4 validation
 
 Checked locally on 2026-10-07.

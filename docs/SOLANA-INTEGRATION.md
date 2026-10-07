@@ -2,7 +2,7 @@
 
 ## Current release
 
-FVF targets Solana and pump.fun. The frontend connects Phantom, prepares metadata drafts and links to pump.fun creation. The homepage purchase link is gated by `VITE_FVF_CA`. It does not mint tokens, submit trades or collect fees.
+FVF targets Solana and pump.fun. The frontend connects Phantom, prepares metadata drafts and links to pump.fun creation. The homepage purchase link is gated by the mint in `src/config/token.json` (with `VITE_FVF_CA` as an empty-config fallback). It does not mint tokens, submit trades or collect fees.
 
 Catalog records use preview provenance. The `PumpProductionAdapter` fails before requesting any transaction. A production result must contain a Solana mint, transaction signature and `mainnet-beta` cluster, with no EVM address or chain-ID assumptions.
 

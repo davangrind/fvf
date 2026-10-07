@@ -5,10 +5,10 @@ test("navigation, theme and motion preferences work on every screen", async ({
   isMobile,
 }) => {
   await page.goto("/");
-  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
-  await page.getByRole("button", { name: "Switch to dark theme" }).click();
-  await page.reload();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  await page.getByRole("button", { name: "Switch to light theme" }).click();
+  await page.reload();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
   await page.getByRole("button", { name: "Pause ambient motion" }).click();
   await expect(page.locator("html")).toHaveAttribute("data-motion", "paused");
   await page.getByRole("button", { name: "Open global search" }).click();
@@ -31,7 +31,7 @@ test("navigation, theme and motion preferences work on every screen", async ({
     page.getByRole("heading", { name: "The numbers have lore" }),
   ).toBeVisible();
   await page.getByRole("button", { name: "Resume ambient motion" }).click();
-  await page.getByRole("button", { name: "Switch to light theme" }).click();
+  await page.getByRole("button", { name: "Switch to dark theme" }).click();
   await page.evaluate(() => window.scrollTo(0, 600));
   await expect(page.locator(".site-header")).toHaveClass(/is-scrolled/);
 });
@@ -426,4 +426,33 @@ test("all shipped headings avoid trailing periods and symbols remain SVG", async
       ),
     ).toBe(true);
   }
+});
+
+test("previous default-light sessions adopt dark mode", async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem("fvf:theme:v3", "light"));
+  await page.goto("/");
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute(
+    "content",
+    "#1f241e",
+  );
+});
+
+test("dark mode survives unavailable browser storage", async ({ page }) => {
+  await page.addInitScript(() => {
+    Object.defineProperty(Storage.prototype, "getItem", {
+      value: () => {
+        throw new Error("Storage blocked");
+      },
+    });
+    Object.defineProperty(Storage.prototype, "setItem", {
+      value: () => {
+        throw new Error("Storage blocked");
+      },
+    });
+  });
+  await page.goto("/");
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  await page.getByRole("button", { name: "Switch to light theme" }).click();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
 });

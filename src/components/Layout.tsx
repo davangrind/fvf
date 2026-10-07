@@ -152,9 +152,11 @@ export function Layout() {
   const [scrolled, setScrolled] = useState(false);
   const [theme, setTheme] = useState(() => {
     try {
-      return localStorage.getItem("fvf:theme:v3") === "dark" ? "dark" : "light";
+      return localStorage.getItem("fvf:theme:v4") === "light"
+        ? "light"
+        : "dark";
     } catch {
-      return "light";
+      return "dark";
     }
   });
   const [motion, setMotion] = useState(() => {
@@ -169,8 +171,11 @@ export function Layout() {
   const location = useLocation();
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute("content", theme === "dark" ? "#1f241e" : "#f4f1e8");
     try {
-      localStorage.setItem("fvf:theme:v3", theme);
+      localStorage.setItem("fvf:theme:v4", theme);
     } catch {
       /* optional preference */
     }
