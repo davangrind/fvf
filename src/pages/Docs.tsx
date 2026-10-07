@@ -52,7 +52,7 @@ export default function Docs() {
             )}
           </div>
           <span className="micro muted">
-            {chapters.length} chapters / about 20 min
+            {chapters.length} chapters / about 15 min
           </span>
           <nav aria-label="Manual chapters">
             {groups.map((g) => (
@@ -76,7 +76,7 @@ export default function Docs() {
         <div className="manual-content">
           <section className="manual-intro panel">
             <div>
-              <span className="badge">Edition 03 / Local demo</span>
+              <span className="badge">Edition 04 / Solana</span>
               <h2>
                 Read the room
                 <br />
@@ -135,24 +135,24 @@ export default function Docs() {
                   ))}
                 </div>
               )}
-              {c.id === "pons" && (
+              {c.id === "pump" && (
                 <p>
                   <a
                     className="text-link"
-                    href="https://github.com/ponsdotdev/pons-labs"
+                    href="https://pump.fun/docs/fees"
                     target="_blank"
                     rel="noreferrer"
                   >
-                    Official pons source
+                    Official pump.fun fees
                   </a>{" "}
                   <span className="muted">/</span>{" "}
                   <a
                     className="text-link"
-                    href="https://www.ponsfamily.com/launchpad/create"
+                    href="https://pump.fun/create"
                     target="_blank"
                     rel="noreferrer"
                   >
-                    pons creation flow
+                    Create on pump.fun
                   </a>
                 </p>
               )}

@@ -1,0 +1,528 @@
+.home-page {
+  padding-top: 10px;
+}
+.welcome {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 760px;
+  border: 2px solid var(--ink);
+  border-radius: 16px;
+  background: #eeeddb;
+  color: #24261e;
+  margin: 24px 0 28px;
+  box-shadow: 0 7px 0 #24261e;
+}
+.welcome:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: linear-gradient(
+    106deg,
+    #d9ebad 0%,
+    #e9edcf 45%,
+    #e0dded 55%,
+    #b9c4ef 100%
+  );
+}
+.welcome:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.14;
+  z-index: -1;
+  background-image: radial-gradient(#20231d 1px, transparent 1px);
+  background-size: 8px 8px;
+  mask-image: linear-gradient(
+    90deg,
+    #000,
+    transparent 45%,
+    transparent 55%,
+    #000
+  );
+}
+.welcome-topline,
+.welcome-bottom {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 26px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.welcome-topline > span {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.welcome-divider {
+  opacity: 0.35;
+  margin: 0 5px;
+}
+.welcome-topline .live-dot {
+  background: #498038;
+  box-shadow: 0 0 0 4px #49803818;
+}
+.welcome-wordmark {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.065em;
+  font-size: clamp(200px, 27vw, 350px);
+  line-height: 0.8;
+  color: #f6572d;
+  z-index: 0;
+  text-shadow: 3px 5px 0 #24261e;
+  white-space: nowrap;
+  user-select: none;
+}
+.welcome-wordmark > span {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 25px;
+  letter-spacing: 0;
+  position: absolute;
+  top: 10px;
+  right: -27px;
+  text-shadow: none;
+  color: #24261e;
+}
+.welcome-radial {
+  position: absolute;
+  top: 26%;
+  width: 60%;
+  aspect-ratio: 1;
+  border: 1px solid #24261e18;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 55px #24261e05,
+    0 0 0 110px #24261e05;
+  z-index: -1;
+}
+.welcome-radial-fly {
+  left: -30%;
+}
+.welcome-radial-astra {
+  right: -30%;
+}
+.welcome-fighter {
+  position: absolute;
+  width: 39%;
+  top: 245px;
+  z-index: 2;
+  text-align: center;
+}
+.welcome-fly {
+  left: -3%;
+}
+.welcome-astra {
+  right: -3%;
+}
+.welcome-fighter button {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  width: 100%;
+  transition: filter 0.2s;
+}
+.welcome-astra img {
+  animation-delay: -2.5s;
+}
+.welcome-fighter button:hover {
+  filter: drop-shadow(0 0 17px #fff9);
+}
+.welcome-fighter img {
+  width: 100%;
+  height: 365px;
+  animation: welcome-float 5s ease-in-out infinite;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 12px #272b282b);
+  transition: transform 0.25s;
+}
+.welcome-fighter button:hover img,
+.welcome-fighter .is-poked img {
+  transform: rotate(-4deg) scale(1.06);
+}
+.welcome-astra button:hover img,
+.welcome-astra .is-poked img {
+  transform: rotate(4deg) scale(1.06);
+}
+.welcome-side-label {
+  position: absolute;
+  top: 320px;
+  left: 0;
+  right: 0;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  z-index: 3;
+  pointer-events: none;
+  transform: rotate(-5deg);
+}
+.welcome-astra .welcome-side-label {
+  transform: rotate(5deg);
+}
+.welcome-side-label small {
+  display: block;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 9px;
+  letter-spacing: 1.3px;
+  margin-top: 3px;
+}
+.welcome-speech {
+  position: absolute;
+  top: 3%;
+  left: 18%;
+  right: 10%;
+  background: #fff9e7;
+  border: 2px solid #24261e;
+  border-radius: 10px;
+  padding: 11px;
+  font-size: 11px;
+  font-weight: 700;
+  transform: rotate(-4deg);
+  box-shadow: 3px 3px #24261e;
+  pointer-events: none;
+}
+.welcome-center {
+  position: relative;
+  z-index: 3;
+  max-width: 400px;
+  margin: 238px auto 52px;
+  text-align: center;
+}
+.welcome-edition {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+}
+.welcome-center h1 {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: clamp(36px, 4vw, 55px);
+  line-height: 0.91;
+  letter-spacing: -1px;
+  margin: 12px 0;
+}
+.welcome-center > p {
+  font-size: 12px;
+  line-height: 1.65;
+  margin: 16px 0 21px;
+}
+.welcome-contract {
+  background: #f9f6ed;
+  border: 2px solid #24261e;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 5px 5px 0 #24261e;
+  transform: rotate(-1deg);
+  text-align: left;
+}
+.welcome-contract-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.welcome-contract-title strong {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 30px;
+  line-height: 1;
+}
+.welcome-contract-title > span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 10px;
+  font-weight: 700;
+  background: #e2e8d3;
+  padding: 6px 9px;
+  border-radius: 5px;
+}
+.welcome-address {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 8px;
+  background: #eae8df;
+  border: 1px solid #24261e24;
+  border-radius: 5px;
+  min-height: 39px;
+}
+.welcome-address > span {
+  font-size: 9px;
+  font-weight: 700;
+  color: #595b4b;
+}
+.welcome-address code {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 10px;
+  line-height: 1.5;
+  flex: 1;
+  word-break: break-all;
+  user-select: all;
+  text-align: center;
+}
+.welcome-address button {
+  background: none;
+  border: none;
+  padding: 3px;
+  display: flex;
+  color: inherit;
+}
+.welcome-address button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+.welcome-swap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border: 2px solid #24261e;
+  border-radius: 6px;
+  background: #ff6135;
+  color: #24261e;
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 800;
+  font-size: 25px;
+  text-decoration: none;
+  width: 100%;
+  padding: 11px;
+  margin-top: 10px;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+.welcome-swap:not(:disabled):hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 3px 3px #24261e;
+}
+.welcome-swap:disabled {
+  background: #eab093;
+  color: #674535;
+  cursor: not-allowed;
+  opacity: 1;
+}
+.welcome-contract > small {
+  display: block;
+  text-align: center;
+  font-size: 9px;
+  margin-top: 10px;
+  color: #5c5b50;
+}
+.welcome-enter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  margin-top: 24px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #24261e;
+  text-decoration: none;
+}
+.welcome-enter:hover {
+  text-decoration: underline;
+}
+.welcome-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top: 1px solid #24261e26;
+  font-size: 9px;
+  padding: 13px 24px;
+  background: #f9f6ed50;
+}
+.welcome-bottom b {
+  color: #e84c20;
+  margin: 0 10px;
+}
+.catalog-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+}
+.catalog-pagination .button {
+  min-width: 100px;
+}
+.activity-more {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 18px;
+  font-size: 12px;
+}
+.ticker-info {
+  display: flex !important;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+@keyframes welcome-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(1deg);
+  }
+}
+@media (min-width: 1600px) {
+  .welcome-fighter {
+    width: 37%;
+  }
+  .welcome-wordmark {
+    font-size: 360px;
+  }
+}
+@media (max-width: 1050px) {
+  .welcome-center {
+    max-width: 340px;
+    margin-top: 215px;
+  }
+  .welcome {
+    min-height: 730px;
+  }
+  .welcome-fighter {
+    top: 280px;
+    width: 36%;
+  }
+  .welcome-fly {
+    left: -6%;
+  }
+  .welcome-astra {
+    right: -6%;
+  }
+  .welcome-fighter img {
+    height: 270px;
+  }
+  .welcome-side-label {
+    top: 250px;
+    font-size: 23px;
+  }
+  .welcome-bottom > span:last-child {
+    display: none;
+  }
+}
+@media (max-width: 700px) {
+  .welcome {
+    margin-top: 15px;
+    min-height: 0;
+    border-radius: 10px;
+  }
+  .welcome-topline {
+    padding: 16px 13px;
+    font-size: 8px;
+    letter-spacing: 0.3px;
+    gap: 6px;
+  }
+  .welcome-topline > span {
+    gap: 5px;
+  }
+  .welcome-topline svg {
+    width: 13px;
+  }
+  .welcome-divider {
+    margin: 0 1px;
+  }
+  .welcome-wordmark {
+    top: 63px;
+    font-size: clamp(175px, 43vw, 280px);
+  }
+  .welcome-wordmark > span {
+    font-size: 16px;
+    right: -20px;
+  }
+  .welcome-fighter {
+    top: 175px;
+    width: 47%;
+  }
+  .welcome-fly {
+    left: 0;
+  }
+  .welcome-astra {
+    right: 0;
+  }
+  .welcome-fighter img {
+    height: 145px;
+  }
+  .welcome-side-label {
+    top: 132px;
+    font-size: 22px;
+  }
+  .welcome-side-label small {
+    font-size: 7px;
+  }
+  .welcome-speech {
+    top: 5%;
+    left: 5%;
+    right: 5%;
+    font-size: 8px;
+    padding: 8px;
+  }
+  .welcome-center {
+    max-width: 360px;
+    margin: 298px auto 54px;
+    padding: 0 18px;
+  }
+  .welcome-center h1 {
+    font-size: 38px;
+    margin: 9px 0;
+  }
+  .welcome-center > p {
+    font-size: 10px;
+    margin: 11px 0 15px;
+  }
+  .welcome-edition {
+    font-size: 8px;
+  }
+  .welcome-bottom {
+    font-size: 7px;
+    padding: 13px 10px;
+    gap: 8px;
+  }
+  .welcome-bottom b {
+    margin: 0 4px;
+  }
+  .welcome-contract {
+    padding: 10px;
+  }
+  .welcome-enter {
+    margin-top: 20px;
+  }
+  .catalog-pagination {
+    gap: 10px;
+    font-size: 10px;
+  }
+  .catalog-pagination .button {
+    min-width: 0;
+  }
+  .ticker-info {
+    font-size: 8px;
+    padding: 0 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .welcome-fighter img {
+    animation: none;
+  }
+  .welcome-fighter img {
+    transition: none;
+  }
+}
+[data-motion="paused"] .welcome-fighter img {
+  animation: none;
+}

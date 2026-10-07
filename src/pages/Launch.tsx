@@ -5,7 +5,7 @@ import {
   Upload,
   Check,
   LoaderCircle,
-  FlaskConical,
+  ArrowUpRight,
   LockKeyhole,
   ChevronLeft,
   Plus,
@@ -121,12 +121,8 @@ export default function Launch() {
     setStep(2);
   }
   async function launch() {
-    if (!ui.wallet) {
-      ui.openWallet();
-      return;
-    }
     if (!ack) {
-      setError("Confirm the demo and fee destination before launching.");
+      setError("Confirm your draft details before continuing.");
       return;
     }
     setBusy(true);
@@ -158,14 +154,14 @@ export default function Launch() {
               <Check size={25} />
             </span>
           </div>
-          <span className="eyebrow">Local demo launch complete</span>
+          <span className="eyebrow">YOUR LAUNCH DRAFT IS READY</span>
           <h1>
             A new problem
             <br />
             has entered the chat
           </h1>
           <p>
-            <b>${created.ticker}</b> joined{" "}
+            <b>${created.ticker}</b> is ready to support{" "}
             {created.faction === "fly" ? "Neuro Fly" : "GPT-6 Astra"} in event
             001.
           </p>
@@ -174,16 +170,21 @@ export default function Launch() {
               ? "Saved in this browser and listed in Tokens."
               : "Available for this session. Storage is unavailable; a reload will lose this record."}
           </p>
-          <div className="notice">
-            <FlaskConical size={19} />
-            <span>
-              No token was deployed onchain. No signature or transaction was
-              requested.
-            </span>
-          </div>
+          <p className="muted">
+            Next: create your token on pump.fun. Transfer your name, ticker,
+            artwork and lore from this draft; pump.fun opens with an empty form.
+          </p>
           <div className="button-row">
+            <a
+              className="button primary"
+              href="https://pump.fun/create"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Continue on pump.fun <ArrowUpRight size={17} />
+            </a>
             <Link className="button primary" to={`/tokens/${created.id}`}>
-              Meet your token
+              View saved draft
             </Link>
             <Link className="button" to="/arena/season-01">
               Visit the arena
@@ -221,7 +222,7 @@ export default function Launch() {
                 }
               }}
             >
-              <span>02</span> Read the fine print
+              <span>02</span> Review launch draft
             </button>
           </div>
           {step === 1 ? (
@@ -389,7 +390,7 @@ export default function Launch() {
           ) : (
             <div className="launch-review">
               <span className="eyebrow">One last vibe check</span>
-              <h2>Know where the fees go</h2>
+              <h2>Ready for the launchpad</h2>
               <dl className="review-list">
                 <div>
                   <dt>Token</dt>
@@ -410,22 +411,18 @@ export default function Launch() {
                   </dd>
                 </div>
                 <div>
-                  <dt>Mode</dt>
-                  <dd>Local demo</dd>
+                  <dt>Network</dt>
+                  <dd>Solana / pump.fun</dd>
                 </div>
                 <div>
-                  <dt>Gas or payment</dt>
-                  <dd>None</dd>
+                  <dt>Next step</dt>
+                  <dd>Create on pump.fun</dd>
                 </div>
               </dl>
-              <div className="notice">
-                <FlaskConical size={20} />
-                <span>
-                  Creator fees are simulated and attributed to this side’s pool.
-                  The production pons launch and fee collector are not
-                  connected.
-                </span>
-              </div>
+              <p className="micro muted">
+                Save your token brief here, then complete creation on pump.fun.
+                Arena fee routing requires a verified mint and recipient setup.
+              </p>
               <label className="checkbox-label">
                 <input
                   type="checkbox"
@@ -433,9 +430,8 @@ export default function Launch() {
                   onChange={(e) => setAck(e.target.checked)}
                 />
                 <span>
-                  I understand this creates a local demo record, not an onchain
-                  token, and the selected side receives its simulated
-                  contributions.
+                  I have reviewed my token details and chosen side. Save my
+                  launch draft.
                 </span>
               </label>
               {error && (
@@ -453,10 +449,8 @@ export default function Launch() {
                     <LoaderCircle size={17} className="spin" /> Creating your
                     problem
                   </>
-                ) : ui.wallet ? (
-                  "Create demo token"
                 ) : (
-                  "Choose a pilot to continue"
+                  "Save launch draft"
                 )}
               </button>
               <button
@@ -511,7 +505,7 @@ export default function Launch() {
           <div className="launch-fineprint">
             <LockKeyhole size={16} />
             <p>
-              No payment. No signing. Your draft stays in this browser.{" "}
+              Prepare on FVF. Create on pump.fun.{" "}
               <Link to="/docs#launch">How launches work</Link>
             </p>
           </div>

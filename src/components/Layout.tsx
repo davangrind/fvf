@@ -271,7 +271,7 @@ export function Layout() {
               aria-label={
                 ui.wallet
                   ? ui.wallet.kind === "demo"
-                    ? "Demo pilot"
+                    ? "Guest"
                     : "Connected wallet"
                   : "Connect wallet"
               }
@@ -280,7 +280,7 @@ export function Layout() {
               <span>
                 {ui.wallet
                   ? ui.wallet.kind === "demo"
-                    ? "Demo pilot"
+                    ? "Guest"
                     : ui.wallet.label.slice(0, 6) + "..."
                   : "Connect wallet"}
               </span>
@@ -296,7 +296,7 @@ export function Layout() {
           </div>
         </div>
       </header>
-      <div className="ticker" aria-label="Simulated platform updates">
+      <div className="ticker" aria-label="Platform updates">
         <span className="ticker-label">
           <i /> FVF BROADCAST
         </span>
@@ -308,7 +308,7 @@ export function Layout() {
                   <Radio size={13} /> ONE PLATFORM / MANY BAD IDEAS
                 </span>
                 <span>
-                  <Zap size={13} /> LAUNCH ON PONS / FUEL YOUR EVENT
+                  <Zap size={13} /> LAUNCH ON PUMP.FUN / FUEL YOUR EVENT
                 </span>
                 {state.events.slice(0, 3).map((e) => (
                   <span key={e.id}>
@@ -320,15 +320,15 @@ export function Layout() {
             ))}
           </div>
         </div>
-        <Link to="/docs#demo" className="ticker-info">
-          SIMULATED DATA <ArrowUpRight size={12} />
+        <Link to="/docs#data" className="ticker-info">
+          DATA PREVIEW <ArrowUpRight size={12} />
         </Link>
       </div>
       <main id="main" tabIndex={-1}>
         {!demoAdapter.persistenceAvailable && (
           <div className="storage-notice" role="status">
-            SESSION-ONLY DEMO / Browser storage is unavailable. Your changes
-            last for this session.
+            SESSION STORAGE / Browser storage is unavailable. Your changes last
+            for this session.
           </div>
         )}
         <Outlet />
@@ -340,20 +340,13 @@ export function Layout() {
         <div className="footer-copy">
           <strong>FEES FUEL INTERNET CHAOS</strong>
           <p>
-            An independent launchpad concept for{" "}
-            <a
-              href="https://www.ponsfamily.com/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              pons
+            An independent arena for tokens launched on{" "}
+            <a href="https://pump.fun/" target="_blank" rel="noreferrer">
+              pump.fun
             </a>{" "}
-            on Robinhood Chain.
+            on Solana.
           </p>
-          <small>
-            Local demo. No real tokens, trades or payouts. Not affiliated with
-            pons, Robinhood or OpenAI.
-          </small>
+          <small>FVF is independent of pump.fun, Solana and OpenAI.</small>
         </div>
         <div className="footer-links">
           <Link to="/docs#fee-flow">

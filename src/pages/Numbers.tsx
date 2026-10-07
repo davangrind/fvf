@@ -10,6 +10,7 @@ export default function Numbers() {
   const fly = factionStats(s, "fly"),
     astra = factionStats(s, "astra");
   const [faction, setFaction] = useState("all");
+  const [visibleCount, setVisibleCount] = useState(30);
   const [kind, setKind] = useState("all");
   const [frozen, setFrozen] = useState<BattleEvent[] | null>(null);
   const events = (frozen ?? s.events).filter(
@@ -39,7 +40,7 @@ export default function Numbers() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "fvf-demo-activity.json";
+    a.download = "fvf-activity.json";
     a.click();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
@@ -54,7 +55,7 @@ export default function Numbers() {
           </p>
         </div>
         <span className="badge">
-          <i className="live-dot" /> Local simulation
+          <i className="live-dot" /> SOLANA / PUMP.FUN
         </span>
       </div>
       <Metrics />
@@ -144,7 +145,7 @@ export default function Numbers() {
               <button
                 className="icon-button"
                 onClick={download}
-                aria-label="Export demo activity"
+                aria-label="Export activity"
               >
                 <Download size={16} />
               </button>
@@ -154,7 +155,10 @@ export default function Numbers() {
             <select
               aria-label="Filter activity by side"
               value={faction}
-              onChange={(e) => setFaction(e.target.value)}
+              onChange={(e) => {
+                setFaction(e.target.value);
+                setVisibleCount(30);
+              }}
             >
               <option value="all">All sides</option>
               <option value="fly">Neuro Fly</option>
@@ -163,7 +167,10 @@ export default function Numbers() {
             <select
               aria-label="Filter activity by type"
               value={kind}
-              onChange={(e) => setKind(e.target.value)}
+              onChange={(e) => {
+                setKind(e.target.value);
+                setVisibleCount(30);
+              }}
             >
               <option value="all">All incidents</option>
               <option value="fees">Contributions</option>
@@ -174,7 +181,7 @@ export default function Numbers() {
             {frozen && <span className="badge">View paused</span>}
           </div>
           <div className="activity-list">
-            {events.slice(0, 20).map((e) => (
+            {events.slice(0, visibleCount).map((e) => (
               <div className="activity-row" key={e.id}>
                 <span className={`activity-icon ${e.faction}`}>
                   <ActivityIcon size={16} />
@@ -182,7 +189,7 @@ export default function Numbers() {
                 <div>
                   <p>{e.text}</p>
                   <small>
-                    {e.kind} <span>/</span> demo{" "}
+                    {e.kind} <span>/</span> SOL{" "}
                     {e.tokenId && (
                       <Link to={`/tokens/${e.tokenId}`}>View token</Link>
                     )}
@@ -196,6 +203,19 @@ export default function Numbers() {
                 <h3>Suspiciously quiet</h3>
                 <p>No incidents match these filters.</p>
               </div>
+            )}
+          </div>
+          <div className="activity-more">
+            <span>
+              {Math.min(events.length, visibleCount)} of {events.length} records
+            </span>
+            {events.length > visibleCount && (
+              <button
+                className="button"
+                onClick={() => setVisibleCount((n) => n + 30)}
+              >
+                Load more
+              </button>
             )}
           </div>
         </section>
@@ -227,10 +247,10 @@ export default function Numbers() {
             All the usual suspects
           </Link>
           <div className="accounting-note">
-            <h3>A quick reality check</h3>
+            <h3>Follow the creator fees</h3>
             <p>
-              These are cumulative simulated creator fees. They are not trading
-              volume, liquidity, treasury balances or payouts.
+              Creator-fee contributions fuel each side. Trading volume and
+              liquidity are tracked separately.
             </p>
             <Link to="/docs#accounting" className="text-link">
               Read the accounting notes

@@ -60,9 +60,9 @@ export type LaunchResult =
   | { source: "demo"; token: Token; receiptId: string }
   | {
       source: "chain";
-      tokenAddress: `0x${string}`;
-      transactionHash: `0x${string}`;
-      chainId: number;
+      mint: string;
+      signature: string;
+      cluster: "mainnet-beta";
     };
 export interface LaunchAdapter {
   readonly source: "demo" | "chain";

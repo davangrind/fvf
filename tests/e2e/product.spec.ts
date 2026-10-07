@@ -44,7 +44,7 @@ test("global search finds tokens and manual chapters by keyboard", async ({
   const search = page.getByRole("combobox", { name: "Search FVF" });
   await search.fill("BSOD");
   await search.press("Enter");
-  await expect(page).toHaveURL(/tokens\/demo-bsod/);
+  await expect(page).toHaveURL(/tokens\/fvf-bsod/);
   await expect(
     page.getByRole("heading", { name: "Blue Screen", exact: true }),
   ).toBeVisible();
@@ -89,7 +89,7 @@ test("arena separates recruiting events from locked concepts and saves ideas", a
   ).toBeVisible();
 });
 
-test("local launch validates, reviews, persists and is searchable", async ({
+test("launch draft validates, persists and hands off to pump.fun", async ({
   page,
 }) => {
   await page.goto("/launch?faction=astra");
@@ -108,16 +108,12 @@ test("local launch validates, reviews, persists and is searchable", async ({
   );
   await page.getByRole("checkbox").check();
   await page
-    .getByRole("button", { name: "Choose a pilot to continue" })
-    .click();
-  await page.getByRole("button", { name: /Use demo pilot/ }).click();
-  await page
-    .getByRole("button", { name: "Create demo token", exact: true })
+    .getByRole("button", { name: "Save launch draft", exact: true })
     .click();
   await expect(
     page.getByRole("heading", { name: /A new problem/ }),
   ).toBeVisible();
-  await page.getByRole("link", { name: "Meet your token" }).click();
+  await page.getByRole("link", { name: "View saved draft" }).click();
   await expect(
     page.getByRole("heading", { name: "Emotionally Liquid", exact: true }),
   ).toBeVisible();
@@ -131,7 +127,7 @@ test("local launch validates, reviews, persists and is searchable", async ({
   await expect(page.locator("tbody tr")).toHaveCount(1);
   await expect(page.locator("tbody")).toContainText("Emotionally Liquid");
   const data = await page.evaluate(() =>
-    JSON.parse(localStorage.getItem("fvf:demo:v2")!),
+    JSON.parse(localStorage.getItem("fvf:solana:v1")!),
   );
   expect(data.tokens[0]).toMatchObject({
     ticker: "COPE",
@@ -162,25 +158,27 @@ test("artwork checks reject invalid uploads and accept a real image", async ({
   await expect(page.getByRole("alert")).toHaveCount(0);
 });
 
-test("homepage presents the platform and keeps the first event compact", async ({
+test("homepage introduces Solana and gates Swap until the official CA exists", async ({
   page,
 }) => {
   await page.goto("/");
-  await expect(page.locator(".platform-intro")).toContainText(
-    "LAUNCHPAD FOR PONS",
+  await expect(page.locator(".welcome")).toContainText("SOLANA");
+  await expect(page.locator(".welcome-wordmark")).toContainText("FVF");
+  await expect(
+    page.getByRole("button", { name: "SWAP", exact: true }),
+  ).toBeDisabled();
+  await expect(page.locator(".welcome-address")).toContainText(
+    "CONTRACT ADDRESS COMING SOON",
   );
-  await expect(page.locator(".platform-intro h1")).toHaveText(
-    "FEES FUELINTERNET CHAOS",
+  await page.getByRole("button", { name: "Provoke Neuro Fly" }).click();
+  await expect(page.locator(".welcome-speech")).toHaveText(
+    "YOUR RAM LOOKS EDIBLE",
   );
-  await expect(page.locator(".home-page .arena-card")).toHaveCount(1);
-  await expect(page.locator(".home-page .arena")).toHaveCount(0);
-  await expect(page.locator(".event-ticket")).toHaveCount(3);
-  await page.getByRole("link", { name: "Explore arenas", exact: true }).click();
-  await expect(page).toHaveURL(/\/arena$/);
-  await expect(page.locator(".arena-card")).toHaveCount(6);
+  await page.getByRole("link", { name: "ENTER THE FIRST ARENA" }).click();
+  await expect(page).toHaveURL(/arena\/season-01/);
 });
 
-test("original arena progression updates pools, skills and persisted stage", async ({
+test("arena skill tree explains progression and links to the correct launch side", async ({
   page,
 }) => {
   await page.goto("/arena/season-01");
@@ -191,16 +189,11 @@ test("original arena progression updates pools, skills and persisted stage", asy
     .getByRole("button", { name: "Hive mind, locked", exact: true })
     .click();
   await expect(fly.locator(".skill-description")).toContainText("$150,000");
-  await fly.getByRole("button", { name: "Simulate $25K in fees" }).click();
-  await expect(fly.locator("h3")).toHaveText("Hive mind");
-  await expect(fly.locator(".skill-node.unlocked")).toHaveCount(3);
-  await expect(page.locator(".fighter-side.fly")).toHaveClass(/evolution-3/);
-  await expect(page.locator(".arena")).toContainText("$153,420");
-  await page.reload();
-  await expect(fly.locator("h3")).toHaveText("Hive mind");
-  await expect(page.locator(".arena")).toHaveClass(/phase-preparing/);
-  await expect(page.getByRole("button", { name: /Fast-forward/ })).toHaveCount(
-    0,
+  await fly.getByRole("link", { name: "Launch for this side" }).click();
+  await expect(page).toHaveURL(/launch\?faction=fly/);
+  await expect(page.locator(".faction-option.fly")).toHaveAttribute(
+    "aria-pressed",
+    "true",
   );
 });
 
@@ -237,20 +230,24 @@ test("token filters, sorting, layout and empty states work", async ({
   page,
 }) => {
   await page.goto("/tokens");
+  await expect(page.getByLabel("Token pages")).toContainText("Page 1 of 8");
+  await page.getByRole("button", { name: "Next", exact: true }).click();
+  await expect(page.getByLabel("Token pages")).toContainText("Page 2 of 8");
   await page.getByRole("button", { name: "Astra", exact: true }).click();
-  await expect(page.locator("tbody tr")).toHaveCount(6);
+  await expect(page.getByLabel("Token pages")).toContainText("Page 1 of 4");
+  await expect(page.locator("tbody tr")).toHaveCount(30);
   await page.getByLabel("Sort tokens").selectOption("new");
   await expect(page.locator("tbody tr").first()).toContainText(
-    "Ctrl Alt Defeat",
+    "Financially Ruined Potato",
   );
   await page.getByRole("button", { name: "Grid view", exact: true }).click();
-  await expect(page.locator(".token-grid-card")).toHaveCount(6);
+  await expect(page.locator(".token-grid-card")).toHaveCount(30);
   await page.getByRole("textbox", { name: "Search tokens" }).fill("zzzz-no");
   await expect(
     page.getByRole("heading", { name: "No matching tokens" }),
   ).toBeVisible();
   await page.getByRole("button", { name: "Clear filters" }).click();
-  await expect(page.locator(".token-grid-card")).toHaveCount(12);
+  await expect(page.locator(".token-grid-card")).toHaveCount(30);
 });
 
 test("numbers activity filtering, freezing, export and chart controls work", async ({
@@ -263,11 +260,13 @@ test("numbers activity filtering, freezing, export and chart controls work", asy
   ).toHaveAttribute("aria-pressed", "true");
   await page.getByLabel("Filter activity by side").selectOption("astra");
   await page.getByLabel("Filter activity by type").selectOption("fees");
-  await expect(page.locator(".activity-row")).toHaveCount(1);
+  await expect(page.locator(".activity-row")).toHaveCount(30);
+  await page.getByRole("button", { name: "Load more" }).click();
+  await expect(page.locator(".activity-row")).toHaveCount(60);
   await page.getByRole("button", { name: "Pause activity" }).click();
   const download = page.waitForEvent("download");
-  await page.getByRole("button", { name: "Export demo activity" }).click();
-  expect((await download).suggestedFilename()).toBe("fvf-demo-activity.json");
+  await page.getByRole("button", { name: "Export activity" }).click();
+  expect((await download).suggestedFilename()).toBe("fvf-activity.json");
   await page.getByRole("button", { name: "Resume activity" }).click();
   await expect(
     page.getByRole("button", { name: "Pause activity" }),
@@ -279,10 +278,12 @@ test("manual searches full content and explains fee flow interactively", async (
 }) => {
   await page.goto("/docs");
   await expect(page.locator(".manual-chapter")).toHaveCount(24);
-  await page.getByRole("textbox", { name: "Search manual" }).fill("reorg");
+  await page
+    .getByRole("textbox", { name: "Search manual" })
+    .fill("instruction position");
   await expect(page.locator(".manual-chapter")).toHaveCount(1);
   await expect(page.locator(".manual-chapter h2")).toHaveText(
-    "Attribution before celebration",
+    "Accrued is not received",
   );
   await page.getByRole("button", { name: "Clear", exact: true }).click();
   await page.goto("/docs#fee-flow");
@@ -290,26 +291,41 @@ test("manual searches full content and explains fee flow interactively", async (
   await expect(page.locator(".flow-explainer h3")).toHaveText(
     "Fees are attributed",
   );
-  await page.getByLabel("Try an imaginary trading volume").fill("50000");
+  await page.getByLabel("Example trading volume").fill("50000");
   await expect(page.locator(".flow-calculator")).toContainText("$500");
   await expect(page.locator(".flow-calculator")).toContainText(
-    "not a confirmed pons rate",
+    "Check pump.fun for current creator fees",
   );
 });
 
-test("wallet connection only reads accounts and rejection can recover", async ({
+test("Phantom connects without signing and disconnects when its account changes", async ({
   page,
 }) => {
   await page.addInitScript(() => {
-    (window as any).requestedMethods = [];
-    window.ethereum = {
-      request: async ({ method }: { method: string }) => {
-        (window as any).requestedMethods.push(method);
-        if (!(window as any).allowWallet)
-          throw new Error("User rejected the request");
-        return method === "eth_requestAccounts"
-          ? ["0x1234567890123456789012345678901234567890"]
-          : "0x1237";
+    const w = window as any;
+    w.walletCalls = [];
+    w.walletListeners = {};
+    w.phantom = {
+      solana: {
+        isPhantom: true,
+        connect: async () => {
+          w.walletCalls.push("connect");
+          if (!w.allowWallet) throw new Error("User rejected the request");
+          return {
+            publicKey: {
+              toString: () => "So11111111111111111111111111111111111111112",
+            },
+          };
+        },
+        disconnect: async () => {
+          w.walletCalls.push("disconnect");
+        },
+        on: (event: string, fn: Function) => {
+          w.walletListeners[event] = fn;
+        },
+        removeListener: (event: string) => {
+          delete w.walletListeners[event];
+        },
       },
     };
   });
@@ -317,24 +333,25 @@ test("wallet connection only reads accounts and rejection can recover", async ({
   await page
     .getByRole("button", { name: "Connect wallet", exact: true })
     .click();
-  await page
-    .getByRole("button", { name: "Connect browser wallet", exact: false })
-    .click();
+  await page.getByRole("button", { name: /Connect Phantom/ }).click();
   await expect(page.getByRole("alert")).toContainText("User rejected");
   await page.evaluate(() => {
     (window as any).allowWallet = true;
   });
-  await page
-    .getByRole("button", { name: "Connect browser wallet", exact: false })
-    .click();
+  await page.getByRole("button", { name: /Connect Phantom/ }).click();
   await expect(
     page.getByRole("button", { name: "Connected wallet", exact: true }),
   ).toBeVisible();
-  expect(await page.evaluate(() => (window as any).requestedMethods)).toEqual([
-    "eth_requestAccounts",
-    "eth_requestAccounts",
-    "eth_chainId",
+  expect(await page.evaluate(() => (window as any).walletCalls)).toEqual([
+    "connect",
+    "connect",
   ]);
+  await page.evaluate(() =>
+    (window as any).walletListeners.accountChanged(null),
+  );
+  await expect(
+    page.getByRole("button", { name: "Connect wallet", exact: true }),
+  ).toBeVisible();
 });
 
 test("reduced motion, legacy routes and missing records stay usable", async ({
@@ -365,12 +382,14 @@ test("corrupt storage recovers without crashing the interface", async ({
   page,
 }) => {
   await page.addInitScript(() =>
-    localStorage.setItem("fvf:demo:v2", "{broken"),
+    localStorage.setItem("fvf:solana:v1", "{broken"),
   );
   await page.goto("/");
-  await expect(page.getByRole("heading", { name: /FEES FUEL/ })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: /THE INTERNET/ }),
+  ).toBeVisible();
   await page.goto("/tokens");
-  await expect(page.locator("tbody tr")).toHaveCount(12);
+  await expect(page.locator("tbody tr")).toHaveCount(30);
 });
 
 test("all shipped headings avoid trailing periods and symbols remain SVG", async ({
@@ -384,7 +403,7 @@ test("all shipped headings avoid trailing periods and symbols remain SVG", async
     "/numbers",
     "/launch",
     "/docs",
-    "/tokens/demo-brain",
+    "/tokens/fvf-brain",
   ]) {
     await page.goto(path);
     await expect(page.locator("h1")).toBeVisible();
@@ -395,6 +414,9 @@ test("all shipped headings avoid trailing periods and symbols remain SVG", async
           .filter((t) => t && /\.$/.test(t)),
       ),
     ).toEqual([]);
+    expect(await page.locator("body").innerText()).not.toMatch(
+      /\bPONS\b|Robinhood|\bEVM\b|simulat|\bdemo\b/i,
+    );
     expect(await page.locator("main").innerText()).not.toMatch(
       /[\u{1F300}-\u{1FAFF}\u2700-\u27BF\u2190-\u21FF]/u,
     );

@@ -69,7 +69,7 @@ export function Arena({ expanded = false }: { expanded?: boolean }) {
         <span className="arena-season">
           SEASON 001 <b>/</b> BIOLOGY VS. TECHNOLOGY
         </span>
-        <span className="demo-tag">DEMO</span>
+        <span className="demo-tag">SOLANA</span>
       </div>
       <div className="arena-stage">
         <div className="arena-countdown preparation-card">
@@ -235,7 +235,7 @@ export function Arena({ expanded = false }: { expanded?: boolean }) {
         {phase === "finished" && state.result && (
           <div className="battle-overlay result-overlay" role="status">
             <Trophy size={34} />
-            <span className="eyebrow">SIMULATED FINAL / NO PAYOUTS</span>
+            <span className="eyebrow">ROUND COMPLETE</span>
             <h2>
               {state.result.winner === "draw"
                 ? "MUTUAL EMBARRASSMENT"
@@ -246,7 +246,7 @@ export function Arena({ expanded = false }: { expanded?: boolean }) {
               className="button primary"
               onClick={() => demoAdapter.restart()}
             >
-              <RotateCcw size={17} /> Restart demo round
+              <RotateCcw size={17} /> Restart round
             </button>
           </div>
         )}
@@ -304,8 +304,8 @@ export function Arena({ expanded = false }: { expanded?: boolean }) {
       </div>
       <div className="arena-bottom">
         <span>
-          <span className="dot-orange" /> Simulated pools & power. Real bad
-          intentions.
+          <span className="dot-orange" /> Creator fees. Strong opinions. Very
+          bad intentions.
         </span>
         <Link to={expanded ? "/docs#first-arena" : "/arena/season-01"}>
           {expanded ? "Battle rules" : "Enter the full arena"}{" "}

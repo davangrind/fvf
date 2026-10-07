@@ -1,55 +1,58 @@
-import { useEffect, useState } from "react";
-import { ArrowUpRight, FlaskConical, Wallet } from "lucide-react";
+﻿import { useEffect, useState } from "react";
+import { ArrowUpRight, UserRound, Wallet } from "lucide-react";
 import { useUI } from "../state";
 import { Modal } from "./Modal";
-interface Provider {
-  request(args: { method: string; params?: unknown[] }): Promise<unknown>;
+interface SolanaProvider {
+  isPhantom?: boolean;
+  connect(): Promise<{ publicKey: { toString(): string } }>;
+  disconnect(): Promise<void>;
   on?: (event: string, fn: (value: unknown) => void) => void;
   removeListener?: (event: string, fn: (value: unknown) => void) => void;
 }
 declare global {
   interface Window {
-    ethereum?: Provider;
+    phantom?: { solana?: SolanaProvider };
+    solana?: SolanaProvider;
   }
 }
+const provider = () =>
+  window.phantom?.solana ??
+  (window.solana?.isPhantom ? window.solana : undefined);
 export function WalletModal() {
   const ui = useUI();
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
   useEffect(() => {
-    const p = window.ethereum;
+    const p = provider();
     if (!p || ui.wallet?.kind !== "browser") return;
-    const disconnect = () => {
-      ui.setWallet(null);
-    };
-    p.on?.("accountsChanged", disconnect);
-    p.on?.("chainChanged", disconnect);
+    const disconnect = () => ui.setWallet(null);
+    p.on?.("accountChanged", disconnect);
+    p.on?.("disconnect", disconnect);
     return () => {
-      p.removeListener?.("accountsChanged", disconnect);
-      p.removeListener?.("chainChanged", disconnect);
+      p.removeListener?.("accountChanged", disconnect);
+      p.removeListener?.("disconnect", disconnect);
     };
   }, [ui.wallet?.kind, ui.setWallet]);
   async function connect() {
     setError("");
-    const provider = window.ethereum;
-    if (!provider) {
+    const p = provider();
+    if (!p) {
       setError(
-        "No browser wallet detected. Install an EVM wallet, or use the demo pilot below.",
+        "Phantom was not detected. Open FVF in Phantom or install the browser extension.",
       );
       return;
     }
     setBusy(true);
     try {
-      const accounts = (await provider.request({
-        method: "eth_requestAccounts",
-      })) as string[];
-      const chainId = (await provider.request({
-        method: "eth_chainId",
-      })) as string;
-      if (!accounts[0]) throw new Error("No account selected.");
-      ui.setWallet({ kind: "browser", label: accounts[0], chainId });
+      const { publicKey } = await p.connect();
+      if (!publicKey) throw new Error("No Solana account selected.");
+      ui.setWallet({
+        kind: "browser",
+        label: publicKey.toString(),
+        network: "solana",
+      });
       ui.closeWallet();
-      ui.toast("Wallet connected. Launches still run in demo mode.");
+      ui.toast("Solana wallet connected");
     } catch (e) {
       setError(
         e instanceof Error ? e.message : "Wallet connection was cancelled.",
@@ -58,60 +61,64 @@ export function WalletModal() {
       setBusy(false);
     }
   }
+  async function disconnect() {
+    try {
+      if (ui.wallet?.kind === "browser") await provider()?.disconnect();
+    } catch {
+      /* Clear the local session even when the extension is unavailable. */
+    }
+    ui.setWallet(null);
+    ui.closeWallet();
+  }
   return (
     <Modal
       open={ui.walletOpen}
       onClose={ui.closeWallet}
-      title={ui.wallet ? "Pilot connected" : "Identify yourself, human"}
+      title={ui.wallet ? "You're in" : "Connect to the chaos"}
     >
       {ui.wallet ? (
         <>
           <p className="wallet-address">{ui.wallet.label}</p>
           <p>
-            {ui.wallet.kind === "demo"
-              ? "Demo pilot · local session"
-              : `Browser wallet · chain ${parseInt(ui.wallet.chainId ?? "0", 16)}`}
-            <br />
-            This arena uses simulated data.
+            {ui.wallet.kind === "demo" ? "Guest session" : "Phantom / Solana"}
           </p>
           <button
             className="button dark full"
-            onClick={() => {
-              ui.setWallet(null);
-              ui.closeWallet();
-            }}
+            onClick={() => void disconnect()}
           >
             Disconnect
           </button>
         </>
       ) : (
         <>
-          <p>
-            No funds needed. Get a demo identity and recruit your first token.
-          </p>
+          <p>Your wallet. Your tokens. Your questionable allegiance.</p>
+          <button
+            className="wallet-option"
+            disabled={busy}
+            onClick={() => void connect()}
+          >
+            <Wallet />
+            <span>
+              <strong>
+                {busy ? "Waiting for wallet..." : "Connect Phantom"}
+              </strong>
+              <small>Solana wallet / account connection only</small>
+            </span>
+            <ArrowUpRight />
+          </button>
           <button
             className="wallet-option"
             disabled={busy}
             onClick={() => {
-              ui.setWallet({ kind: "demo", label: "DEMO PILOT #0042" });
+              ui.setWallet({ kind: "demo", label: "GUEST #0042" });
               ui.closeWallet();
-              ui.toast("Demo pilot online. Questionable judgment confirmed.");
+              ui.toast("Guest session ready");
             }}
           >
-            <FlaskConical />
+            <UserRound />
             <span>
-              <strong>Use demo pilot</strong>
-              <small>No wallet. No signatures. Just chaos.</small>
-            </span>
-            <ArrowUpRight />
-          </button>
-          <button className="wallet-option" disabled={busy} onClick={connect}>
-            <Wallet />
-            <span>
-              <strong>
-                {busy ? "Waiting for wallet…" : "Connect browser wallet"}
-              </strong>
-              <small>Read your account. No transaction requested.</small>
+              <strong>Continue as guest</strong>
+              <small>Explore arenas and prepare a token draft</small>
             </span>
             <ArrowUpRight />
           </button>
@@ -121,8 +128,14 @@ export function WalletModal() {
             </p>
           )}
           <p className="micro muted">
-            Connecting a real wallet does not enable onchain launches in this
-            MVP.
+            Connecting does not request a signature or move funds.{" "}
+            <a
+              href="https://phantom.com/download"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Get Phantom
+            </a>
           </p>
         </>
       )}

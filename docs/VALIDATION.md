@@ -1,3 +1,21 @@
+# Solana edition / v0.4 validation
+
+Checked locally on 2026-10-07.
+
+- Production build: passed after final source changes
+- Unit tests: 26 passed, including mint validation, catalog integrity and legacy saved-token migration
+- E2E matrix: 60 scenarios exercised across desktop/mobile Chromium and WebKit; the initial run passed 56. A copy audit exposed legacy demo-prefixed record IDs and a broad regex matching the word response. Both were fixed; all 12 affected route/search/draft checks passed on rerun. The updated homepage checks also passed on all four browsers.
+- Responsive check: Home, Tokens, Numbers and the first arena at 320, 390, 600, 768, 1024 and 1440 px; 24 checks, no overflow or page errors
+- Homepage accessibility: axe WCAG A/AA checks in light and dark themes; no detected violations
+- Configured-CA check: isolated local server with a valid-format mint; exact pump.fun URL, clipboard contents and 320 px layout passed. No swap page was opened and no transaction was requested.
+- Empty CA: Swap and Copy disabled; no fabricated address shown
+
+The preview dataset remains identified by one global source link and export metadata. Actual fee ingestion and direct minting are not connected. Phantom checks use an injected Solana provider; no funds were used.
+
+## Historical v0.3 validation
+
+The report below belongs to the preceding release.
+
 # Version 3 validation
 
 Completed 2026-09-20 in the Windows workspace. Browser checks used headless Chromium and WebKit, each with desktop and iPhone 13 emulation. This does not claim testing on physical Apple hardware or the Safari application.

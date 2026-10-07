@@ -8,13 +8,13 @@ export default function TokenDetail() {
   const { id } = useParams();
   const s = useBattle();
   const ui = useUI();
-  const t = s.tokens.find((t) => t.id === id);
+  const t = s.tokens.find((t) => t.id === id?.replace(/^demo-/, "fvf-"));
   if (!t)
     return (
       <div className="page empty-state">
         <TopicIcon />
         <h1>This token escaped containment</h1>
-        <p>It may belong to another browser’s local demo.</p>
+        <p>This token is not in the current catalog.</p>
         <Link className="button primary" to="/tokens">
           Back to tokens
         </Link>
@@ -30,7 +30,7 @@ export default function TokenDetail() {
       <div className="token-detail-heading">
         <TokenAvatar token={t} />
         <div>
-          <span className="eyebrow">Local demo token</span>
+          <span className="eyebrow">SOLANA / PUMP.FUN</span>
           <h1>{t.name}</h1>
           <span className="mono">${t.ticker}</span>
         </div>
@@ -44,7 +44,7 @@ export default function TokenDetail() {
           <p>{t.description}</p>
           <div className="token-detail-stats">
             <div>
-              <small>Simulated market cap</small>
+              <small>Market cap</small>
               <strong>{money(t.marketCap)}</strong>
             </div>
             <div>
@@ -52,7 +52,7 @@ export default function TokenDetail() {
               <strong>{money(t.contribution)}</strong>
             </div>
             <div>
-              <small>Illustrative 24h change</small>
+              <small>24h change</small>
               <strong className={t.change < 0 ? "negative" : "positive"}>
                 {t.change > 0 ? "+" : ""}
                 {t.change}%
@@ -65,16 +65,16 @@ export default function TokenDetail() {
           </div>
           <div className="record-id">
             <span>
-              <small>Local record ID / not a contract address</small>
+              <small>FVF record ID</small>
               <code>{t.id}</code>
             </span>
             <button
               className="icon-button"
-              aria-label="Copy local token ID"
+              aria-label="Copy token record ID"
               onClick={() => {
                 void navigator.clipboard
                   .writeText(t.id)
-                  .then(() => ui.toast("Local record ID copied"))
+                  .then(() => ui.toast("Record ID copied"))
                   .catch(() =>
                     ui.toast(
                       "Clipboard unavailable. Select the ID to copy it.",
@@ -115,7 +115,7 @@ export default function TokenDetail() {
               <div className="activity-row" key={e.id}>
                 <div>
                   <p>{e.text}</p>
-                  <small>demo / {e.kind}</small>
+                  <small>{e.kind}</small>
                 </div>
                 <time>{age(e.at)}</time>
               </div>
@@ -136,7 +136,7 @@ export default function TokenDetail() {
             {stats.pool
               ? ((t.contribution / stats.pool) * 100).toFixed(1)
               : "0"}
-            % of its side’s simulated creator-fee pool.
+            % of its side’s creator-fee pool.
           </p>
           <div className="stage-progress">
             <span

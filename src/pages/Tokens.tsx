@@ -10,6 +10,7 @@ export default function Tokens() {
   const [query, setQuery] = useState("");
   const [faction, setFaction] = useState("all");
   const [sort, setSort] = useState("fees");
+  const [page, setPage] = useState(1);
   const [grid, setGrid] = useState(false);
   const tokens = useMemo(
     () =>
@@ -28,6 +29,9 @@ export default function Tokens() {
         ),
     [s.tokens, query, faction, sort],
   );
+  const pages = Math.max(1, Math.ceil(tokens.length / 30));
+  const current = Math.min(page, pages);
+  const visible = tokens.slice((current - 1) * 30, current * 30);
   return (
     <div className="page">
       <div className="page-heading heading-row">
@@ -42,7 +46,7 @@ export default function Tokens() {
       </div>
       <div className="token-summary">
         <span>
-          <b>{s.tokens.length}</b> local recruits
+          <b>{s.tokens.length}</b> tokens on Solana
         </span>
         <span>
           <b>
@@ -53,7 +57,7 @@ export default function Tokens() {
           </b>{" "}
           fees contributed
         </span>
-        <span className="badge">Simulated data</span>
+        <span className="badge">SOL / PUMP.FUN</span>
       </div>
       <section className="panel">
         <div className="token-filters">
@@ -63,7 +67,10 @@ export default function Tokens() {
               aria-label="Search tokens"
               placeholder="Search name or ticker"
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={(e) => {
+                setQuery(e.target.value);
+                setPage(1);
+              }}
             />
             {query && (
               <button className="text-button" onClick={() => setQuery("")}>
@@ -81,7 +88,10 @@ export default function Tokens() {
                 key={id}
                 aria-pressed={faction === id}
                 className={faction === id ? "active" : ""}
-                onClick={() => setFaction(id)}
+                onClick={() => {
+                  setFaction(id);
+                  setPage(1);
+                }}
               >
                 {label}
               </button>
@@ -90,7 +100,10 @@ export default function Tokens() {
           <select
             aria-label="Sort tokens"
             value={sort}
-            onChange={(e) => setSort(e.target.value)}
+            onChange={(e) => {
+              setSort(e.target.value);
+              setPage(1);
+            }}
           >
             <option value="fees">Most fees</option>
             <option value="cap">Market cap</option>
@@ -117,7 +130,7 @@ export default function Tokens() {
         </div>
         {grid ? (
           <div className="token-grid">
-            {tokens.map((t, i) => (
+            {visible.map((t, i) => (
               <Link
                 className="token-grid-card"
                 to={`/tokens/${t.id}`}
@@ -168,8 +181,27 @@ export default function Tokens() {
             )}
           </div>
         ) : (
-          <TokenTable tokens={tokens} />
+          <TokenTable tokens={visible} offset={(current - 1) * 30} />
         )}
+        <nav className="catalog-pagination" aria-label="Token pages">
+          <button
+            className="button"
+            disabled={current === 1}
+            onClick={() => setPage(current - 1)}
+          >
+            Previous
+          </button>
+          <span>
+            Page {current} of {pages}
+          </span>
+          <button
+            className="button"
+            disabled={current === pages}
+            onClick={() => setPage(current + 1)}
+          >
+            Next
+          </button>
+        </nav>
         <div className="panel-footnote">
           <span>
             {tokens.length} of {s.tokens.length} tokens
@@ -177,10 +209,6 @@ export default function Tokens() {
           <span>All tokens currently support experiment 001</span>
         </div>
       </section>
-      <p className="page-note">
-        Market caps, changes and sparklines are illustrative. Creator-fee
-        contributions reflect this browser’s simulation.
-      </p>
     </div>
   );
 }

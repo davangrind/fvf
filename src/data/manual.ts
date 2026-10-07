@@ -13,16 +13,9 @@ export const manualChapters: ManualChapter[] = [
     title: "A serious guide to unserious things",
     summary: "FVF in one minute",
     paragraphs: [
-      "FeesVFees is a launchpad concept where tokens pick a side in internet spectacles. Instead of a token existing in isolation, its creator fees help a character, team or other participant develop inside a shared event. The token gives its community a home; the arena gives those communities something ridiculous to rally around.",
-      "FVF is the platform. Neuro Fly versus GPT-6 Astra is its first experiment. Future events can have two, three or four participants, entirely different art, and their own rules. A future card is a concept, not an open market or a promise of a launch date.",
-      "This release is an interactive local demo. You can create a token record, follow its contribution, explore event progression and explore the numbers without spending anything. There is no production launch, trading, settlement or payout in this build.",
-    ],
-    bullets: [
-      "Launch gives a token an identity and a side",
-      "Tokens lists every local recruit",
-      "Arena is the directory of current and planned events",
-      "Numbers explains the pools and activity",
-      "This manual explains what happens and what does not",
+      "FeesVFees brings Solana tokens into shared internet spectacles. Communities choose a side; creator-fee contributions fuel the arena. A token gets a home, a rivalry and a reason for its community to keep watching.",
+      "FVF is the platform. Neuro Fly versus GPT-6 Astra is event 001. Future events can have two, three or four participants, their own aesthetics and entirely different rules. The directory separates open preparation from planned arenas.",
+      "Start on Home, explore the token catalog, pick an arena and read its rules. Launch helps you prepare a token brief before continuing to pump.fun.",
     ],
   },
   {
@@ -31,9 +24,9 @@ export const manualChapters: ManualChapter[] = [
     title: "Your first five minutes",
     summary: "A guided lap around FVF",
     paragraphs: [
-      "Begin with the homepage for a platform overview, fee totals and leading tokens. The Arena directory shows the first open event alongside planned two-, three- and four-sided concepts. Planned events cannot accept tokens or contributions.",
-      "Open Neuro Fly versus GPT-6 Astra to see its own scene, fee pools, supporters and evolution. Click a fighter for a reaction, inspect its skills or use the labelled demo fee button to see what a contribution changes. Sound is optional.",
-      "Launch a local token, review its event and side, and open its profile. You can find it again through Tokens or global search. Visit Numbers to inspect fee history and activity across the currently available platform data.",
+      "The welcome screen introduces FVF and the first rivalry. Its central CA card is reserved for the official FVF Solana mint. Swap opens that specific mint on pump.fun once its address has been announced.",
+      "Explore Tokens by name, ticker, side, market cap or contributed fees. Switch between the table and cards, then use Previous and Next to move through the catalog. Each token links to its profile and chosen arena.",
+      "Open the first arena to inspect the fighters, fee pools, stages and skills. Click a character for a response. Optional sound, night mode and motion controls are available across the site.",
     ],
   },
   {
@@ -42,20 +35,20 @@ export const manualChapters: ManualChapter[] = [
     title: "One platform, many questionable events",
     summary: "How the arena directory works",
     paragraphs: [
-      "Every event has an identity, participants and a lifecycle. The directory separates a recruiting event from a planned concept. A locked card can be opened to read its lore and saved in this browser, but it cannot receive tokens or fees. Saving is a local bookmark, not a subscription.",
-      "The first event is a two-sided laboratory rivalry. The Touch Grass Incident is a proposed duel. The Last Brain Cell and 3 AM Fridge Politics propose three contenders. Council of Bad Advice proposes four. They demonstrate the breadth of the platform, not functioning additional markets.",
-      "Production event rules must define who can join, when attribution starts, when it ends and how outcomes are resolved. Different event formats do not automatically share a winning formula. Those rules need to be published before contributions count.",
+      "Every arena groups a set of participants around a shared story. The arena defines its sides, progression, preparation state and eventual resolution rules. A token can support a participant without becoming the platform's entire identity.",
+      "Neuro Fly versus GPT-6 Astra is the first open preparation room. The Touch Grass Incident, The Last Brain Cell, Council of Bad Advice and other proposed events are locked until their rules and launch details are ready.",
+      "A planned card opens its lore and can be bookmarked in your browser. A bookmark is a personal preference, not a reservation, investment or registration for an upcoming launch.",
     ],
   },
   {
-    id: "demo",
+    id: "data",
     group: "Start here",
-    title: "What is real in this demo",
-    summary: "The line between a working interface and a working protocol",
+    title: "Data sources and availability",
+    summary: "How to read the current release",
     paragraphs: [
-      "The navigation, forms, local token creation, search, filters, theme preferences, charts, skill previews and interactive characters work in your browser. Fee contributions, market caps, percentage changes, activity and the starting history are simulated. Dollar values illustrate the interface; they are not live quotes or redeemable balances.",
-      "A demo launch creates a local record with zero initial market cap and zero contributed fees. It does not mint a contract, charge gas or return a transaction hash. The seed tokens and their starting metrics are fictional. The simulator adds a small contribution every seven seconds while the tab is visible.",
-      "Browser-wallet connection requests account access and reads the chain ID. It never requests a signature or a transaction. Connecting a wallet does not change the launch mode. No rewards, betting positions, guarantees or prize claims exist in this demo.",
+      "The current catalog, market caps, percentage changes, pool history and activity are a generated preview dataset. They are not a live Solana feed, verified transactions, redeemable balances or confirmed launches. The DATA PREVIEW link beside the broadcast identifies this source across the site.",
+      "The interface includes 240 catalog tokens, over 480 activity records and a week of starting fee history. Browser activity extends that dataset. Financial-looking numbers remain preview values even when the page is open or an arena is marked live; the arena badge describes the available interactive page.",
+      "Launch saves a brief in this browser. Actual mint creation takes place on pump.fun, where you review its current terms and wallet request. Fee routing and indexing are not connected in this release. The FVF Swap link stays disabled until a valid official mint is configured. Connecting Phantom only requests account access.",
     ],
   },
   {
@@ -64,9 +57,9 @@ export const manualChapters: ManualChapter[] = [
     title: "Where the fees go",
     summary: "The whole idea, without the fog machine",
     paragraphs: [
-      "The product concept is: a token joins an event; trading produces creator fees under the launch protocol; attributable fees reach the intended recipient; the event records a contribution; the appropriate participant progresses. Each step is distinct and needs its own evidence in production.",
-      "Trading volume, trading liquidity, token market cap and creator fees are different quantities. The pool figures represent cumulative creator-fee contributions in this demo. It does not mean that trading liquidity has been removed from a pool or sent into a game.",
-      "The interactive diagram below uses an assumed 1% rate to explain multiplication. It is not a quote of pons fees. Production fee rates, recipient permissions, settlement assets and claim mechanics must be obtained from the verified deployment and reflected accurately in the interface.",
+      "The intended path is token creation, trading, creator fees, verified attribution and arena progression. Each step represents a separate operation. A trade does not become an FVF contribution merely because a token's description mentions an arena.",
+      "pump.fun distinguishes creator fees from protocol fees and liquidity-provider fees. Rates vary with market conditions, market stage and the applicable fee schedule. Use the current official fee page for the token you are examining.",
+      "The calculator below uses an assumed 1% rate to explain the relationship between volume and fees. It is a worked example, not a current quote. Trading volume, market capitalization, liquidity and a participant's cumulative fee pool are different quantities.",
     ],
   },
   {
@@ -75,9 +68,9 @@ export const manualChapters: ManualChapter[] = [
     title: "Attribution before celebration",
     summary: "Which token fed which side",
     paragraphs: [
-      "A contribution needs a token identity, event identity, participant, amount, denomination, source and timestamp. In the demo, the simulator chooses an existing token and adds its amount to that token’s contribution. The faction pool is the sum of the contributions of its tokens.",
-      "The same attribution must be retained when funds share a recipient in production. A treasury balance alone cannot tell you which token funded which event. Transfers need to be reconciled with fee claims and protocol events, with duplicate processing prevented.",
-      "The Numbers page groups contributions by side and lists source activity. Opening a token shows that token’s own contribution. A real indexer would need confirmation handling, reorg recovery, asset conversion rules and a clear explanation of corrections.",
+      "A contribution needs a Solana mint, event, participant, verified recipient, amount, denomination and source transaction. Names and tickers are not unique and cannot establish a token's identity or fee destination.",
+      "The production registry must verify the mint and relevant fee recipient before accepting a token. An indexer then links eligible fee transfers to the registered participant, with duplicate protection and a confirmation policy.",
+      "If recipient permissions or destinations change, attribution needs to stop or be revalidated. Publishing the source and accounting state makes the fee history understandable and reviewable.",
     ],
   },
   {
@@ -86,9 +79,9 @@ export const manualChapters: ManualChapter[] = [
     title: "Accrued is not received",
     summary: "Four words that save a lot of confusion",
     paragraphs: [
-      "Accrued fees are fees recorded as earned by the protocol. Claimable fees can be collected under its rules. Claimed fees have left that accounting position. Received funds have arrived at the expected destination and been verified. Those are separate stages, not synonyms.",
-      "The current pool figures deliberately represent simulated cumulative contributions. They do not assert a verified treasury balance. In production, the display must choose and label the accounting stage that qualifies for event progression. A pending claim should not silently appear as a received contribution.",
-      "If a fee arrives in a token denomination rather than the intended native asset, the system needs an explicit handling and valuation rule. No automatic conversion or exchange integration has been implemented here. A dollar equivalent would also need a timestamped pricing source.",
+      "Accrued fees are not necessarily claimed fees. Claimed fees are not necessarily funds received by the participant's destination. FVF needs to define the accounting stage that counts toward progression for each event.",
+      "Keep original asset quantities and timestamps alongside any USD conversion. Store SOL values as integer lamports and SPL amounts in the mint's base units. Price conversions require a named source and observation time.",
+      "A production ledger must identify transfers by signature and instruction position, handle retries without double counting and reconcile indexed totals against the chain. A pool visualization is a view of that ledger, not an independent proof of funds.",
     ],
   },
   {
@@ -97,9 +90,9 @@ export const manualChapters: ManualChapter[] = [
     title: "Reading the fee pools",
     summary: "Cumulative contributions and event progress",
     paragraphs: [
-      "Each side has a creator-fee pool equal to the sum of contributions attributed to its tokens. The first arena displays the exact pool total, supporting-token count and power index. Those values belong to this event; future events can define their own progression rules.",
-      "The shared split bar shows each side's share of the combined event pool. The evolution bar below the scene shows progress toward the next stage threshold. These are different measurements, and neither is a predicted chance of winning.",
-      "The interface never promises that a contribution can be withdrawn, redeemed or paid back. Treasury custody, access control, disbursement and settlement are future protocol work. The current pools exist as local numbers in your browser.",
+      "The pool beneath each fighter shows cumulative creator-fee contributions attributed to that side. The split compares the two sides; it does not represent betting odds, ownership or a probability of winning.",
+      "A token's share is its contribution divided by its side's total. Tokens on the same side cooperate to cross evolution thresholds, even when their individual names and communities are unrelated.",
+      "USD labels are a common display denomination. The network is Solana; a dollar label does not imply that SOL is trading at one dollar or that a balance can be redeemed from the interface.",
     ],
   },
   {
@@ -108,9 +101,9 @@ export const manualChapters: ManualChapter[] = [
     title: "Launching your little problem",
     summary: "From idea to local recruit",
     paragraphs: [
-      "Choose an event that is accepting recruits. At the moment, only Neuro Fly versus GPT-6 Astra is available. Pick a side, enter the token name and ticker, add a short description and optionally upload artwork. The preview updates with your draft.",
-      "Review the event and the intended fee destination before confirming. The demo asks you to acknowledge that no onchain token will be created. You can use a demo pilot without a wallet. The launch button is protected against repeated clicks while the record is being created.",
-      "After success, your token appears in Tokens, global search, the selected side’s filtered token list and the activity log. New tokens begin with zero fee contribution. A successful form submission should not invent trading activity, market cap or a blockchain receipt.",
+      "Choose an open event and a side, then enter a name, ticker, image and lore. Optional website and X links belong to the same token brief. Review the preview before saving.",
+      "Save launch draft stores the brief and opens a completion screen. Continue on pump.fun opens its creation page with an empty form; transfer your chosen metadata there and review its transaction details in your wallet. Saving the FVF draft does not submit a mint transaction.",
+      "After creation, FVF integration requires the verified Solana mint and an approved fee destination. A choice of side in a draft expresses your intended allegiance; it does not automatically change pump.fun fee routing.",
     ],
   },
   {
@@ -119,9 +112,9 @@ export const manualChapters: ManualChapter[] = [
     title: "Names, tickers and questionable artwork",
     summary: "What the form accepts",
     paragraphs: [
-      "Token names accept 1–32 English letters, numbers and spaces. Tickers accept 1–10 uppercase letters or numbers. The lore field is required and allows up to 256 characters. These are demo input rules, not a claim about all pons protocol limits.",
-      "Uploaded artwork must be a valid PNG, JPEG or WebP image under 2 MB. The browser reads and checks the image before showing it. Images are stored with your local token record; they are not uploaded to a public metadata host. The default fighter artwork is available if you do not upload an image.",
-      "Optional websites must use HTTPS. Optional X handles use letters, numbers and underscores up to 15 characters. A production launch needs durable metadata hosting, content validation and a clear association between the displayed metadata and the minted token.",
+      "FVF draft names accept 1-32 English letters, numbers and spaces. Tickers accept 1-10 uppercase letters or numbers. Lore accepts up to 256 characters. These are form rules for this brief; pump.fun validates its own creation flow.",
+      "Artwork may be PNG, JPEG or WebP, up to 2 MB. The form checks the file signature and that the image can be decoded. Changing sides preserves uploaded artwork; the default fighter illustration follows the selected side.",
+      "Use links you control. A ticker can be copied by someone else, so always identify an actual Solana token by its mint address. The FVF record ID shown in a catalog profile is not a mint.",
     ],
   },
   {
@@ -130,9 +123,9 @@ export const manualChapters: ManualChapter[] = [
     title: "Wallets without the jump scare",
     summary: "Exactly what connection does",
     paragraphs: [
-      "Demo pilot mode creates an in-memory identity for this session. It needs no extension, account or funds. It is a convenient way to try the complete creation flow and is not a real address.",
-      "Browser-wallet mode uses an injected EVM provider to request an account and read the current chain ID. No chain switch, message signature, token approval or value transfer is requested. If no provider is present or you reject access, the interface shows an error and leaves demo pilot available.",
-      "Changing accounts or chains disconnects the displayed session so it does not continue showing stale account information. Production wallet support needs chain validation, transaction simulation and clear disclosures of the exact transaction being requested.",
+      "Connect Phantom uses Phantom's Solana provider. The wallet extension or mobile wallet controls the account permission request. FVF displays the selected public key once access is granted.",
+      "Account changes or wallet disconnection clear the displayed session so an old address is not left connected in the interface. Disconnect also asks the provider to end its connection.",
+      "Guest mode lets you browse and prepare drafts without an extension. It is a browser session rather than a blockchain address. Swaps and token creation on pump.fun use that site's separate wallet and transaction flow.",
     ],
   },
   {
@@ -141,9 +134,9 @@ export const manualChapters: ManualChapter[] = [
     title: "A token gets its own corner",
     summary: "Profiles, rankings and what the numbers mean",
     paragraphs: [
-      "A token profile contains its name, ticker, lore, chosen side, simulated market cap and attributed contribution. Its local identity is not a contract address. The corresponding arena link is the place to inspect the participant it supports.",
-      "Token rankings can be sorted by contributed fees, simulated market cap or newest creation time. Search matches names and tickers; faction filters narrow the list. On the homepage, The biggest feeders ranks by cumulative contributed fees.",
-      "Percentage changes and sparklines on seed tokens are illustrative demo data, not trading signals. The platform fee chart is separate and plots actual snapshots of the local simulation. A newly created token has no invented price history.",
+      "A token profile collects its name, ticker, lore, side, market cap, change and attributed contribution. Its activity links the token to the larger arena story. The displayed record ID identifies this catalog entry.",
+      "Search works across all entries, not just the current page. The token directory supports side filters and sorting by fees, market cap or newest creation. Pagination shows 30 entries per page in both table and grid views.",
+      "The homepage ranks the five largest contributors. New saved drafts begin with zero market cap and zero contribution and show no invented trading chart. Their metadata can be revisited from the catalog.",
     ],
   },
   {
@@ -152,9 +145,9 @@ export const manualChapters: ManualChapter[] = [
     title: "Neuro Fly versus GPT-6 Astra",
     summary: "Event 001, not the entire platform",
     paragraphs: [
-      "The first arena pits a radioactive, exposed-brain fly against a synthetic rival with a cyan core and orbiting drones. Their illustrated scene uses the original FVF comic artwork: biological green on one side, periwinkle technology on the other.",
-      "The arena gives this rivalry its own identity, fee pools, skill trees and activity. Home, Tokens and Numbers remain platform sections. A later event can have different participants and rules without redefining FVF around that one story.",
-      "Click a fighter to provoke a short response. Hover and idle motion add life to the illustrations; they are not separately rigged 3D models. The fictional Astra character is independently created and is not an OpenAI product or endorsement.",
+      "A lab fly ate the wrong server. The server took it personally. Neuro Fly represents wetware, instinct and the swarm. GPT-6 Astra represents hardware, optimization and an unreasonable amount of confidence.",
+      "Each side has its own illustration, pool, supporters, progression and skill tree. Click the characters for reactions, inspect a skill or choose a side for a new launch brief.",
+      "The fictional Astra character is independently created. FVF is not affiliated with or endorsed by OpenAI. This arena's preparation room is the first event on a platform built for many different stories.",
     ],
   },
   {
@@ -163,20 +156,20 @@ export const manualChapters: ManualChapter[] = [
     title: "Evolution, unfortunately",
     summary: "Five stages of escalating concern",
     paragraphs: [
-      "The first event uses cumulative thresholds of $0, $25,000, $75,000, $150,000 and $250,000. Each threshold advances a side by one stage. A contribution can cross several thresholds: the stage is derived from its resulting pool rather than a separate counter.",
-      "The evolution cards show the actual stage, progress toward the next threshold and four skills. The scene changes its scale, aura and visual equipment as the stage rises. The underlying artwork remains the original illustrated fighter.",
-      "Use Simulate $25K in fees on either evolution card to add a clearly labelled contribution from an existing token on that side. Pool totals, stage, power, fee history and activity update together. These controls do not spend or transfer funds.",
+      "Each side advances through five stages at $0, $25K, $75K, $150K and $250K in cumulative contributions. Crossing a threshold changes the stage name and visual treatment of the fighter.",
+      "The scene adds scale, aura and equipment as the fighter evolves. Progress toward the next stage appears beneath the character and in its evolution panel.",
+      "Evolution belongs to the participant rather than one token. Every attributed contribution on that side affects the same progression total. The final threshold completes the current preparation progression.",
     ],
   },
   {
     id: "skills",
     group: "The first arena",
     title: "A skill tree with questionable roots",
-    summary: "Unlocks, demonstrations and future combat",
+    summary: "Unlocks, progression and future combat",
     paragraphs: [
-      "Each side has four skills corresponding to the four nonzero evolution thresholds. The tree distinguishes locked and unlocked nodes. Clicking either type reveals its description and the fee threshold required to unlock it.",
-      "Skills are visual flavour in this release. They explain progression but do not apply damage or determine a future result. The displayed locked state follows the actual fee pool, and reading a skill does not change it.",
-      "The displayed power index is floor(pool multiplied by 0.72), a deterministic demo score. It is not a probability, payout quote or finalized combat stat. Combat balance, cooldowns, counterplay and the eventual longer fight need their own design and validation.",
+      "Skill nodes show an ability name, its unlock threshold and whether the current stage has reached it. Clicking a node explains that ability even when it is still locked.",
+      "The first arena's skills give context to evolution and character personality. Combat balance, cooldowns and interactions between skills belong to the upcoming battle rules.",
+      "The displayed power index is a game score derived from the fee pool. It is not a financial return, a payout quote or a probability of winning.",
     ],
   },
   {
@@ -185,9 +178,9 @@ export const manualChapters: ManualChapter[] = [
     title: "Controls in the arena",
     summary: "Small interactions with clear effects",
     paragraphs: [
-      "Click either fighter to reveal its response. Repeated clicks can trigger an alternate line. The sound toggle enables short synthesized feedback after a user interaction; audio is off by default.",
-      "Inspect the skill nodes to read about locked and unlocked progression. The labelled simulation buttons add demo contributions. Those are the controls that change the pool and stage; poking a fighter does not.",
-      "The footer lets you pause ambient motion, and the operating system's reduced-motion setting is respected. Both leave the text, data and controls available. The archived laboratory toys and draggable assistants are not part of this version.",
+      "Click Neuro Fly or Astra to provoke a response. The home scene and the full arena both react to interaction. Character motion makes the preparation room feel occupied while remaining optional.",
+      "The footer sound toggle enables short synthesized feedback after user interaction. Sound starts off. Use the adjacent motion toggle to pause ambient animations; the interface also respects your system's reduced-motion preference.",
+      "Skill inspection, fee-history periods, token filters, global search and theme switching work with keyboard controls. Interactive elements retain focus outlines; the menu collapses on smaller screens.",
     ],
   },
   {
@@ -196,9 +189,9 @@ export const manualChapters: ManualChapter[] = [
     title: "Preparation now, battle later",
     summary: "Why the big red fight button is missing",
     paragraphs: [
-      "This release focuses on event discovery, recruitment and fee-driven progression. The actual longer fight remains deferred. There is no countdown implying that a production outcome is about to be decided.",
-      "The first arena stays in preparation mode. Its scene restores the initial prototype's artwork and visual identity, while the platform routes and documentation cover more than this one rivalry.",
-      "A future battle needs published resolution rules, an explicit lock time, replayable inputs and an explainable result. Financial settlement needs separate design and review; a visual demo never implies a payout.",
+      "Preparation is available now. A resolved, multi-minute combat sequence is a separate feature. The page does not announce a fake imminent battle deadline.",
+      "Before combat opens, each arena needs published inputs, lock time, resolution rules and an explainable result. A preparation power score alone cannot establish those rules.",
+      "Future rounds may introduce entirely different characters and progression. An event's visual story does not promise betting, settlement, prizes or token returns.",
     ],
   },
   {
@@ -207,9 +200,9 @@ export const manualChapters: ManualChapter[] = [
     title: "Numbers with their labels on",
     summary: "How to read the dashboard",
     paragraphs: [
-      "The Numbers page combines cumulative creator fees, local token count, open event count, faction distribution, contribution rankings and activity. The chart derives from the simulation’s timestamped pool history. Hover it or use its arrow-key controls to inspect a snapshot.",
-      "Time filters change the visible history. The retained history is bounded to the latest 100 snapshots, so All means all retained snapshots rather than an infinite archive. Seeded history provides an illustrative first day; later points record your actual local demo interactions.",
-      "There are intentionally no invented holder counts, real trading volumes, realized yields or treasury balances. When production data exists, each new metric needs a definition and source before it is useful. A big number without a source is just typography.",
+      "Numbers brings together platform metrics, cumulative fee history, side distribution, contributor rankings and the incident log. Each metric describes a separate dimension of activity.",
+      "The fee chart supports one hour, 24 hours and all retained history. Hover or use its left and right arrow keys to inspect individual timestamped snapshots. All covers up to 720 retained snapshots.",
+      "The distribution ring compares the Fly and Astra pools for event 001. Rankings order tokens by attributed creator fees. Neither chart is a price prediction.",
     ],
   },
   {
@@ -218,9 +211,9 @@ export const manualChapters: ManualChapter[] = [
     title: "The incident log",
     summary: "Fees, recruits and spontaneous upgrades",
     paragraphs: [
-      "Activity records simulated contributions, local launches, stage changes and changes in which side leads the pool split. Each event has a timestamp and a demo source label. Events associated with a token link back to that token’s profile.",
-      "Use faction and event-type filters to narrow the feed. Pausing freezes the visible feed so you can inspect it; it does not stop the platform simulator or hide that the underlying state continues to change. Resuming shows the latest events again.",
-      "Export downloads the currently displayed filtered records as JSON with an explicit demo source. The log retains up to 80 recent events. It is a convenient local inspection tool, not a production audit ledger or proof of payment.",
+      "The incident log groups contributions, launches, decisions, evolutions and lead changes. Entries associated with a token link back to that profile. Recent records appear first.",
+      "Filter by participant or event type. Load more reveals 30 additional matching records. Pause freezes the current view for inspection; resuming returns to the latest state.",
+      "Export downloads all matching records, including those beyond the visible page, as JSON. The file retains its source metadata and export timestamp. The browser stores up to 1,000 events.",
     ],
   },
   {
@@ -229,42 +222,42 @@ export const manualChapters: ManualChapter[] = [
     title: "Paper edition, night edition",
     summary: "Make the chaos comfortable",
     paragraphs: [
-      "The default paper edition restores the original warm background, ink borders, orange actions and condensed poster typography. The optional night edition keeps the same graphic language on a dark background. Use the sun or moon button in the navigation; the preference is saved for this edition.",
-      "The system cursor is preserved. Buttons retain their original outlined hover feedback, and the illustrated arena has restrained ambient movement. You can pause animation from the footer or use your operating system's reduced-motion setting.",
-      "Global search opens from the navigation or Command/Control K. It searches pages, local token names and tickers, the open arena and manual chapter titles. Use arrows and Enter for keyboard navigation; Escape closes the dialog.",
+      "The paper edition uses warm surfaces, orange highlights, green wetware and blue hardware. Night mode darkens the surrounding interface while preserving the rivalry's colors.",
+      "Your theme and motion choices are remembered in the browser. The sound toggle remains under your control. The header compacts as you scroll and expands again at the top.",
+      "Global search opens with the search button or Control/Command plus K. Search pages, tokens, open arenas and manual chapters; use arrow keys and Enter to open a result.",
     ],
   },
   {
     id: "storage",
     group: "Under the hood",
-    title: "Your browser is the demo database",
-    summary: "Persistence and its limits",
+    title: "Your saved settings and drafts",
+    summary: "Browser storage and persistence",
     paragraphs: [
-      "The platform retains localStorage key fvf:demo:v2 so existing local tokens and fee progress survive this visual restoration. This edition uses fvf:theme:v3 for its theme, fvf:motion for motion and fvf:idea:* for saved arena concepts. Launch drafts use sessionStorage key fvf:draft:v3.",
-      "Reloading the same browser restores successfully saved records. Clearing site data removes them. Devices and browser profiles have separate demos. Tabs run independent in-memory simulations, so simultaneous edits are not reconciled by a shared backend.",
-      "If storage is blocked or full, the interface reports session-only behavior. A valid launch can still appear in the current session. Production needs a durable indexer, database, metadata hosting, synchronization and recovery rules.",
+      "Drafts, preferences, bookmarked arena ideas and the current catalog state are stored in your browser. Reloading the same profile restores successfully saved data; another device has its own state.",
+      "If browser storage is unavailable, the interface keeps working for the session and displays a storage notice. Clearing site data removes browser records. A saved launch brief is not a backup of a blockchain account.",
+      "This edition keeps older storage intact and carries forward saved custom token records into the Solana catalog. A production indexer and account-backed persistence are separate infrastructure.",
     ],
   },
   {
-    id: "pons",
+    id: "pump",
     group: "Under the hood",
-    title: "The pons connection",
-    summary: "A researched integration, not a deployed one",
+    title: "Solana meets pump.fun",
+    summary: "The network and the launchpad",
     paragraphs: [
-      "FVF is designed around the pons launchpad ecosystem on Robinhood Chain. The first prototype reviewed the official pons V2 source and creation flow. The production adapter is deliberately unavailable until the deployment, permissions and transaction parameters have been verified for the intended release.",
-      "The researched factory interface includes a creator-fee recipient concept, but a configurable recipient does not by itself implement FVF. We still need an authorized recipient or treasury design, per-token attribution, event assignment and fee collection. Recipient transfer and protocol override behavior must be accounted for.",
-      "The repository’s PONS-INTEGRATION document records the source references and outstanding verification. Addresses appearing in research are not presented as audited or verified FVF deployments. The interface does not ask you to send funds to an address copied from a design document.",
+      "FVF now targets Solana and the pump.fun ecosystem. Solana identifies an SPL token by its mint public key. pump.fun provides the external creation and token trading pages linked from FVF.",
+      "The homepage Swap destination is built only from the configured FVF mint, never from a token name or guessed address. The address is checked as a 32-byte base58 public key before enabling the link. Format validation alone does not establish ownership or authenticity.",
+      "The official pump.fun fee schedule defines creator, protocol and liquidity-provider fees. Rates and program behavior must be checked against the relevant market before enabling production fee attribution. The links below are the primary references.",
     ],
   },
   {
     id: "production",
     group: "Under the hood",
-    title: "Before this gets real",
-    summary: "The work between a demo and a protocol",
+    title: "The production connection",
+    summary: "From the interface to verified chain data",
     paragraphs: [
-      "A production release needs verified contracts and chain settings, a launch transaction builder, metadata hosting, wallet checks, an attributable fee collector, an indexer and a published event lifecycle. Treasury permissions and event outcome rules require independent review.",
-      "The transaction flow must show what will happen before signing, handle rejected requests and failed transactions, wait for the required confirmations and distinguish pending from completed states. A local success screen is insufficient evidence of a successful chain transaction.",
-      "Prizes, financial settlement, betting, cross-chain conversion, a platform token and buybacks are not implemented or promised. If any are introduced, their rules, risks and implementation must be explained separately. The current focus is a clear launchpad experience and a memorable interactive arena.",
+      "Production launch integration needs verified program instructions, mint registration, metadata storage, recipient policy and explicit wallet transaction review. The current direct mint adapter stays unavailable until these are implemented.",
+      "The accounting service needs confirmed chain ingestion, exact amounts, duplicate protection, a replayable ledger and reconciliation. Public metrics should switch to indexed records only once their source is verified.",
+      "Set the official FVF mint to enable its purchase link, then verify the address and resulting pump.fun page. That configuration enables an external link; it does not activate the fee indexer or minting integration.",
     ],
   },
   {
@@ -273,9 +266,9 @@ export const manualChapters: ManualChapter[] = [
     title: "A small dictionary of large mistakes",
     summary: "Terms you will see around the platform",
     paragraphs: [
-      "Arena: an event with its own participants and rules. Participant or side: the character or team a token supports. Recruit: a token linked to a side. Creator fee: the protocol-defined fee attributable to a token creator or recipient. Contribution: an amount attributed to a token and counted toward its side’s pool.",
-      "Pool: the cumulative contributed amount shown for a side. Stage: a threshold-derived evolution level. Skill: an ability associated with a stage. Sandbox preview: a visual demonstration that does not change accounting. Power index: the current demo formula derived from a pool.",
-      "Market cap: an illustrative value on seed tokens, not pool size. Liquidity: assets used for trading, not a synonym for creator fees. Receipt: evidence of an operation; this demo only has local records. Planned: an idea with no open recruitment or committed release date. Brain cell: a scarce resource around here.",
+      "Mint: the Solana public key identifying a token. SOL: Solana's native asset. SPL token: a token issued through the Solana token programs. CA: the familiar shorthand used here for a token's mint address.",
+      "Creator fee: the portion of a trade's fees assigned under the applicable creator-fee rules. Pool: cumulative contributions shown for an arena participant. Stage: an evolution level reached at a contribution threshold. Skill: an ability associated with that progression.",
+      "Market cap: token valuation based on price and supply. Liquidity: assets available to facilitate trading. Record ID: the catalog identifier shown by FVF. Planned: a future arena with no open preparation or committed release date. Brain cell: scarce around here.",
     ],
   },
 ];

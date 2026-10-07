@@ -80,9 +80,7 @@ export function EventFeed({ events }: { events: BattleEvent[] }) {
             ) : (
               <p>{e.text}</p>
             )}
-            <small>
-              {age(e.at)} <b>·</b> SIMULATED
-            </small>
+            <small>{age(e.at)}</small>
           </div>
         </div>
       ))}

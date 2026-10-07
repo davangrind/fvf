@@ -45,13 +45,13 @@ export function Metrics() {
     {
       label: "Creator fees pooled",
       value: money(total, true),
-      note: "Illustrative USD",
+      note: "USD denomination",
       icon: Waves,
     },
     {
       label: "Tokens with a side",
       value: String(s.tokens.length),
-      note: "Local demo records",
+      note: "Solana / pump.fun",
       icon: Coins,
     },
     {
@@ -61,9 +61,9 @@ export function Metrics() {
       icon: Layers3,
     },
     {
-      label: "Onchain launches",
-      value: "00",
-      note: "Local demo, zero real trades",
+      label: "Arena activity",
+      value: String(s.events.length),
+      note: "Incidents in the feed",
       icon: Activity,
     },
   ];
@@ -107,9 +107,11 @@ export function Sparkline({
 export function TokenTable({
   tokens,
   compact = false,
+  offset = 0,
 }: {
   tokens: Token[];
   compact?: boolean;
+  offset?: number;
 }) {
   return (
     <div className="table-scroll">
@@ -119,7 +121,7 @@ export function TokenTable({
             <th>Token</th>
             <th>Market cap</th>
             <th>24h change</th>
-            {!compact && <th>Illustrative trend</th>}
+            {!compact && <th>7d trend</th>}
             <th>Fees contributed</th>
             <th>Side</th>
           </tr>
@@ -129,7 +131,7 @@ export function TokenTable({
             <tr key={t.id}>
               <td>
                 <Link className="token-identity" to={`/tokens/${t.id}`}>
-                  <span className="rank">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="rank">{String(offset + i + 1).padStart(2, "0")}</span>
                   <TokenAvatar token={t} />
                   <span>
                     <strong>{t.name}</strong>
@@ -368,7 +370,7 @@ export function FeeChart({ single = false }: { single?: boolean }) {
         viewBox="0 0 720 255"
         role="img"
         tabIndex={0}
-        aria-label="Simulated cumulative fee chart. Use left and right arrow keys to inspect snapshots."
+        aria-label="Cumulative fee chart. Use left and right arrow keys to inspect snapshots."
         onKeyDown={(e) => {
           if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
             e.preventDefault();
@@ -460,7 +462,7 @@ export function FeeChart({ single = false }: { single?: boolean }) {
           {single ? "All arena pools" : "Neuro Fly"}
           {!single && <span className="violet-text"> / GPT-6 Astra</span>}
         </span>
-        <span>Simulated USD · not price history</span>
+        <span>Cumulative fees / USD</span>
       </div>
     </div>
   );
@@ -474,7 +476,7 @@ const flowSteps = [
   },
   {
     title: "Trading happens",
-    text: "In the production concept, trades may generate creator fees under pons rules. Trading volume and liquidity are not the fee pool.",
+    text: "Trades on pump.fun can generate creator fees. Trading volume and liquidity are not the fee pool.",
     icon: Activity,
   },
   {
@@ -518,7 +520,7 @@ export function FeeFlow() {
         </div>
         <div className="flow-calculator">
           <label htmlFor="flow-volume">
-            Try an imaginary trading volume <b>{money(volume)}</b>
+            Example trading volume <b>{money(volume)}</b>
           </label>
           <input
             id="flow-volume"
@@ -533,7 +535,9 @@ export function FeeFlow() {
             <span>At an assumed 1% creator fee</span>
             <strong>{money(volume * 0.01)}</strong>
           </div>
-          <small>Illustration only. 1% is not a confirmed pons rate.</small>
+          <small>
+            Example rate only. Check pump.fun for current creator fees.
+          </small>
         </div>
       </div>
     </div>

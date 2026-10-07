@@ -5,10 +5,10 @@ import {
   Plus,
   Zap,
   Swords,
-  Radio,
   BookOpen,
   LockKeyhole,
 } from "lucide-react";
+import { Welcome } from "../components/Welcome";
 import { useBattle } from "../state";
 import { arenaEvents } from "../data/events";
 import { Metrics, ArenaCard } from "../components/Platform";
@@ -21,37 +21,7 @@ export default function Home() {
     .slice(0, 5);
   return (
     <div className="page home-page">
-      <section className="home-intro platform-intro">
-        <div>
-          <span className="eyebrow">
-            <Radio size={14} /> FVF / AN INDEPENDENT LAUNCHPAD FOR PONS
-          </span>
-          <h1>
-            FEES FUEL
-            <br />
-            <span>INTERNET CHAOS</span>
-          </h1>
-        </div>
-        <div className="intro-action">
-          <p>
-            Launch a token. Find your people.
-            <br />
-            Turn creator fees into fuel for community events.
-          </p>
-          <p className="intro-description">
-            Duels, rivalries and whatever the internet dreams up next. One
-            platform. A different story in every arena.
-          </p>
-          <div className="button-row">
-            <Link to="/launch" className="button primary">
-              Launch your token <ArrowUpRight size={18} />
-            </Link>
-            <Link to="/arena" className="text-link">
-              Explore arenas <ArrowUpRight size={16} />
-            </Link>
-          </div>
-        </div>
-      </section>
+      <Welcome />
       <div className="loop-strip platform-loop">
         <span>
           <span className="loop-number">01</span>
@@ -88,7 +58,7 @@ export default function Home() {
           </div>
           <TokenRows tokens={top} compact />
           <p className="micro muted home-data-note">
-            Ranked by simulated creator fees contributed across FVF
+            Ranked by creator fees contributed across FVF
           </p>
         </section>
         <section className="home-arena-section">

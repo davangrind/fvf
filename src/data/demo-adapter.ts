@@ -10,7 +10,7 @@ import type {
   SettlementAdapter,
 } from "../domain/types";
 import { createSeed } from "./seed";
-const STORAGE_KEY = "fvf:demo:v2";
+const STORAGE_KEY = "fvf:solana:v1";
 export class DemoAdapter implements BattleDataAdapter, LaunchAdapter {
   readonly source = "demo" as const;
   private state: BattleSnapshot;
@@ -22,6 +22,30 @@ export class DemoAdapter implements BattleDataAdapter, LaunchAdapter {
     this.state = createSeed();
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) {
+        const legacyRaw = localStorage.getItem("fvf:demo:v2");
+        if (legacyRaw) {
+          try {
+            const legacy = JSON.parse(legacyRaw);
+            const saved = Array.isArray(legacy.tokens)
+              ? legacy.tokens.filter(
+                  (token: {
+                    id?: string;
+                    source?: string;
+                    contribution?: number;
+                  }) =>
+                    typeof token.id === "string" &&
+                    /^demo-[0-9a-f]{8}-/.test(token.id) &&
+                    token.source === "demo" &&
+                    Number.isFinite(token.contribution),
+                )
+              : [];
+            this.state.tokens = [...saved, ...this.state.tokens];
+          } catch {
+            /* Keep legacy storage intact; use the new catalog. */
+          }
+        }
+      }
       if (raw) {
         const parsed = JSON.parse(raw);
         if (
@@ -40,6 +64,14 @@ export class DemoAdapter implements BattleDataAdapter, LaunchAdapter {
     } catch {
       this.persistenceAvailable = false;
     }
+    this.state.tokens = this.state.tokens.map((token) => ({
+      ...token,
+      id: token.id.replace(/^demo-/, "fvf-"),
+    }));
+    this.state.events = this.state.events.map((event) => ({
+      ...event,
+      tokenId: event.tokenId?.replace(/^demo-/, "fvf-"),
+    }));
   }
   getSnapshot = () => this.state;
   subscribe = (listener: () => void) => {
@@ -84,7 +116,7 @@ export class DemoAdapter implements BattleDataAdapter, LaunchAdapter {
         source: "demo" as const,
       },
       ...state.events,
-    ].slice(0, 80);
+    ].slice(0, 1000);
   }
   simulate(faction?: Faction, amount?: number) {
     if (this.state.phase !== "preparing") return;
@@ -131,7 +163,7 @@ export class DemoAdapter implements BattleDataAdapter, LaunchAdapter {
         fly: factionStats(next, "fly").pool,
         astra: factionStats(next, "astra").pool,
       },
-    ].slice(-100);
+    ].slice(-720);
     this.commit(next);
   }
   async launch(input: LaunchInput): Promise<LaunchResult> {
@@ -152,7 +184,7 @@ export class DemoAdapter implements BattleDataAdapter, LaunchAdapter {
       const token = {
         ...input,
         name: input.name.trim(),
-        id: `demo-${crypto.randomUUID()}`,
+        id: `fvf-${crypto.randomUUID()}`,
         emoji: input.faction === "fly" ? "🧪" : "⚡",
         marketCap: 0,
         contribution: 0,

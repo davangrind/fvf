@@ -1,6 +1,6 @@
 import { beforeEach, afterEach, describe, expect, it, vi } from "vitest";
 import { DemoAdapter } from "../../src/data/demo-adapter";
-import { PonsProductionAdapter } from "../../src/data/production-adapter";
+import { PumpProductionAdapter } from "../../src/data/production-adapter";
 import { factionStats } from "../../src/domain/battle";
 import type { LaunchInput } from "../../src/domain/types";
 const input: LaunchInput = {
@@ -67,13 +67,44 @@ describe("demo boundary", () => {
     expect(a.getSnapshot().phase).toBe("preparing");
   });
   it("fails closed for production launches", async () => {
-    await expect(new PonsProductionAdapter().launch(input)).rejects.toThrow(
+    await expect(new PumpProductionAdapter().launch(input)).rejects.toThrow(
       "Production launch is not configured",
     );
   });
+  it("preserves older saved tokens while loading the expanded catalog", () => {
+    storage.set(
+      "fvf:demo:v2",
+      JSON.stringify({
+        tokens: [
+          {
+            ...input,
+            id: "demo-12345678-1234-1234-1234-123456789abc",
+            source: "demo",
+            contribution: 123,
+            marketCap: 0,
+            change: 0,
+            emoji: "",
+            createdAt: 1,
+          },
+        ],
+      }),
+    );
+    const snapshot = new DemoAdapter().getSnapshot();
+    expect(snapshot.tokens).toHaveLength(241);
+    expect(snapshot.tokens[0]).toMatchObject({
+      id: "fvf-12345678-1234-1234-1234-123456789abc",
+      contribution: 123,
+    });
+    expect(storage.has("fvf:demo:v2")).toBe(true);
+    expect(
+      snapshot.events.every(
+        (e) => !e.tokenId || snapshot.tokens.some((t) => t.id === e.tokenId),
+      ),
+    ).toBe(true);
+  });
   it("survives corrupt or unavailable browser storage", () => {
-    storage.set("fvf:demo:v2", "{broken");
-    expect(new DemoAdapter().getSnapshot().tokens.length).toBe(12);
+    storage.set("fvf:solana:v1", "{broken");
+    expect(new DemoAdapter().getSnapshot().tokens.length).toBe(240);
     vi.stubGlobal("localStorage", {
       getItem: () => {
         throw new Error("blocked");

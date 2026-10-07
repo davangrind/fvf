@@ -43,8 +43,7 @@ export default function Arenas() {
         ))}
       </div>
       <p className="page-note">
-        One recruiting arena. Five future concepts. All fees and token
-        activity are simulated.
+        One recruiting arena. Five future concepts. Pick your next bad idea.
       </p>
     </div>
   );

@@ -11,7 +11,7 @@ import { demoAdapter } from "./data/demo-adapter";
 export interface WalletSession {
   kind: "demo" | "browser";
   label: string;
-  chainId?: string;
+  network?: "solana";
 }
 interface UIState {
   wallet: WalletSession | null;

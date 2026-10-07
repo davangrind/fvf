@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import { Arena } from "../components/Arena";
 import { useBattle, useUI } from "../state";
-import { demoAdapter } from "../data/demo-adapter";
+
 import { FACTIONS, factionStats, money, THRESHOLDS } from "../domain/battle";
 import type { Faction } from "../domain/types";
 import { EventFeed } from "../components/DataViews";
@@ -51,10 +51,8 @@ export default function Battle() {
       <Arena expanded />
       <div className="arena-controls">
         <span>
-          <Beaker size={17} /> DEMO LAB{" "}
-          <small>
-            Try fee-driven progression. The actual fight comes later.
-          </small>
+          <Beaker size={17} /> ARENA CONTROL{" "}
+          <small>Preparation is open. Pick your side.</small>
         </span>
         <div>
           <button className="text-button" onClick={ui.toggleSound}>
@@ -136,23 +134,14 @@ export default function Battle() {
                         "Final form. Even the developers are concerned.",
                       ][selected.i]
                     }{" "}
-                    Unlocks at {money(THRESHOLDS[selected.i + 1])} in simulated
+                    Unlocks at {money(THRESHOLDS[selected.i + 1])} in creator
                     fees.
                   </p>
                 )}
-                <button
-                  className="text-button feed-demo"
-                  disabled={state.phase !== "preparing"}
-                  onClick={() => {
-                    demoAdapter.simulate(f, 25000);
-                    ui.toast(
-                      `${FACTIONS[f].short} received $25K in demo fees.`,
-                    );
-                  }}
-                >
-                  <Zap size={15} /> Simulate $25K in fees{" "}
+                <Link className="text-link" to={`/launch?faction=${f}`}>
+                  <Zap size={15} /> Launch for this side{" "}
                   <ArrowUpRight size={16} />
-                </button>
+                </Link>
               </article>
             );
           })}
@@ -165,7 +154,7 @@ export default function Battle() {
               <span className="eyebrow">THE PLOT THICKENS</span>
               <h2>FEE HISTORY</h2>
             </div>
-            <span className="demo-tag">DEMO HISTORY</span>
+            <span className="demo-tag">FEE FLOW</span>
           </div>
           <FeeChart />
         </section>

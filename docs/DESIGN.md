@@ -1,3 +1,11 @@
+# Solana edition / v0.4
+
+The original visual language remains. `Welcome.tsx` and `welcome.css` add a large FVF mark, green / blue rivalry scene, interactive fighters and a central Solana CA / Swap card. Copy and Swap stay disabled until a valid official mint is configured. Mobile stacks the fighters above the heading and purchase card. The animations respect reduced motion and the shared pause control.
+
+The catalog expands to 240 entries with pagination; Numbers has hundreds of records and load-more controls. Phantom replaces EVM connection. Repeated simulation badges are consolidated into a single data-source link. Launch is explicitly a draft handoff to pump.fun.
+
+The notes below describe the archived v0.3 design baseline; storage and fee controls have changed as described above and in README.
+
 # Version 3: original visual identity, platform hierarchy
 
 ## Direction
